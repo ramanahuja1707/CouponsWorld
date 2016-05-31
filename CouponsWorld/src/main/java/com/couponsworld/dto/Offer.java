@@ -1,5 +1,7 @@
 package com.couponsworld.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
