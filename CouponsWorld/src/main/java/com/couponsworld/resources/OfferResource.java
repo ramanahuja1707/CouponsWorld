@@ -1,4 +1,4 @@
-package com.couponswworld.resources;
+package com.couponsworld.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,8 +13,4 @@ public class OfferResource {
 	public String getOffers() {
 		return "{key:hello World}";
 	}
-	
-	
-	
-	
 }
