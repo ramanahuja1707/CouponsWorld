@@ -77,13 +77,32 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantOffer updateOffer(@PathParam("offerId") long offerId, Offer offer) {
-		offer.setOfferId(offerId);
-		List<Offer> offers = new ArrayList<>();
-		offers.add(offer);
-		ResultantOffer resultantOffer = new ResultantOffer();
-		resultantOffer.setOffers(offers);
-		return resultantOffer;
+		try {
+			return OfferService.updateOffer(offerId, offer);
+		} catch (Exception exception) {
 
+			// creating Offer List to wrap the input Offer Object into it
+			offers = new ArrayList<Offer>();
+			offers.add(offer);
+
+			// creating resultantOffer Object
+			resultantOffer = new ResultantOffer();
+
+			// creating the error getting
+			com.couponsworld.dto.Error error = new com.couponsworld.dto.Error();
+			error.setErrorCode(101);
+			error.setErrorName(exception.getMessage().toString());
+
+			// wrapping the error to a list of errors
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
+			resultantOffer.setErrors(errors);
+			resultantOffer.setLinks(links);
+			resultantOffer.setStatus(Status.FAILURE);
+			resultantOffer.setOffers(offers);
+			return resultantOffer;
+		}
 	}
 
 	@Path("/{offerId}")

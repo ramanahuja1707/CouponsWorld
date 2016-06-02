@@ -3,6 +3,7 @@ package com.couponsworld.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.couponsworld.dto.Error;
 import com.couponsworld.dto.Link;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.dto.ResultantOffer;
@@ -20,27 +21,60 @@ public class OfferService {
 			Object returnedObject = DatabaseService.createOfferInDatabase(offer);
 			if (returnedObject instanceof Offer) {
 				// offer successfully created and returned....
-				// Creating ResultantOffer object
+				// wrapping the offer into offer list
 				offers = new ArrayList<Offer>();
 				offers.add((Offer) returnedObject);
+
+				// Creating ResultantOffer object
 				resultantOffer = new ResultantOffer();
+
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
 				resultantOffer.setLinks(links);
 			} else {
+				// Creating Error for updating Offer
+				com.couponsworld.dto.Error error = new Error();
+				error.setErrorCode(101);
+				error.setErrorName(((OfferException) returnedObject).getMessage());
+
+				// wrapping the offer into offer list
+				offers = new ArrayList<Offer>();
+				offers.add(offer);
+
+				// wrapping the error into errors list
+				errors = new ArrayList<Error>();
+				errors.add(error);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
 				resultantOffer = new ResultantOffer();
-				resultantOffer.setOffers(new ArrayList<Offer>());
-				resultantOffer.setErrors(new ArrayList<com.couponsworld.dto.Error>());
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(new ArrayList<Link>());
+				resultantOffer.setLinks(null);
 			}
-		} catch (Exception e) {
+		} catch (Exception exception) {
+			// Creating Error for updating Offer
+			com.couponsworld.dto.Error error = new Error();
+			error.setErrorCode(101);
+			error.setErrorName(exception.getMessage());
+
+			// wrapping the offer into offer list
+			offers = new ArrayList<Offer>();
+			offers.add(offer);
+
+			// wrapping the error into errors list
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
+			// offer does not created and error returned....
+			// Creating ResultantOffer object
 			resultantOffer = new ResultantOffer();
-			resultantOffer.setOffers(new ArrayList<Offer>());
-			resultantOffer.setErrors(new ArrayList<com.couponsworld.dto.Error>());
+			resultantOffer.setOffers(offers);
+			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(new ArrayList<Link>());
+			resultantOffer.setLinks(null);
 		}
 		return resultantOffer;
 	}
@@ -59,18 +93,46 @@ public class OfferService {
 				resultantOffer.setStatus(Status.SUCCESS);
 				resultantOffer.setLinks(links);
 			} else if (returnedObject instanceof OfferException) {
+				// Creating Error for updating Offer
+				com.couponsworld.dto.Error error = new Error();
+				error.setErrorCode(101);
+				error.setErrorName(((OfferException) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<Error>();
+				errors.add(error);
+
+				// wrapping the offer into offer list
+				offers = new ArrayList<Offer>();
+				offers.add(offer);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
 				resultantOffer = new ResultantOffer();
-				resultantOffer.setOffers(new ArrayList<Offer>());
-				resultantOffer.setErrors(new ArrayList<com.couponsworld.dto.Error>());
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(new ArrayList<Link>());
+				resultantOffer.setLinks(links);
 			}
 		} catch (Exception e) {
+			// Creating Error for updating Offer
+			com.couponsworld.dto.Error error = new Error();
+			error.setErrorCode(101);
+			error.setErrorName(e.getMessage());
+
+			// wrapping the offer into offer list
+			offers = new ArrayList<Offer>();
+			offers.add(offer);
+
+			// wrapping the error into errors list
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
 			resultantOffer = new ResultantOffer();
-			resultantOffer.setOffers(new ArrayList<Offer>());
-			resultantOffer.setErrors(new ArrayList<com.couponsworld.dto.Error>());
+			resultantOffer.setOffers(offers);
+			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(new ArrayList<Link>());
+			resultantOffer.setLinks(links);
 		}
 		return resultantOffer;
 	}
