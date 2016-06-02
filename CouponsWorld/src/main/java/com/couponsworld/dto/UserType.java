@@ -7,8 +7,8 @@ import com.googlecode.objectify.annotation.Id;
 public class UserType {
 
 	@Id
-	long userTypeId;
-	String userTypeName;
+	private long userTypeId;
+	private String userTypeName;
 
 	public long getUserTypeId() {
 		return userTypeId;

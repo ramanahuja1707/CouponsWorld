@@ -3,7 +3,7 @@ package com.couponsworld.enums;
 public enum Status {
 
 	// Objects for Enum
-	SUCCESS("success"), FAILED("failed");
+	SUCCESS("success"), FAILURE("failure");
 
 	// data member
 	String status;

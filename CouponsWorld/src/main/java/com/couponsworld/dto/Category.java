@@ -7,14 +7,14 @@ import com.googlecode.objectify.annotation.Id;
 public class Category {
 
 	@Id
-	Long categoryId;
-	String categoryName;
+	private long categoryId;
+	private String categoryName;
 
-	public Long getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(Long categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 

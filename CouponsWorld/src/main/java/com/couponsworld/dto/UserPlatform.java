@@ -7,8 +7,8 @@ import com.googlecode.objectify.annotation.Id;
 public class UserPlatform {
 
 	@Id
-	long userPlatformId;
-	String userPlatformName;
+	private long userPlatformId;
+	private String userPlatformName;
 
 	public long getUserPlatformId() {
 		return userPlatformId;

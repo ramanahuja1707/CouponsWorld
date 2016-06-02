@@ -2,7 +2,7 @@ package com.couponsworld.dto;
 
 public class Error {
 	private long errorCode = 0L;
-	private String error = null;
+	private String errorName = null;
 
 	public long getErrorCode() {
 		return errorCode;
@@ -12,12 +12,13 @@ public class Error {
 		this.errorCode = errorCode;
 	}
 
-	public String getError() {
-		return error;
+	public String getErrorName() {
+		return errorName;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setErrorName(String errorName) {
+		this.errorName = errorName;
 	}
 
+	
 }

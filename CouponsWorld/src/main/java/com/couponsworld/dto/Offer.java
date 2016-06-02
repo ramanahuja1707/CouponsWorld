@@ -1,7 +1,5 @@
 package com.couponsworld.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -9,25 +7,25 @@ import com.googlecode.objectify.annotation.Id;
 public class Offer {
 
 	@Id
-	long offerId;
-	String category;
-	String company;
-	long cashBack;
-	String cashBackMode;
-	String description;
-	String termsAndConditions;
-	String promoCode;
-	String startDate;
-	String expiryDate;
-	String extraOfferReference;
-	long totalExtraOffers;
-	String restrictions;
-	String userType;
-	String userPlatform;
-	String usabilityStatus;
-	String catchyHeading;
-	String subCategory;
-	long maximumCashBack;
+	private long offerId;
+	private String category;
+	private String company;
+	private long cashBack;
+	private String cashBackMode;
+	private String description;
+	private String termsAndConditions;
+	private String promoCode;
+	private String startDate;
+	private String expiryDate;
+	private String extraOfferReference;
+	private long totalExtraOffers;
+	private String restrictions;
+	private String userType;
+	private String userPlatform;
+	private String usabilityStatus;
+	private String catchyHeading;
+	private String subCategory;
+	private long maximumCashBack;
 
 	public long getOfferId() {
 		return offerId;

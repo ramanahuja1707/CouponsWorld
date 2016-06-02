@@ -7,8 +7,8 @@ import com.googlecode.objectify.annotation.Id;
 public class SubCategory {
 
 	@Id
-	long subCategoryId;
-	String subCategoryName;
+	private long subCategoryId;
+	private String subCategoryName;
 
 	public long getSubCategoryId() {
 		return subCategoryId;

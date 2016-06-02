@@ -7,8 +7,8 @@ import com.googlecode.objectify.annotation.Id;
 public class UsabilityStatus {
 
 	@Id
-	long usabilityStatusId;
-	String usabilityStatusName;
+	private long usabilityStatusId;
+	private String usabilityStatusName;
 
 	public long getUsabilityStatusId() {
 		return usabilityStatusId;

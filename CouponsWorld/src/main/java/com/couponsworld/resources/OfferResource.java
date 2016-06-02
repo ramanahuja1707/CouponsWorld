@@ -13,11 +13,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.couponsworld.dto.Error;
+import com.couponsworld.dto.Link;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.dto.ResultantOffer;
+import com.couponsworld.enums.Status;
+import com.couponsworld.services.OfferService;
+import com.google.appengine.api.search.query.QueryParser.restriction_return;
 
 @Path("/offers")
 public class OfferResource {
+	private List<Offer> offers = null;
+	private List<Error> errors = null;
+	private List<Link> links = null;
+	private ResultantOffer resultantOffer;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -35,11 +44,32 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantOffer createOffer(Offer offer) {
-		List<Offer> offers = new ArrayList<>();
-		offers.add(offer);
-		ResultantOffer resultantOffer = new ResultantOffer();
-		resultantOffer.setOffers(offers);
-		return resultantOffer;
+		try {
+			return OfferService.createOffer(offer);
+		} catch (Exception exception) {
+
+			// creating Offer List to wrap the input Offer Object into it
+			offers = new ArrayList<Offer>();
+			offers.add(offer);
+
+			// creating resultantOffer Object
+			resultantOffer = new ResultantOffer();
+
+			// creating the error getting
+			com.couponsworld.dto.Error error = new com.couponsworld.dto.Error();
+			error.setErrorCode(101);
+			error.setErrorName(exception.getMessage().toString());
+
+			// wrapping the error to a list of errors
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
+			resultantOffer.setErrors(errors);
+			resultantOffer.setLinks(links);
+			resultantOffer.setStatus(Status.FAILURE);
+			resultantOffer.setOffers(offers);
+			return resultantOffer;
+		}
 	}
 
 	@PUT

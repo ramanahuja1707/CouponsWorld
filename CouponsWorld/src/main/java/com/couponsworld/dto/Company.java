@@ -7,10 +7,10 @@ import com.googlecode.objectify.annotation.Id;
 public class Company {
 
 	@Id
-	long companyId;
-	String companyName;
-	String companyDescription;
-	String companyLogoName;
+	private long companyId;
+	private String companyName;
+	private String companyDescription;
+	private String companyLogoName;
 
 	public long getCompanyId() {
 		return companyId;
