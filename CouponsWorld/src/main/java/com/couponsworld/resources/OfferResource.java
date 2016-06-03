@@ -125,12 +125,28 @@ public class OfferResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId) {
-		Offer offer = new Offer();
-		offer.setOfferId(offerId);
-		List<Offer> offers = new ArrayList<>();
-		offers.add(offer);
-		ResultantOffer resultantOffer = new ResultantOffer();
-		resultantOffer.setOffers(offers);
-		return resultantOffer;
+		try {
+			return OfferService.deleteOffer(offerId);
+		} catch (Exception exception) {
+
+			// creating resultantOffer Object
+			resultantOffer = new ResultantOffer();
+
+			// creating the error getting
+			com.couponsworld.dto.Error error = new com.couponsworld.dto.Error();
+			error.setErrorCode(101);
+			error.setErrorName(exception.getMessage().toString());
+
+			// wrapping the error to a list of errors
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
+			resultantOffer.setErrors(errors);
+			resultantOffer.setLinks(links);
+			resultantOffer.setStatus(Status.FAILURE);
+			resultantOffer.setOffers(offers);
+			return resultantOffer;
+		}
+
 	}
 }

@@ -55,4 +55,18 @@ public class DatabaseService {
 		}
 	}
 
+	public static Offer deleteOfferFromDatabase(long offerId) throws OfferException, Exception {
+		try {
+			Offer offerRetreivedFromDatabase = ofy().load().type(Offer.class).id(offerId).now();
+			if (offerRetreivedFromDatabase != null) {
+				ofy().delete().entities(offerRetreivedFromDatabase).now();
+				return offerRetreivedFromDatabase;
+			} else {
+				throw new OfferException("Offer not existing with offerId : " + offerId);
+			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
 }
