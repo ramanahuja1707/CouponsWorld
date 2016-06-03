@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.dto.Error;
-import com.couponsworld.dto.Link;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.dto.ResultantOffer;
 import com.couponsworld.enums.Status;
@@ -13,7 +12,6 @@ import com.couponsworld.exceptions.OfferException;
 public class OfferService {
 	public static List<Offer> offers = null;
 	public static List<com.couponsworld.dto.Error> errors = null;
-	public static List<Link> links = null;
 	public static ResultantOffer resultantOffer;
 
 	public static ResultantOffer createOffer(Offer offer) {
@@ -31,7 +29,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.dto.Error error = new Error();
@@ -52,7 +50,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(null);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating Offer
@@ -74,8 +72,10 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(null);
+			resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
 		}
+		offers = null;
+		errors = null;
 		return resultantOffer;
 	}
 
@@ -91,7 +91,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
 				com.couponsworld.dto.Error error = new Error();
@@ -112,7 +112,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.dto.Error error = new Error();
@@ -133,7 +133,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -153,8 +153,10 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(links);
+			resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
 		}
+		offers = null;
+		errors = null;
 		return resultantOffer;
 	}
 
@@ -177,7 +179,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
 			} else {
 
 				if (((List<Offer>) returnedObject).size() > 0) {
@@ -186,13 +188,13 @@ public class OfferService {
 					resultantOffer.setOffers((List<Offer>) returnedObject);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(links);
+					resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
 				} else {
 					resultantOffer = new ResultantOffer();
 					resultantOffer.setOffers(offers);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(links);
+					resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
 				}
 			}
 		} catch (Exception e) {
@@ -209,8 +211,10 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(links);
+			resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
 		}
+		offers = null;
+		errors = null;
 		return resultantOffer;
 	}
 
@@ -226,7 +230,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
 				com.couponsworld.dto.Error error = new Error();
@@ -247,7 +251,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.dto.Error error = new Error();
@@ -268,7 +272,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(links);
+				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -284,8 +288,10 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(links);
+			resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
 		}
+		offers = null;
+		errors = null;
 		return resultantOffer;
 	}
 
