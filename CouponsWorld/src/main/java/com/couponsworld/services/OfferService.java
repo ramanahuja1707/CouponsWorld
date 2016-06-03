@@ -113,6 +113,27 @@ public class OfferService {
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
 				resultantOffer.setLinks(links);
+			} else {
+				// Creating Error for updating Offer
+				com.couponsworld.dto.Error error = new Error();
+				error.setErrorCode(101);
+				error.setErrorName(((Exception) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<Error>();
+				errors.add(error);
+
+				// wrapping the offer into offer list
+				offers = new ArrayList<Offer>();
+				offers.add(offer);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.FAILURE);
+				resultantOffer.setLinks(links);
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -123,6 +144,53 @@ public class OfferService {
 			// wrapping the offer into offer list
 			offers = new ArrayList<Offer>();
 			offers.add(offer);
+
+			// wrapping the error into errors list
+			errors = new ArrayList<Error>();
+			errors.add(error);
+
+			resultantOffer = new ResultantOffer();
+			resultantOffer.setOffers(offers);
+			resultantOffer.setErrors(errors);
+			resultantOffer.setStatus(Status.FAILURE);
+			resultantOffer.setLinks(links);
+		}
+		return resultantOffer;
+	}
+
+	public static ResultantOffer getOffers() {
+		try {
+			Object returnedObject = DatabaseService.getOffersFromDatabase();
+			if (returnedObject instanceof Exception) {
+				// Creating Error for updating Offer
+				com.couponsworld.dto.Error error = new Error();
+				error.setErrorCode(101);
+				error.setErrorName(((Exception) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<Error>();
+				errors.add(error);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.FAILURE);
+				resultantOffer.setLinks(links);
+			} else {
+
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers((List<Offer>) returnedObject);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.SUCCESS);
+				resultantOffer.setLinks(links);
+			}
+		} catch (Exception e) {
+			// Creating Error for updating Offer
+			com.couponsworld.dto.Error error = new Error();
+			error.setErrorCode(101);
+			error.setErrorName(e.getMessage());
 
 			// wrapping the error into errors list
 			errors = new ArrayList<Error>();

@@ -2,6 +2,8 @@ package com.couponsworld.services;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.List;
+
 import com.couponsworld.dto.Offer;
 import com.couponsworld.exceptions.OfferException;
 import com.googlecode.objectify.ObjectifyService;
@@ -36,6 +38,18 @@ public class DatabaseService {
 			} else {
 				throw new OfferException("Offer not existing with offerId : " + offerId);
 			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static List<Offer> getOffersFromDatabase() throws OfferException, Exception {
+		try {
+			List<Offer> offersRetreivedFromDatabase = ofy().load().type(Offer.class).list();
+			// if (offersRetreivedFromDatabase.size() != 0) {
+
+			return offersRetreivedFromDatabase;
+			// }
 		} catch (Exception exception) {
 			throw exception;
 		}
