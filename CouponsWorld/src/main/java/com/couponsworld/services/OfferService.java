@@ -154,6 +154,8 @@ public class OfferService {
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
+			offers = null;
+			errors = null;
 		}
 		offers = null;
 		errors = null;
@@ -212,6 +214,8 @@ public class OfferService {
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
+			offers = null;
+			errors = null;
 		}
 		offers = null;
 		errors = null;
@@ -289,6 +293,8 @@ public class OfferService {
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
+			offers = null;
+			errors = null;
 		}
 		offers = null;
 		errors = null;
