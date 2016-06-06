@@ -14,32 +14,32 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.couponsworld.apiresults.ResultantOffer;
-import com.couponsworld.dto.Offer;
+import com.couponsworld.apiresults.ResultantCategory;
+import com.couponsworld.dto.Category;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
+import com.couponsworld.services.CategoryService;
 import com.couponsworld.services.GenerateLinkService;
-import com.couponsworld.services.OfferService;
 import com.couponsworld.utilities.AuthenticationKeyValidator;
 import com.couponsworld.utilities.Constants;
 
-@Path("/offers")
-public class OfferResource {
-	private List<Offer> offers = null;
+@Path("/categories")
+public class CategoryResource {
+	private List<Category> categories = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
-	private ResultantOffer resultantOffer;
+	private ResultantCategory resultantCategory;
 
 	@GET
 	@Path("/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantOffer getOffers(@PathParam("authLoginId") String authLoginId,
+	public ResultantCategory getCategories(@PathParam("authLoginId") String authLoginId,
 			@HeaderParam("authKey") String authKey) {
 		try {
 			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.getOffers();
+				return CategoryService.getcategories();
 			} else {
 				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
+				resultantCategory = new ResultantCategory();
 
 				// creatin g the error getting
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -50,18 +50,18 @@ public class OfferResource {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
+				resultantCategory.setErrors(errors);
+				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+				resultantCategory.setStatus(Status.FAILURE);
+				resultantCategory.setCategories(categories);
 				errors = null;
-				offers = null;
-				return resultantOffer;
+				categories = null;
+				return resultantCategory;
 			}
+		} catch (NullPointerException nle) {
 
-		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -72,16 +72,16 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
 			errors = null;
-			return resultantOffer;
+			categories = null;
+			return resultantCategory;
 		} catch (Exception exception) {
-
 			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -92,12 +92,13 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
 			errors = null;
-			return resultantOffer;
+			categories = null;
+			return resultantCategory;
 		}
 
 	}
@@ -106,14 +107,14 @@ public class OfferResource {
 	@Path("/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantOffer createOffer(Offer offer, @PathParam("authLoginId") String authLoginId,
+	public ResultantCategory createCategory(Category category, @PathParam("authLoginId") String authLoginId,
 			@HeaderParam("authKey") String authKey) {
 		try {
 			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.createOffer(offer);
+				return CategoryService.createCategory(category);
 			} else {
 				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
+				resultantCategory = new ResultantCategory();
 
 				// creatin g the error getting
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -124,18 +125,17 @@ public class OfferResource {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
-
-				offers = null;
+				resultantCategory.setErrors(errors);
+				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createOffer"));
+				resultantCategory.setStatus(Status.FAILURE);
+				resultantCategory.setCategories(categories);
+				categories = null;
 				errors = null;
-				return resultantOffer;
+				return resultantCategory;
 			}
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -146,21 +146,22 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createOffer"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
 
+			categories = null;
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		} catch (Exception exception) {
 
-			// creating Offer List to wrap the input Offer Object into it
-			offers = new ArrayList<Offer>();
-			offers.add(offer);
+			// creating Category List to wrap the input Offer Object into it
+			categories = new ArrayList<Category>();
+			categories.add(category);
 
 			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -171,29 +172,30 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
+			categories = null;
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		}
 	}
 
 	@PUT
-	@Path("/{offerId}/{authLoginId}")
+	@Path("/{categoryId}/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantOffer updateOffer(@PathParam("offerId") long offerId, Offer offer,
+	public ResultantCategory updateOffer(@PathParam("categoryId") long categoryId, Category category,
 			@PathParam("authLoginId") String authLoginId, @HeaderParam("authKey") String authKey) {
 		try {
 			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.updateOffer(offerId, offer);
+				return CategoryService.updateCategory(categoryId, category);
 			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
+				// creating resultantCategory Object
+				resultantCategory = new ResultantCategory();
 
-				// creatin g the error getting
+				// creating the error getting
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
 				error.setErrorName("Invalid Login Credentials....");
@@ -202,18 +204,18 @@ public class OfferResource {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
+				resultantCategory.setErrors(errors);
+				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
+				resultantCategory.setStatus(Status.FAILURE);
+				resultantCategory.setCategories(categories);
 
-				offers = null;
+				categories = null;
 				errors = null;
-				return resultantOffer;
+				return resultantCategory;
 			}
 		} catch (NullPointerException npe) {
-			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			// creating resultantCategory Object
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -224,21 +226,21 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
-			offers = null;
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
+
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		} catch (Exception exception) {
 
-			// creating Offer List to wrap the input Offer Object into it
-			offers = new ArrayList<Offer>();
-			offers.add(offer);
+			// creating category List to wrap the input category Object into it
+			categories = new ArrayList<Category>();
+			categories.add(category);
 
-			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			// creating resultantCategory Object
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -249,27 +251,27 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
-			offers = null;
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
+			categories = null;
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		}
 	}
 
 	@DELETE
-	@Path("/{offerId}/{authLoginId}")
+	@Path("/{categoryId}/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId, @PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantCategory deleteOffer(@PathParam("categoryId") long categoryId,
+			@PathParam("authLoginId") String authLoginId, @HeaderParam("authKey") String authKey) {
 		try {
 			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.deleteOffer(offerId);
+				return CategoryService.deleteCategory(categoryId);
 			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
+				// creating resultantCategory Object
+				resultantCategory = new ResultantCategory();
 
 				// creatin g the error getting
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -280,18 +282,18 @@ public class OfferResource {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
+				resultantCategory.setErrors(errors);
+				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
+				resultantCategory.setStatus(Status.FAILURE);
+				resultantCategory.setCategories(categories);
 
-				offers = null;
+				categories = null;
 				errors = null;
-				return resultantOffer;
+				return resultantCategory;
 			}
 		} catch (NullPointerException npe) {
-			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			// creating resultantCategory Object
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -302,17 +304,17 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
-
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
+			categories = null;
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		} catch (Exception exception) {
 
-			// creating resultantOffer Object
-			resultantOffer = new ResultantOffer();
+			// creating resultantCategory Object
+			resultantCategory = new ResultantCategory();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -323,13 +325,13 @@ public class OfferResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
-			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setOffers(offers);
-
+			resultantCategory.setErrors(errors);
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
+			resultantCategory.setStatus(Status.FAILURE);
+			resultantCategory.setCategories(categories);
+			categories = null;
 			errors = null;
-			return resultantOffer;
+			return resultantCategory;
 		}
 
 	}

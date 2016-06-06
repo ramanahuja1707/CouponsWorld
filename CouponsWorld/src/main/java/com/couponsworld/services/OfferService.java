@@ -3,15 +3,15 @@ package com.couponsworld.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.couponsworld.dto.Error;
+import com.couponsworld.apiresults.ResultantOffer;
 import com.couponsworld.dto.Offer;
-import com.couponsworld.dto.ResultantOffer;
+import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.OfferException;
 
 public class OfferService {
 	public static List<Offer> offers = null;
-	public static List<com.couponsworld.dto.Error> errors = null;
+	public static List<com.couponsworld.apiresults.Error> errors = null;
 	public static ResultantOffer resultantOffer;
 
 	public static ResultantOffer createOffer(Offer offer) {
@@ -29,11 +29,11 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
 			} else {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.OFFER_ERROR.getErrorCode());
 				error.setErrorName(((OfferException) returnedObject).getMessage());
 
 				// wrapping the offer into offer list
@@ -41,7 +41,7 @@ public class OfferService {
 				offers.add(offer);
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// offer does not created and error returned....
@@ -50,12 +50,12 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating Offer
-			com.couponsworld.dto.Error error = new Error();
-			error.setErrorCode(101);
+			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
 
 			// wrapping the offer into offer list
@@ -63,7 +63,7 @@ public class OfferService {
 			offers.add(offer);
 
 			// wrapping the error into errors list
-			errors = new ArrayList<Error>();
+			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
 			// offer does not created and error returned....
@@ -72,7 +72,7 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateLink("createOffer"));
+			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
 		}
 		offers = null;
 		errors = null;
@@ -91,15 +91,15 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.OFFER_ERROR.getErrorCode());
 				error.setErrorName(((OfferException) returnedObject).getMessage());
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// wrapping the offer into offer list
@@ -112,15 +112,15 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
 			} else {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 				error.setErrorName(((Exception) returnedObject).getMessage());
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// wrapping the offer into offer list
@@ -133,12 +133,12 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
-			com.couponsworld.dto.Error error = new Error();
-			error.setErrorCode(101);
+			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(e.getMessage());
 
 			// wrapping the offer into offer list
@@ -146,14 +146,14 @@ public class OfferService {
 			offers.add(offer);
 
 			// wrapping the error into errors list
-			errors = new ArrayList<Error>();
+			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
 			resultantOffer = new ResultantOffer();
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateLink("updateOffer"));
+			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
 			offers = null;
 			errors = null;
 		}
@@ -167,12 +167,12 @@ public class OfferService {
 			Object returnedObject = DatabaseService.getOffersFromDatabase();
 			if (returnedObject instanceof Exception) {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 				error.setErrorName(((Exception) returnedObject).getMessage());
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// offer does not created and error returned....
@@ -181,7 +181,25 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			} else if (returnedObject instanceof OfferException) {
+
+				// Creating Error for updating Offer
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.OFFER_ERROR.getErrorCode());
+				error.setErrorName(((OfferException) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
+				errors.add(error);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.FAILURE);
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
 			} else {
 
 				if (((List<Offer>) returnedObject).size() > 0) {
@@ -190,30 +208,30 @@ public class OfferService {
 					resultantOffer.setOffers((List<Offer>) returnedObject);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
+					resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
 				} else {
 					resultantOffer = new ResultantOffer();
 					resultantOffer.setOffers(offers);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
+					resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
 				}
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
-			com.couponsworld.dto.Error error = new Error();
-			error.setErrorCode(101);
+			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(e.getMessage());
 
 			// wrapping the error into errors list
-			errors = new ArrayList<Error>();
+			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
 			resultantOffer = new ResultantOffer();
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateLink("getOffers"));
+			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
 			offers = null;
 			errors = null;
 		}
@@ -234,15 +252,15 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.OFFER_ERROR.getErrorCode());
 				error.setErrorName(((OfferException) returnedObject).getMessage());
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// wrapping the offer into offer list
@@ -255,15 +273,15 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
 			} else {
 				// Creating Error for updating Offer
-				com.couponsworld.dto.Error error = new Error();
-				error.setErrorCode(101);
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 				error.setErrorName(((Exception) returnedObject).getMessage());
 
 				// wrapping the error into errors list
-				errors = new ArrayList<Error>();
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
 				// wrapping the offer into offer list
@@ -276,23 +294,23 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
-			com.couponsworld.dto.Error error = new Error();
-			error.setErrorCode(101);
+			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(e.getMessage());
 
 			// wrapping the error into errors list
-			errors = new ArrayList<Error>();
+			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
 			resultantOffer = new ResultantOffer();
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateLink("deleteOffer"));
+			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
 			offers = null;
 			errors = null;
 		}

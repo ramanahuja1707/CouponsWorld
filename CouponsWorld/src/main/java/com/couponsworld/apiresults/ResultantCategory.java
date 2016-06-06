@@ -1,25 +1,23 @@
-package com.couponsworld.dto;
+package com.couponsworld.apiresults;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.couponsworld.dto.Category;
 import com.couponsworld.enums.Status;
 
-@XmlRootElement
-public class ResultantOffer {
+public class ResultantCategory {
 
-	private List<Offer> offers = null;
+	private List<Category> categories = null;
 	private Status status = null;
 	private List<Error> errors = null;
 	private List<Link> links = null;
 
-	public List<Offer> getOffers() {
-		return offers;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public Status getStatus() {

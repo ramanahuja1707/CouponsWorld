@@ -2,18 +2,27 @@ package com.couponsworld.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.couponsworld.dto.Link;
+import com.couponsworld.apiresults.Link;
 import com.couponsworld.utilities.Constants;
+import com.google.api.server.spi.Constant;
 
 public class GenerateLinkService {
 
+	// Offer CRUD Links
 	private static Link getOffers_Link = null;
 	private static Link createOffer_Link = null;
 	private static Link updateOffer_Link = null;
 	private static Link deleteOffer_Link = null;
-	private static List<Link> links = null;
+
+	// Category CRUD Links
+	private static Link getCategories_Link = null;
+	private static Link createCategory_Link = null;
+	private static Link updateCategory_Link = null;
+	private static Link deleteCategory_Link = null;
+
+	private static List<Link> offerLinks = null;
+	private static List<Link> categoryLinks = null;
 
 	static {
 		// creating the getoffers_Link object
@@ -47,15 +56,57 @@ public class GenerateLinkService {
 		deleteOffer_Link.setHref(Constants.DELETEOFFER_HREF);
 		deleteOffer_Link.setMethod(Constants.DELETEOFFER_METHOD);
 		deleteOffer_Link.setRel(Constants.DELETEOFFER_REL);
+
+		// creating the createCategory_Link object
+		createCategory_Link = new Link();
+		createCategory_Link.setContentTypeConsumes(Constants.CREATECATEGORIES_CONTENT_TYPE_CONSUMES);
+		createCategory_Link.setContentTypeProduces(Constants.CREATECATEGORIES_CONTENT_TYPE_PRODUCES);
+		createCategory_Link.setHref(Constants.CREATECATEGORIES_HREF);
+		createCategory_Link.setMethod(Constants.CREATECATEGORIES_METHOD);
+		createCategory_Link.setRel(Constants.CREATECATEGORIES_REL);
+
+		// creating the getCategories_Link object
+		getCategories_Link = new Link();
+		getCategories_Link.setContentTypeConsumes(Constants.GETCATEGORY_CONTENT_TYPE_CONSUMES);
+		getCategories_Link.setContentTypeProduces(Constants.GETCATEGORY_CONTENT_TYPE_PRODUCES);
+		getCategories_Link.setHref(Constants.GETCATEGORY_HREF);
+		getCategories_Link.setMethod(Constants.GETCATEGORY_METHOD);
+		getCategories_Link.setRel(Constants.GETCATEGORY_REL);
+
+		// creating the updateCategory_Link object
+		updateCategory_Link = new Link();
+		updateCategory_Link.setContentTypeConsumes(Constants.UPDATECATEGORY_CONTENT_TYPE_CONSUMES);
+		updateCategory_Link.setContentTypeProduces(Constants.UPDATECATEGORY_CONTENT_TYPE_PRODUCES);
+		updateCategory_Link.setHref(Constants.UPDATECATEGORY_HREF);
+		updateCategory_Link.setMethod(Constants.UPDATECATEGORY_METHOD);
+		updateCategory_Link.setRel(Constants.UPDATECATEGORY_REL);
+
+		// creating the deleteCategory_Link object
+		deleteCategory_Link = new Link();
+		deleteCategory_Link.setContentTypeConsumes(Constants.DELETECATEGORY_CONTENT_TYPE_CONSUMES);
+		deleteCategory_Link.setContentTypeProduces(Constants.DELETECATEGORY_CONTENT_TYPE_PRODUCES);
+		deleteCategory_Link.setHref(Constants.DELETECATEGORY_HREF);
+		deleteCategory_Link.setMethod(Constants.DELETECATEGORY_METHOD);
+		deleteCategory_Link.setRel(Constants.DELETECATEGORY_REL);
+
 	}
 
-	public static List<Link> generateLink(String methodName) {
-		links = new ArrayList<Link>();
-		links.add(createOffer_Link);
-		links.add(deleteOffer_Link);
-		links.add(getOffers_Link);
-		links.add(updateOffer_Link);
-		return links;
+	public static List<Link> generateOfferLink(String methodName) {
+		offerLinks = new ArrayList<Link>();
+		offerLinks.add(createOffer_Link);
+		offerLinks.add(deleteOffer_Link);
+		offerLinks.add(getOffers_Link);
+		offerLinks.add(updateOffer_Link);
+		return offerLinks;
+	}
+
+	public static List<Link> generateCategoryLink(String methodName) {
+		categoryLinks = new ArrayList<Link>();
+		categoryLinks.add(createCategory_Link);
+		categoryLinks.add(deleteCategory_Link);
+		categoryLinks.add(getCategories_Link);
+		categoryLinks.add(updateCategory_Link);
+		return categoryLinks;
 	}
 
 }

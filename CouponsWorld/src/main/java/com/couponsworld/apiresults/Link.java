@@ -1,4 +1,4 @@
-package com.couponsworld.dto;
+package com.couponsworld.apiresults;
 
 public class Link {
 
