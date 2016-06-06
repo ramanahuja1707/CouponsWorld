@@ -30,34 +30,12 @@ public class CategoryResource {
 	private ResultantCategory resultantCategory;
 
 	@GET
-	@Path("/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantCategory getCategories(@PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantCategory getCategories() {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return CategoryService.getcategories();
-			} else {
-				// creating resultantOffer Object
-				resultantCategory = new ResultantCategory();
 
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
+			return CategoryService.getcategories();
 
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantCategory.setErrors(errors);
-				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
-				resultantCategory.setStatus(Status.FAILURE);
-				resultantCategory.setCategories(categories);
-				errors = null;
-				categories = null;
-				return resultantCategory;
-			}
 		} catch (NullPointerException nle) {
 
 			// creating resultantOffer Object
@@ -104,35 +82,14 @@ public class CategoryResource {
 	}
 
 	@POST
-	@Path("/{authLoginId}")
+
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantCategory createCategory(Category category, @PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantCategory createCategory(Category category) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return CategoryService.createCategory(category);
-			} else {
-				// creating resultantOffer Object
-				resultantCategory = new ResultantCategory();
 
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
+			return CategoryService.createCategory(category);
 
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantCategory.setErrors(errors);
-				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createOffer"));
-				resultantCategory.setStatus(Status.FAILURE);
-				resultantCategory.setCategories(categories);
-				categories = null;
-				errors = null;
-				return resultantCategory;
-			}
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantCategory = new ResultantCategory();
@@ -183,36 +140,14 @@ public class CategoryResource {
 	}
 
 	@PUT
-	@Path("/{categoryId}/{authLoginId}")
+	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantCategory updateOffer(@PathParam("categoryId") long categoryId, Category category,
-			@PathParam("authLoginId") String authLoginId, @HeaderParam("authKey") String authKey) {
+	public ResultantCategory updateOffer(@PathParam("categoryId") long categoryId, Category category) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return CategoryService.updateCategory(categoryId, category);
-			} else {
-				// creating resultantCategory Object
-				resultantCategory = new ResultantCategory();
 
-				// creating the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
+			return CategoryService.updateCategory(categoryId, category);
 
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantCategory.setErrors(errors);
-				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
-				resultantCategory.setStatus(Status.FAILURE);
-				resultantCategory.setCategories(categories);
-
-				categories = null;
-				errors = null;
-				return resultantCategory;
-			}
 		} catch (NullPointerException npe) {
 			// creating resultantCategory Object
 			resultantCategory = new ResultantCategory();
@@ -262,35 +197,13 @@ public class CategoryResource {
 	}
 
 	@DELETE
-	@Path("/{categoryId}/{authLoginId}")
+	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantCategory deleteOffer(@PathParam("categoryId") long categoryId,
-			@PathParam("authLoginId") String authLoginId, @HeaderParam("authKey") String authKey) {
+	public ResultantCategory deleteOffer(@PathParam("categoryId") long categoryId) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return CategoryService.deleteCategory(categoryId);
-			} else {
-				// creating resultantCategory Object
-				resultantCategory = new ResultantCategory();
 
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
+			return CategoryService.deleteCategory(categoryId);
 
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantCategory.setErrors(errors);
-				resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
-				resultantCategory.setStatus(Status.FAILURE);
-				resultantCategory.setCategories(categories);
-
-				categories = null;
-				errors = null;
-				return resultantCategory;
-			}
 		} catch (NullPointerException npe) {
 			// creating resultantCategory Object
 			resultantCategory = new ResultantCategory();

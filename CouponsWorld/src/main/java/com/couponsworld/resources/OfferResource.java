@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,8 +19,6 @@ import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.services.GenerateLinkService;
 import com.couponsworld.services.OfferService;
-import com.couponsworld.utilities.AuthenticationKeyValidator;
-import com.couponsworld.utilities.Constants;
 
 @Path("/offers")
 public class OfferResource {
@@ -30,35 +27,10 @@ public class OfferResource {
 	private ResultantOffer resultantOffer;
 
 	@GET
-	@Path("/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantOffer getOffers(@PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantOffer getOffers() {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.getOffers();
-			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
-
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
-
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
-				errors = null;
-				offers = null;
-				return resultantOffer;
-			}
-
+			return OfferService.getOffers();
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantOffer = new ResultantOffer();
@@ -103,36 +75,11 @@ public class OfferResource {
 	}
 
 	@POST
-	@Path("/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantOffer createOffer(Offer offer, @PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantOffer createOffer(Offer offer) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.createOffer(offer);
-			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
-
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
-
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
-
-				offers = null;
-				errors = null;
-				return resultantOffer;
-			}
+			return OfferService.createOffer(offer);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantOffer = new ResultantOffer();
@@ -181,36 +128,12 @@ public class OfferResource {
 	}
 
 	@PUT
-	@Path("/{offerId}/{authLoginId}")
+	@Path("/{offerId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantOffer updateOffer(@PathParam("offerId") long offerId, Offer offer,
-			@PathParam("authLoginId") String authLoginId, @HeaderParam("authKey") String authKey) {
+	public ResultantOffer updateOffer(@PathParam("offerId") long offerId, Offer offer) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.updateOffer(offerId, offer);
-			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
-
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
-
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
-
-				offers = null;
-				errors = null;
-				return resultantOffer;
-			}
+			return OfferService.updateOffer(offerId, offer);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantOffer = new ResultantOffer();
@@ -262,33 +185,9 @@ public class OfferResource {
 	@DELETE
 	@Path("/{offerId}/{authLoginId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId, @PathParam("authLoginId") String authLoginId,
-			@HeaderParam("authKey") String authKey) {
+	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId) {
 		try {
-			if (authLoginId.equals(Constants.AUTH_LOGIN_ID) && AuthenticationKeyValidator.validate(authKey)) {
-				return OfferService.deleteOffer(offerId);
-			} else {
-				// creating resultantOffer Object
-				resultantOffer = new ResultantOffer();
-
-				// creatin g the error getting
-				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
-				error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
-				error.setErrorName("Invalid Login Credentials....");
-
-				// wrapping the error to a list of errors
-				errors = new ArrayList<com.couponsworld.apiresults.Error>();
-				errors.add(error);
-
-				resultantOffer.setErrors(errors);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
-				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setOffers(offers);
-
-				offers = null;
-				errors = null;
-				return resultantOffer;
-			}
+			return OfferService.deleteOffer(offerId);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantOffer = new ResultantOffer();
