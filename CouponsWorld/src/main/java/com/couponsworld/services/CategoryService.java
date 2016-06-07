@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.ResultantCategory;
+import com.couponsworld.database.DatabaseService;
 import com.couponsworld.dto.Category;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.CategoryException;
+import com.couponsworld.utilities.GenerateLinkService;
 
 public class CategoryService {
 

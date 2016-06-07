@@ -1,4 +1,4 @@
-package com.couponsworld.services;
+package com.couponsworld.utilities;
 
 import java.util.ArrayList;
 import java.util.List;

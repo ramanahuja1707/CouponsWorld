@@ -15,8 +15,8 @@ import com.couponsworld.dto.Category;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
-import com.couponsworld.services.GenerateLinkService;
 import com.couponsworld.utilities.Constants;
+import com.couponsworld.utilities.GenerateLinkService;
 
 @Provider
 public class ResourcesFilter implements ContainerRequestFilter {

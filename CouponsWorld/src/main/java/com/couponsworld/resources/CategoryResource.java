@@ -18,7 +18,7 @@ import com.couponsworld.dto.Category;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.services.CategoryService;
-import com.couponsworld.services.GenerateLinkService;
+import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/categories")
 public class CategoryResource {

@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.ResultantOffer;
+import com.couponsworld.database.DatabaseService;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.OfferException;
+import com.couponsworld.utilities.GenerateLinkService;
 
 public class OfferService {
-	public static List<Offer> offers = null;
-	public static List<com.couponsworld.apiresults.Error> errors = null;
-	public static ResultantOffer resultantOffer;
+	private static List<Offer> offers = null;
+	private static List<com.couponsworld.apiresults.Error> errors = null;
+	private static ResultantOffer resultantOffer;
 
 	public static ResultantOffer createOffer(Offer offer) {
 		try {

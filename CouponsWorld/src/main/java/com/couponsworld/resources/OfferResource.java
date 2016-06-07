@@ -17,8 +17,8 @@ import com.couponsworld.apiresults.ResultantOffer;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
-import com.couponsworld.services.GenerateLinkService;
 import com.couponsworld.services.OfferService;
+import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/offers")
 public class OfferResource {
