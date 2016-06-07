@@ -90,6 +90,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 				requestContext.abortWith(Response.ok(createResultantAuthErrorForCategoryURL(
 						"Missing Access Credentials or wrong credentials passed")).build());
 			} else {
+				System.out.println("Company null");
 				requestContext.abortWith(Response.ok(
 						createResultantAuthErrorForCompanyURL("Missing Access Credentials or wrong credentials passed"))
 						.build());
@@ -104,6 +105,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 				requestContext.abortWith(Response.ok(createResultantAuthErrorForCategoryURL(
 						"Missing Access Credentials or wrong credentials passed")).build());
 			} else {
+				System.out.println("Company exception");
 				requestContext.abortWith(Response.ok(
 						createResultantAuthErrorForCompanyURL("Missing Access Credentials or wrong credentials passed"))
 						.build());
@@ -146,7 +148,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 		errors.add(error);
 
 		resultantCategory.setErrors(errors);
-		resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+		resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getCategories"));
 		resultantCategory.setStatus(Status.FAILURE);
 		resultantCategory.setCategories(categories);
 		errors = null;
@@ -168,7 +170,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 		errors.add(error);
 
 		resultantCompany.setErrors(errors);
-		resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+		resultantCompany.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
 		resultantCompany.setStatus(Status.FAILURE);
 		resultantCompany.setCompanies(companies);
 		errors = null;

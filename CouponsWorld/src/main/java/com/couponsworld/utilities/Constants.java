@@ -87,7 +87,7 @@ public class Constants {
 
 	// updateCompany link object details
 	public static final String UPDATECOMPANY = "updateCompany";
-	public static final String UPDATECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories/<companyId>";
+	public static final String UPDATECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/companies/<companyId>";
 	public static final String UPDATECOMPANY_REL = "To update a particular company in database";
 	public static final String UPDATECOMPANY_METHOD = "PUT";
 	public static final String UPDATECOMPANY_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
@@ -95,7 +95,7 @@ public class Constants {
 
 	// deleteCompany link object details
 	public static final String DELETECOMPANY = "deleteCompany";
-	public static final String DELETECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories/<companyId>";
+	public static final String DELETECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/companies/<companyId>";
 	public static final String DELETECOMPANY_REL = "To delete a particular company from database";
 	public static final String DELETECOMPANY_METHOD = "DELETE";
 	public static final String DELETECOMPANY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
