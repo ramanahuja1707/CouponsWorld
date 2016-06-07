@@ -79,7 +79,6 @@ public class CategoryResource {
 	}
 
 	@POST
-
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantCategory createCategory(Category category) {
@@ -95,6 +94,10 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
+
+			// creating Category List to wrap the input Offer Object into it
+			categories = new ArrayList<Category>();
+			categories.add(category);
 
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
@@ -148,6 +151,10 @@ public class CategoryResource {
 		} catch (NullPointerException npe) {
 			// creating resultantCategory Object
 			resultantCategory = new ResultantCategory();
+
+			// creating Category List to wrap the input Offer Object into it
+			categories = new ArrayList<Category>();
+			categories.add(category);
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();

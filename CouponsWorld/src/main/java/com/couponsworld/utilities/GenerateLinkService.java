@@ -21,8 +21,16 @@ public class GenerateLinkService {
 	private static Link updateCategory_Link = null;
 	private static Link deleteCategory_Link = null;
 
+	// Company CRUD Links
+	private static Link getCompanies_Link = null;
+	private static Link createCompany_Link = null;
+	private static Link updateCompany_Link = null;
+	private static Link deleteCompany_Link = null;
+
+	// links for all resources
 	private static List<Link> offerLinks = null;
 	private static List<Link> categoryLinks = null;
+	private static List<Link> companyLinks = null;
 
 	static {
 		// creating the getoffers_Link object
@@ -57,6 +65,8 @@ public class GenerateLinkService {
 		deleteOffer_Link.setMethod(Constants.DELETEOFFER_METHOD);
 		deleteOffer_Link.setRel(Constants.DELETEOFFER_REL);
 
+		// ----------------------------------------------------------------------------------------------------------------------------------
+
 		// creating the createCategory_Link object
 		createCategory_Link = new Link();
 		createCategory_Link.setContentTypeConsumes(Constants.CREATECATEGORIES_CONTENT_TYPE_CONSUMES);
@@ -89,6 +99,39 @@ public class GenerateLinkService {
 		deleteCategory_Link.setMethod(Constants.DELETECATEGORY_METHOD);
 		deleteCategory_Link.setRel(Constants.DELETECATEGORY_REL);
 
+		// ----------------------------------------------------------------------------------------------------------------------------
+
+		// creating the createCompany_Link object
+		createCompany_Link = new Link();
+		createCompany_Link.setContentTypeConsumes(Constants.CREATECOMPANY_CONTENT_TYPE_CONSUMES);
+		createCompany_Link.setContentTypeProduces(Constants.CREATECOMPANY_CONTENT_TYPE_PRODUCES);
+		createCompany_Link.setHref(Constants.CREATECOMPANY_HREF);
+		createCompany_Link.setMethod(Constants.CREATECOMPANY_METHOD);
+		createCompany_Link.setRel(Constants.CREATECOMPANY_REL);
+
+		// creating the getCompanies_Link object
+		getCompanies_Link = new Link();
+		getCompanies_Link.setContentTypeConsumes(Constants.GETCOMPANIES_CONTENT_TYPE_CONSUMES);
+		getCompanies_Link.setContentTypeProduces(Constants.GETCOMPANIES_CONTENT_TYPE_PRODUCES);
+		getCompanies_Link.setHref(Constants.GETCOMPANIES_HREF);
+		getCompanies_Link.setMethod(Constants.GETCOMPANIES_METHOD);
+		getCompanies_Link.setRel(Constants.GETCOMPANIES_REL);
+
+		// creating the updateCompany_Link object
+		updateCompany_Link = new Link();
+		updateCompany_Link.setContentTypeConsumes(Constants.UPDATECOMPANY_CONTENT_TYPE_CONSUMES);
+		updateCompany_Link.setContentTypeProduces(Constants.UPDATECOMPANY_CONTENT_TYPE_PRODUCES);
+		updateCompany_Link.setHref(Constants.UPDATECOMPANY_HREF);
+		updateCompany_Link.setMethod(Constants.UPDATECOMPANY_METHOD);
+		updateCompany_Link.setRel(Constants.UPDATECOMPANY_REL);
+
+		// creating the deleteCompany_Link object
+		deleteCompany_Link = new Link();
+		deleteCompany_Link.setContentTypeConsumes(Constants.DELETECOMPANY_CONTENT_TYPE_CONSUMES);
+		deleteCompany_Link.setContentTypeProduces(Constants.DELETECOMPANY_CONTENT_TYPE_PRODUCES);
+		deleteCompany_Link.setHref(Constants.DELETECOMPANY_HREF);
+		deleteCompany_Link.setMethod(Constants.DELETECOMPANY_METHOD);
+		deleteCompany_Link.setRel(Constants.DELETECOMPANY_REL);
 	}
 
 	public static List<Link> generateOfferLink(String methodName) {
@@ -107,6 +150,15 @@ public class GenerateLinkService {
 		categoryLinks.add(getCategories_Link);
 		categoryLinks.add(updateCategory_Link);
 		return categoryLinks;
+	}
+
+	public static List<Link> generateCompanyLink(String methodName) {
+		companyLinks = new ArrayList<Link>();
+		companyLinks.add(createCompany_Link);
+		companyLinks.add(getCompanies_Link);
+		companyLinks.add(updateCompany_Link);
+		companyLinks.add(deleteCompany_Link);
+		return companyLinks;
 	}
 
 }

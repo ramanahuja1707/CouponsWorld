@@ -33,6 +33,8 @@ public class Constants {
 	public static final String DELETEOFFER_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
 	public static final String DELETEOFFER_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
 
+	// ----------------------------------------------------------------------------------------------------------
+
 	// createCategories link object details
 	public static final String CREATECATEGORIES = "createCategories";
 	public static final String CREATECATEGORIES_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories";
@@ -60,10 +62,46 @@ public class Constants {
 	// deleteCategory link object details
 	public static final String DELETECATEGORY = "deleteCategory";
 	public static final String DELETECATEGORY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories/<categoryId>";
-	public static final String DELETECATEGORY_REL = "To delete a particular offer from database";
+	public static final String DELETECATEGORY_REL = "To delete a particular category from database";
 	public static final String DELETECATEGORY_METHOD = "DELETE";
 	public static final String DELETECATEGORY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
 	public static final String DELETECATEGORY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ----------------------------------------------------------------------------------------------
+
+	// createCompany link object details
+	public static final String CREATECOMPANY = "createCompany";
+	public static final String CREATECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/companies";
+	public static final String CREATECOMPANY_REL = "To create a company in database";
+	public static final String CREATECOMPANY_METHOD = "POST";
+	public static final String CREATECOMPANY_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATECOMPANY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// getCompanies link object details
+	public static final String GETCOMPANIES = "getCompanies";
+	public static final String GETCOMPANIES_HREF = "http://1.couponsworld-1707.appspot.com/webapi/companies";
+	public static final String GETCOMPANIES_REL = "To get all companies from database";
+	public static final String GETCOMPANIES_METHOD = "GET";
+	public static final String GETCOMPANIES_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GETCOMPANIES_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateCompany link object details
+	public static final String UPDATECOMPANY = "updateCompany";
+	public static final String UPDATECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories/<companyId>";
+	public static final String UPDATECOMPANY_REL = "To update a particular company in database";
+	public static final String UPDATECOMPANY_METHOD = "PUT";
+	public static final String UPDATECOMPANY_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATECOMPANY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteCompany link object details
+	public static final String DELETECOMPANY = "deleteCompany";
+	public static final String DELETECOMPANY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categories/<companyId>";
+	public static final String DELETECOMPANY_REL = "To delete a particular company from database";
+	public static final String DELETECOMPANY_METHOD = "DELETE";
+	public static final String DELETECOMPANY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETECOMPANY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ---------------------------------------------------------------------------------------------------
 
 	// authentication password for web api
 	public final static String AUTH_PASSWORD = "garr.innovate";
