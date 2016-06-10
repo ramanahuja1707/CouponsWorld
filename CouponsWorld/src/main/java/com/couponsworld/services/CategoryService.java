@@ -82,7 +82,7 @@ public class CategoryService {
 		return resultantCategory;
 	}
 
-	public static ResultantCategory getcategories() {
+	public static ResultantCategory getCategories() {
 		try {
 			Object returnedObject = DatabaseService.getCategoriesFromDatabase();
 			if (returnedObject instanceof Exception) {
@@ -254,6 +254,7 @@ public class CategoryService {
 				// Creating ResultantCategory object
 				categories = new ArrayList<Category>();
 				categories.add((Category) returnedObject);
+
 				resultantCategory = new ResultantCategory();
 				resultantCategory.setCategories(categories);
 				resultantCategory.setErrors(errors);
@@ -269,12 +270,6 @@ public class CategoryService {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				// wrapping the category into category list
-				categories = new ArrayList<Category>();
-				categories.add((Category) returnedObject);
-
-				// category does not created and error returned....
-				// Creating ResultantCategory object
 				resultantCategory = new ResultantCategory();
 				resultantCategory.setCategories(categories);
 				resultantCategory.setErrors(errors);
@@ -289,10 +284,6 @@ public class CategoryService {
 				// wrapping the error into errors list
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
-
-				// wrapping the category into category list
-				categories = new ArrayList<Category>();
-				categories.add((Category) returnedObject);
 
 				// category does not created and error returned....
 				// Creating ResultantCategory object

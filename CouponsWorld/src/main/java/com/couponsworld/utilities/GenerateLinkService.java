@@ -27,10 +27,18 @@ public class GenerateLinkService {
 	private static Link updateCompany_Link = null;
 	private static Link deleteCompany_Link = null;
 
+	// SubCategory CRUD Links
+	private static Link getSubCategories_Link = null;
+	private static Link createSubCategory_Link = null;
+	private static Link updateSubCategory_Link = null;
+	private static Link deleteSubCategory_Link = null;
+
 	// links for all resources
 	private static List<Link> offerLinks = null;
 	private static List<Link> categoryLinks = null;
 	private static List<Link> companyLinks = null;
+	private static List<Link> subCategoryLinks = null;
+	// private static List<Link> exceptionLinks = null;
 
 	static {
 		// creating the getoffers_Link object
@@ -132,6 +140,40 @@ public class GenerateLinkService {
 		deleteCompany_Link.setHref(Constants.DELETECOMPANY_HREF);
 		deleteCompany_Link.setMethod(Constants.DELETECOMPANY_METHOD);
 		deleteCompany_Link.setRel(Constants.DELETECOMPANY_REL);
+
+		// ----------------------------------------------------------------------------------------------------------------------------
+
+		// creating the createSubCategory_Link object
+		createSubCategory_Link = new Link();
+		createSubCategory_Link.setContentTypeConsumes(Constants.CREATESUBCATEGORY_CONTENT_TYPE_CONSUMES);
+		createSubCategory_Link.setContentTypeProduces(Constants.CREATESUBCATEGORY_CONTENT_TYPE_PRODUCES);
+		createSubCategory_Link.setHref(Constants.CREATESUBCATEGORY_HREF);
+		createSubCategory_Link.setMethod(Constants.CREATESUBCATEGORY_METHOD);
+		createSubCategory_Link.setRel(Constants.CREATESUBCATEGORY_REL);
+
+		// creating the getSubCategories_Link object
+		getSubCategories_Link = new Link();
+		getSubCategories_Link.setContentTypeConsumes(Constants.GETSUBCATEGORIES_CONTENT_TYPE_CONSUMES);
+		getSubCategories_Link.setContentTypeProduces(Constants.GETSUBCATEGORIES_CONTENT_TYPE_PRODUCES);
+		getSubCategories_Link.setHref(Constants.GETSUBCATEGORIES_HREF);
+		getSubCategories_Link.setMethod(Constants.GETSUBCATEGORIES_METHOD);
+		getSubCategories_Link.setRel(Constants.GETSUBCATEGORIES_REL);
+
+		// creating the updateSubCategory_Link object
+		updateSubCategory_Link = new Link();
+		updateSubCategory_Link.setContentTypeConsumes(Constants.UPDATESUBCATEGORY_CONTENT_TYPE_CONSUMES);
+		updateSubCategory_Link.setContentTypeProduces(Constants.UPDATESUBCATEGORY_CONTENT_TYPE_PRODUCES);
+		updateSubCategory_Link.setHref(Constants.UPDATESUBCATEGORY_HREF);
+		updateSubCategory_Link.setMethod(Constants.UPDATESUBCATEGORY_METHOD);
+		updateSubCategory_Link.setRel(Constants.UPDATESUBCATEGORY_REL);
+
+		// creating the deleteSubCategory_Link object
+		deleteSubCategory_Link = new Link();
+		deleteSubCategory_Link.setContentTypeConsumes(Constants.DELETESUBCATEGORY_CONTENT_TYPE_CONSUMES);
+		deleteSubCategory_Link.setContentTypeProduces(Constants.DELETESUBCATEGORY_CONTENT_TYPE_PRODUCES);
+		deleteSubCategory_Link.setHref(Constants.DELETESUBCATEGORY_HREF);
+		deleteSubCategory_Link.setMethod(Constants.DELETESUBCATEGORY_METHOD);
+		deleteSubCategory_Link.setRel(Constants.DELETESUBCATEGORY_REL);
 	}
 
 	public static List<Link> generateOfferLink(String methodName) {
@@ -161,4 +203,39 @@ public class GenerateLinkService {
 		return companyLinks;
 	}
 
+	public static List<Link> generateSubcategoryLink(String methodName) {
+		subCategoryLinks = new ArrayList<Link>();
+		subCategoryLinks.add(createSubCategory_Link);
+		subCategoryLinks.add(getSubCategories_Link);
+		subCategoryLinks.add(updateSubCategory_Link);
+		subCategoryLinks.add(deleteSubCategory_Link);
+		return subCategoryLinks;
+	}
+
+	/*
+	 * public static List<Link> generateExceptionLinkw(String methodName) {
+	 * exceptionLinks = new ArrayList<Link>();
+	 * 
+	 * // adding Offer Links exceptionLinks.add(createOffer_Link);
+	 * exceptionLinks.add(deleteOffer_Link); exceptionLinks.add(getOffers_Link);
+	 * exceptionLinks.add(updateOffer_Link);
+	 * 
+	 * // adding category Links exceptionLinks = new ArrayList<Link>();
+	 * exceptionLinks.add(createCategory_Link);
+	 * exceptionLinks.add(deleteCategory_Link);
+	 * exceptionLinks.add(getCategories_Link);
+	 * exceptionLinks.add(updateCategory_Link);
+	 * 
+	 * // adding Sub category Links exceptionLinks.add(createSubCategory_Link);
+	 * exceptionLinks.add(getSubCategories_Link);
+	 * exceptionLinks.add(updateSubCategory_Link);
+	 * exceptionLinks.add(deleteSubCategory_Link);
+	 * 
+	 * // adding Company Links exceptionLinks.add(createCompany_Link);
+	 * exceptionLinks.add(getCompanies_Link);
+	 * exceptionLinks.add(updateCompany_Link);
+	 * exceptionLinks.add(deleteCompany_Link);
+	 * 
+	 * return exceptionLinks; }
+	 */
 }

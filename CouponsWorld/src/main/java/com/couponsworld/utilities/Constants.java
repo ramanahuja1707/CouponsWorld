@@ -1,6 +1,9 @@
 package com.couponsworld.utilities;
 
+import javax.ws.rs.core.MediaType;
+
 public class Constants {
+
 	// createOffer link object details
 	public static final String GETOFFERS = "createOffer";
 	public static final String GETOFFERS_HREF = "http://1.couponsworld-1707.appspot.com/webapi/offers";
@@ -101,10 +104,48 @@ public class Constants {
 	public static final String DELETECOMPANY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
 	public static final String DELETECOMPANY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
 
-	// ---------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------
+
+	// createSubCategory link object details
+	public static final String CREATESUBCATEGORY = "createSubCategory";
+	public static final String CREATESUBCATEGORY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/subcategories";
+	public static final String CREATESUBCATEGORY_REL = "To create a sub category in database";
+	public static final String CREATESUBCATEGORY_METHOD = "POST";
+	public static final String CREATESUBCATEGORY_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATESUBCATEGORY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// getSubCategories link object details
+	public static final String GETSUBCATEGORIES = "getSubCategories";
+	public static final String GETSUBCATEGORIES_HREF = "http://1.couponsworld-1707.appspot.com/webapi/subcategories";
+	public static final String GETSUBCATEGORIES_REL = "To get all sub category from database";
+	public static final String GETSUBCATEGORIES_METHOD = "GET";
+	public static final String GETSUBCATEGORIES_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GETSUBCATEGORIES_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateSubCategory link object details
+	public static final String UPDATESUBCATEGORY = "updateSubCategory";
+	public static final String UPDATESUBCATEGORY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/subcategories/<subCategoryId>";
+	public static final String UPDATESUBCATEGORY_REL = "To update a particular sub category in database";
+	public static final String UPDATESUBCATEGORY_METHOD = "PUT";
+	public static final String UPDATESUBCATEGORY_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATESUBCATEGORY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteSubCategory link object details
+	public static final String DELETESUBCATEGORY = "deleteSubCategory";
+	public static final String DELETESUBCATEGORY_HREF = "http://1.couponsworld-1707.appspot.com/webapi/subcategories/<subCategoryId>";
+	public static final String DELETESUBCATEGORY_REL = "To delete a particular sub category from database";
+	public static final String DELETESUBCATEGORY_METHOD = "DELETE";
+	public static final String DELETESUBCATEGORY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETESUBCATEGORY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
 
 	// authentication password for web api
 	public final static String AUTH_PASSWORD = "garr.innovate";
 	// Authentication username for web API
 	public final static String AUTH_USERNAME = "innovate.garr";
+
+	// URL Petterns for WEB REST API
+	public static final String URL_PATTERN_ALL = "(http://1.couponsworld-1707.appspot.com/webapi)\\/(offers|categories|subcategories|companies)(\\/?)((\\d)*)";
+	public static final String URL_PATTERN_GET_POST = "(http://1.couponsworld-1707.appspot.com/webapi)\\/(offers|categories|subcategories|companies)";
+	public static final String URL_PATTERN_DELETE_PUT = "(http://1.couponsworld-1707.appspot.com/webapi)\\/(offers|categories|subcategories|companies)(\\/?)((\\d)*)";
+
 }

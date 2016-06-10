@@ -186,7 +186,7 @@ public class CompanyService {
 
 				// wrapping the company into company list
 				companies = new ArrayList<Company>();
-				companies.add((Company) returnedObject);
+				companies.add(company);
 
 				// company does not created and error returned....
 				// Creating ResultantCompany object
@@ -207,7 +207,7 @@ public class CompanyService {
 
 				// wrapping the company into company list
 				companies = new ArrayList<Company>();
-				companies.add((Company) returnedObject);
+				companies.add(company);
 
 				// company does not created and error returned....
 				// Creating ResultantCompany object
@@ -229,7 +229,7 @@ public class CompanyService {
 
 			// wrapping the company into company list
 			companies = new ArrayList<Company>();
-			companies.add((company));
+			companies.add(company);
 
 			// company does not created and error returned....
 			// Creating ResultantCompany object
@@ -268,10 +268,6 @@ public class CompanyService {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				// wrapping the company into company list
-				companies = new ArrayList<Company>();
-				companies.add((Company) returnedObject);
-
 				// company does not created and error returned....
 				// Creating ResultantCompany object
 				resultantComapny = new ResultantComapny();
@@ -288,10 +284,6 @@ public class CompanyService {
 				// wrapping the error into errors list
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
-
-				// wrapping the company into company list
-				companies = new ArrayList<Company>();
-				companies.add((Company) returnedObject);
 
 				// company does not created and error returned....
 				// Creating ResultantCompany object

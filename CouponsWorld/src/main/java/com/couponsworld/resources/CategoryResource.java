@@ -31,7 +31,7 @@ public class CategoryResource {
 	public ResultantCategory getCategories() {
 		try {
 
-			return CategoryService.getcategories();
+			return CategoryService.getCategories();
 
 		} catch (NullPointerException nle) {
 
@@ -48,7 +48,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getCategories"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			errors = null;
@@ -68,7 +68,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getCategories"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			errors = null;
@@ -104,7 +104,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createOffer"));
+			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 
@@ -130,7 +130,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+			resultantCategory.setLinks(GenerateLinkService.generateOfferLink("createCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			categories = null;
@@ -143,7 +143,7 @@ public class CategoryResource {
 	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantCategory updateOffer(@PathParam("categoryId") long categoryId, Category category) {
+	public ResultantCategory updateCategory(@PathParam("categoryId") long categoryId, Category category) {
 		try {
 
 			return CategoryService.updateCategory(categoryId, category);
@@ -203,7 +203,7 @@ public class CategoryResource {
 	@DELETE
 	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantCategory deleteOffer(@PathParam("categoryId") long categoryId) {
+	public ResultantCategory deleteCategory(@PathParam("categoryId") long categoryId) {
 		try {
 
 			return CategoryService.deleteCategory(categoryId);

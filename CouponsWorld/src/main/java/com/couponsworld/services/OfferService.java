@@ -250,6 +250,7 @@ public class OfferService {
 				// Creating ResultantOffer object
 				offers = new ArrayList<Offer>();
 				offers.add((Offer) returnedObject);
+
 				resultantOffer = new ResultantOffer();
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
@@ -264,10 +265,6 @@ public class OfferService {
 				// wrapping the error into errors list
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
-
-				// wrapping the offer into offer list
-				offers = new ArrayList<Offer>();
-				offers.add((Offer) returnedObject);
 
 				// offer does not created and error returned....
 				// Creating ResultantOffer object
@@ -285,10 +282,6 @@ public class OfferService {
 				// wrapping the error into errors list
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
-
-				// wrapping the offer into offer list
-				offers = new ArrayList<Offer>();
-				offers.add((Offer) returnedObject);
 
 				// offer does not created and error returned....
 				// Creating ResultantOffer object

@@ -11,6 +11,7 @@ import javax.ws.rs.ext.Provider;
 
 import com.couponsworld.apiresults.ResultantCategory;
 import com.couponsworld.apiresults.ResultantComapny;
+import com.couponsworld.apiresults.ResultantException;
 import com.couponsworld.apiresults.ResultantOffer;
 import com.couponsworld.dto.Category;
 import com.couponsworld.dto.Company;
@@ -30,14 +31,19 @@ public class ResourcesFilter implements ContainerRequestFilter {
 	private List<Company> companies = null;
 
 	private List<com.couponsworld.apiresults.Error> errors = null;
-	private ResultantCategory resultantCategory;
-	private ResultantOffer resultantOffer;
-	private ResultantComapny resultantCompany;
+	private ResultantCategory resultantCategory = null;
+	private ResultantOffer resultantOffer = null;
+	private ResultantComapny resultantCompany = null;
+	private ResultantException resultantException = null;
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		try {
-			if (requestContext.getUriInfo().getPath().contains("offers")) {
+			System.out.println("Entered into resource filter");
+
+			if (requestContext.getUriInfo().getAbsolutePath().toString().contains("offers")) {
+				System.out.println(requestContext.getUriInfo().getPath());
+				System.out.println(requestContext.getUriInfo().getAbsolutePath());
 				List<String> authHeaders = requestContext.getHeaders().get(AUTHORIZATION_KEY);
 				if ((authHeaders.size() >= 0 && authHeaders != null)) {
 
@@ -80,6 +86,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 					}
 				}
 			}
+
 		} catch (NullPointerException n) {
 			// System.out.println("Null Pointer");
 			if (requestContext.getUriInfo().getPath().contains("offers")) {
@@ -170,11 +177,32 @@ public class ResourcesFilter implements ContainerRequestFilter {
 		errors.add(error);
 
 		resultantCompany.setErrors(errors);
-		resultantCompany.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+		resultantCompany.setLinks(GenerateLinkService.generateCompanyLink("createResultantAuthErrorForCompanyURL"));
 		resultantCompany.setStatus(Status.FAILURE);
 		resultantCompany.setCompanies(companies);
 		errors = null;
 		companies = null;
 		return resultantCompany;
 	}
+
+	/*
+	 * private ResultantException createResultantAuthErrorForExceptionURL(String
+	 * errorName) { // creating ResultantException Object resultantException =
+	 * new ResultantException();
+	 * 
+	 * // creating the error getting com.couponsworld.apiresults.Error error =
+	 * new com.couponsworld.apiresults.Error();
+	 * error.setErrorCode(Errors.API_AUTHENTICATION_ERROR.getErrorCode());
+	 * error.setErrorName(errorName);
+	 * 
+	 * // wrapping the error to a list of errors errors = new
+	 * ArrayList<com.couponsworld.apiresults.Error>(); errors.add(error);
+	 * 
+	 * resultantException.setErrors(errors); resultantException
+	 * .setLinks(GenerateLinkService.generateExceptionLink(
+	 * "createResultantAuthErrorForExceptionURL"));
+	 * resultantException.setStatus(Status.FAILURE);
+	 * 
+	 * errors = null; companies = null; return resultantException; }
+	 */
 }
