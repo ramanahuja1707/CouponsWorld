@@ -7,7 +7,8 @@ public enum Errors {
 					"Error related to category Occured"), API_AUTHENTICATION_ERROR(104L,
 							"API Authentication Error Occured"), COMPANY_ERROR(105L,
 									"Error related to Company Occured"), SUBCATEGORY_ERROR(106L,
-											"Error related to Sub Category Occured");
+											"Error related to Sub Category Occured"), USABILITY_STATUS_ERROR(107L,
+													"Error related to Usability Status Occured");
 
 	// data member
 	private String errorName;

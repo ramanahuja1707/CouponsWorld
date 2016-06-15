@@ -183,7 +183,7 @@ public class OfferResource {
 	}
 
 	@DELETE
-	@Path("/{offerId}/{authLoginId}")
+	@Path("/{offerId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId) {
 		try {
