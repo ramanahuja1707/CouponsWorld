@@ -3,7 +3,7 @@ package com.couponsworld.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.couponsworld.apiresults.ResulatantUsabilityStatus;
+import com.couponsworld.apiresults.ResultantUsabilityStatus;
 import com.couponsworld.database.DatabaseService;
 import com.couponsworld.dto.Category;
 import com.couponsworld.dto.UsabilityStatus;
@@ -15,11 +15,12 @@ import com.couponsworld.exceptions.UsabilityStatusException;
 import com.couponsworld.utilities.GenerateLinkService;
 
 public class UsabilityStatusService {
-	public static List<UsabilityStatus> usabilityStatuses = null;
-	public static List<com.couponsworld.apiresults.Error> errors = null;
-	public static ResulatantUsabilityStatus resultantUsabilityStatus;
 
-	public static ResulatantUsabilityStatus createUsabilityStatus(UsabilityStatus usabilityStatus) {
+	private static List<UsabilityStatus> usabilityStatuses = null;
+	private static List<com.couponsworld.apiresults.Error> errors = null;
+	private static ResultantUsabilityStatus resultantUsabilityStatus;
+
+	public static ResultantUsabilityStatus createUsabilityStatus(UsabilityStatus usabilityStatus) {
 		try {
 			Object returnedObject = DatabaseService.createUsabilityStatusInDatabase(usabilityStatus);
 			if (returnedObject instanceof UsabilityStatus) {
@@ -29,7 +30,7 @@ public class UsabilityStatusService {
 				usabilityStatuses.add((UsabilityStatus) returnedObject);
 
 				// Creating ResultantUsabilityStatus object
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
@@ -50,7 +51,7 @@ public class UsabilityStatusService {
 				errors.add(error);
 
 				// Creating ResultantUsabilityStatus object
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
@@ -72,7 +73,7 @@ public class UsabilityStatusService {
 			errors.add(error);
 
 			// Creating ResultantUsabilityStatus object
-			resultantUsabilityStatus = new ResulatantUsabilityStatus();
+			resultantUsabilityStatus = new ResultantUsabilityStatus();
 
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
@@ -84,7 +85,7 @@ public class UsabilityStatusService {
 		return resultantUsabilityStatus;
 	}
 
-	public static ResulatantUsabilityStatus getUsabilityStatus() {
+	public static ResultantUsabilityStatus getUsabilityStatus() {
 		try {
 			Object returnedObject = DatabaseService.getUsabilityStatusFromDatabase();
 			if (returnedObject instanceof Exception) {
@@ -98,7 +99,7 @@ public class UsabilityStatusService {
 				errors.add(error);
 
 				// Creating ResulatantUsabilityStatus object
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -114,7 +115,7 @@ public class UsabilityStatusService {
 				errors.add(error);
 
 				// Creating ResulatantUsabilityStatus object
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -124,14 +125,14 @@ public class UsabilityStatusService {
 				if (((List<Category>) returnedObject).size() > 0) {
 
 					// Creating ResulatantUsabilityStatus object
-					resultantUsabilityStatus = new ResulatantUsabilityStatus();
+					resultantUsabilityStatus = new ResultantUsabilityStatus();
 					resultantUsabilityStatus.setUsabilityStatus((List<UsabilityStatus>) returnedObject);
 					resultantUsabilityStatus.setErrors(errors);
 					resultantUsabilityStatus.setStatus(Status.SUCCESS);
 					resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
 				} else {
 					// Creating ResulatantUsabilityStatus object
-					resultantUsabilityStatus = new ResulatantUsabilityStatus();
+					resultantUsabilityStatus = new ResultantUsabilityStatus();
 					resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 					resultantUsabilityStatus.setErrors(errors);
 					resultantUsabilityStatus.setStatus(Status.SUCCESS);
@@ -148,7 +149,7 @@ public class UsabilityStatusService {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 			// Creating ResulatantUsabilityStatus object
-			resultantUsabilityStatus = new ResulatantUsabilityStatus();
+			resultantUsabilityStatus = new ResultantUsabilityStatus();
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -161,7 +162,7 @@ public class UsabilityStatusService {
 		return resultantUsabilityStatus;
 	}
 
-	public static ResulatantUsabilityStatus updateUsabilityStatus(long usabilityStatusId,
+	public static ResultantUsabilityStatus updateUsabilityStatus(long usabilityStatusId,
 			UsabilityStatus usabilityStatus) {
 		try {
 			Object returnedObject = DatabaseService.updateUsabilityStatusInDatabase(usabilityStatusId, usabilityStatus);
@@ -171,7 +172,7 @@ public class UsabilityStatusService {
 				usabilityStatuses = new ArrayList<UsabilityStatus>();
 				usabilityStatuses.add((UsabilityStatus) returnedObject);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.SUCCESS);
@@ -190,7 +191,7 @@ public class UsabilityStatusService {
 				usabilityStatuses = new ArrayList<UsabilityStatus>();
 				usabilityStatuses.add(usabilityStatus);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -209,7 +210,7 @@ public class UsabilityStatusService {
 				usabilityStatuses = new ArrayList<UsabilityStatus>();
 				usabilityStatuses.add(usabilityStatus);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -229,7 +230,7 @@ public class UsabilityStatusService {
 			usabilityStatuses = new ArrayList<UsabilityStatus>();
 			usabilityStatuses.add(usabilityStatus);
 
-			resultantUsabilityStatus = new ResulatantUsabilityStatus();
+			resultantUsabilityStatus = new ResultantUsabilityStatus();
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -242,7 +243,7 @@ public class UsabilityStatusService {
 		return resultantUsabilityStatus;
 	}
 
-	public static ResulatantUsabilityStatus deleteUsabilityStatus(long usabilityStatusId) {
+	public static ResultantUsabilityStatus deleteUsabilityStatus(long usabilityStatusId) {
 		try {
 			Object returnedObject = DatabaseService.deleteUsabilityStatusFromDatabase(usabilityStatusId);
 			if (returnedObject instanceof UsabilityStatus) {
@@ -250,12 +251,12 @@ public class UsabilityStatusService {
 				usabilityStatuses = new ArrayList<UsabilityStatus>();
 				usabilityStatuses.add((UsabilityStatus) returnedObject);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.SUCCESS);
 				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
-			} else if (returnedObject instanceof SubCategoryException) {
+			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating Usability Status
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 				error.setErrorCode(Errors.USABILITY_STATUS_ERROR.getErrorCode());
@@ -265,7 +266,7 @@ public class UsabilityStatusService {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -280,7 +281,7 @@ public class UsabilityStatusService {
 				errors = new ArrayList<com.couponsworld.apiresults.Error>();
 				errors.add(error);
 
-				resultantUsabilityStatus = new ResulatantUsabilityStatus();
+				resultantUsabilityStatus = new ResultantUsabilityStatus();
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
@@ -296,7 +297,7 @@ public class UsabilityStatusService {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUsabilityStatus = new ResulatantUsabilityStatus();
+			resultantUsabilityStatus = new ResultantUsabilityStatus();
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);

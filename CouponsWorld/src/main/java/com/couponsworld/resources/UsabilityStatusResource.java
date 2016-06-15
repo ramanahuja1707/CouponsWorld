@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.couponsworld.apiresults.ResulatantUsabilityStatus;
+import com.couponsworld.apiresults.ResultantUsabilityStatus;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
@@ -25,16 +25,16 @@ public class UsabilityStatusResource {
 
 	private List<UsabilityStatus> usabilityStatuses = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
-	private ResulatantUsabilityStatus resulatantUsabilityStatus;
+	private ResultantUsabilityStatus resulatantUsabilityStatus;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResulatantUsabilityStatus getUsabilityStatus() {
+	public ResultantUsabilityStatus getUsabilityStatus() {
 		try {
 			return UsabilityStatusService.getUsabilityStatus();
 		} catch (NullPointerException npe) {
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -54,7 +54,7 @@ public class UsabilityStatusResource {
 		} catch (Exception exception) {
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -78,7 +78,7 @@ public class UsabilityStatusResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResulatantUsabilityStatus createUsabilityStatus(UsabilityStatus usabilityStatus) {
+	public ResultantUsabilityStatus createUsabilityStatus(UsabilityStatus usabilityStatus) {
 		try {
 			return UsabilityStatusService.createUsabilityStatus(usabilityStatus);
 		} catch (NullPointerException npe) {
@@ -87,7 +87,7 @@ public class UsabilityStatusResource {
 			usabilityStatuses.add(usabilityStatus);
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -110,7 +110,7 @@ public class UsabilityStatusResource {
 			usabilityStatuses.add(usabilityStatus);
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -134,7 +134,7 @@ public class UsabilityStatusResource {
 	@Path("/{usabilityStatusId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResulatantUsabilityStatus updateUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId,
+	public ResultantUsabilityStatus updateUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId,
 			UsabilityStatus usabilityStatus) {
 		try {
 			return UsabilityStatusService.updateUsabilityStatus(usabilityStatusId, usabilityStatus);
@@ -143,7 +143,7 @@ public class UsabilityStatusResource {
 			usabilityStatuses.add(usabilityStatus);
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -166,7 +166,7 @@ public class UsabilityStatusResource {
 			usabilityStatuses.add(usabilityStatus);
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -189,12 +189,12 @@ public class UsabilityStatusResource {
 	@DELETE
 	@Path("/{usabilityStatusId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResulatantUsabilityStatus deleteUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId) {
+	public ResultantUsabilityStatus deleteUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId) {
 		try {
 			return UsabilityStatusService.deleteUsabilityStatus(usabilityStatusId);
 		} catch (NullPointerException npe) {
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -214,7 +214,7 @@ public class UsabilityStatusResource {
 		} catch (Exception exception) {
 
 			// creating resulatantUsabilityStatus Object
-			resulatantUsabilityStatus = new ResulatantUsabilityStatus();
+			resulatantUsabilityStatus = new ResultantUsabilityStatus();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();

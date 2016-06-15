@@ -5,7 +5,7 @@ import java.util.List;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.enums.Status;
 
-public class ResulatantUsabilityStatus {
+public class ResultantUsabilityStatus {
 
 	private List<UsabilityStatus> usabilityStatus = null;
 	private Status status = null;
