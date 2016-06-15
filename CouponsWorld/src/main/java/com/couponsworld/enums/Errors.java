@@ -9,7 +9,9 @@ public enum Errors {
 									"Error related to Company Occured"), SUBCATEGORY_ERROR(106L,
 											"Error related to Sub Category Occured"), USABILITY_STATUS_ERROR(107L,
 													"Error related to Usability Status Occured"), USER_PLATFORM_ERROR(
-															108L, "Error related to Usability Status Occured");
+															108L,
+															"Error related to Usability Status Occured"), USER_TYPE_ERROR(
+																	109L, "Error related to Usability Status Occured");
 
 	// data member
 	private String errorName;

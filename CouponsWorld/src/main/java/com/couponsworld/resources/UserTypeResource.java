@@ -13,28 +13,28 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.couponsworld.apiresults.ResultantUserPlatform;
-import com.couponsworld.dto.UserPlatform;
+import com.couponsworld.apiresults.ResultantUserType;
+import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
-import com.couponsworld.services.UserPlatformService;
+import com.couponsworld.services.UserTypeService;
 import com.couponsworld.utilities.GenerateLinkService;
 
-@Path("/userplatform")
-public class UserPlatformResource {
+@Path("/usertype")
+public class UserTypeResource {
 
-	private List<UserPlatform> userPlatforms = null;
+	private List<UserType> userTypes = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
-	private ResultantUserPlatform resultantUserPlatform;
+	private ResultantUserType resultantUserType;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantUserPlatform getUserPlatform() {
+	public ResultantUserType getUserTypes() {
 		try {
-			return UserPlatformService.getUserPlatforms();
+			return UserTypeService.getUserTypes();
 		} catch (NullPointerException npe) {
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -45,16 +45,16 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		} catch (Exception exception) {
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -65,12 +65,12 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		}
 
 	}
@@ -78,16 +78,16 @@ public class UserPlatformResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantUserPlatform createUserPlatform(UserPlatform userPlatform) {
+	public ResultantUserType createUserType(UserType userType) {
 		try {
-			return UserPlatformService.createUserPlatform(userPlatform);
+			return UserTypeService.createUserType(userType);
 		} catch (NullPointerException npe) {
 
-			userPlatforms = new ArrayList<UserPlatform>();
-			userPlatforms.add(userPlatform);
+			userTypes = new ArrayList<UserType>();
+			userTypes.add(userType);
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -98,19 +98,19 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		} catch (Exception exception) {
 
-			userPlatforms = new ArrayList<UserPlatform>();
-			userPlatforms.add(userPlatform);
+			userTypes = new ArrayList<UserType>();
+			userTypes.add(userType);
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -121,29 +121,28 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		}
 	}
 
 	@PUT
-	@Path("/{userPlatformId}")
+	@Path("/{userTypeId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantUserPlatform updateUserPlatform(@PathParam("userPlatformId") long userPlatformId,
-			UserPlatform userPlatform) {
+	public ResultantUserType updateUserType(@PathParam("userTypeId") long userTypeId, UserType userType) {
 		try {
-			return UserPlatformService.updateUserPlatform(userPlatformId, userPlatform);
+			return UserTypeService.updateUserType(userTypeId, userType);
 		} catch (NullPointerException npe) {
-			userPlatforms = new ArrayList<UserPlatform>();
-			userPlatforms.add(userPlatform);
+			userTypes = new ArrayList<UserType>();
+			userTypes.add(userType);
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -154,19 +153,19 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		} catch (Exception exception) {
 
-			userPlatforms = new ArrayList<UserPlatform>();
-			userPlatforms.add(userPlatform);
+			userTypes = new ArrayList<UserType>();
+			userTypes.add(userType);
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -177,24 +176,24 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		}
 	}
 
 	@DELETE
-	@Path("/{userPlatformId}")
+	@Path("/{userTypeId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantUserPlatform deleteUserPlatform(@PathParam("userPlatformId") long userPlatformId) {
+	public ResultantUserType deleteUserType(@PathParam("userTypeId") long userTypeId) {
 		try {
-			return UserPlatformService.deleteUserPlatform(userPlatformId);
+			return UserTypeService.deleteUserType(userTypeId);
 		} catch (NullPointerException npe) {
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -205,16 +204,16 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		} catch (Exception exception) {
 
-			// creating resultantUserPlatform Object
-			resultantUserPlatform = new ResultantUserPlatform();
+			// creating resultantUserType Object
+			resultantUserType = new ResultantUserType();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -225,12 +224,13 @@ public class UserPlatformResource {
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
 
-			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
-			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setUserPlatform(userPlatforms);
+			resultantUserType.setErrors(errors);
+			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setStatus(Status.FAILURE);
+			resultantUserType.setUserType(userTypes);
 			errors = null;
-			return resultantUserPlatform;
+			return resultantUserType;
 		}
+
 	}
 }
