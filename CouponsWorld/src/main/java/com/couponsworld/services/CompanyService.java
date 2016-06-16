@@ -32,7 +32,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.SUCCESS);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("createCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("createCompany"));
 			} else {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -54,7 +54,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("createCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("createCompany"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating company
@@ -77,7 +77,7 @@ public class CompanyService {
 			resultantComapny.setCompanies(companies);
 			resultantComapny.setErrors(errors);
 			resultantComapny.setStatus(Status.FAILURE);
-			resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("createCompany"));
+			resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("createCompany"));
 		}
 		companies = null;
 		errors = null;
@@ -102,7 +102,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("getCompanies"));
 			} else if (returnedObject instanceof CompanyException) {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -118,7 +118,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("getCompanies"));
 			} else {
 
 				if (((List<Category>) returnedObject).size() > 0) {
@@ -127,13 +127,13 @@ public class CompanyService {
 					resultantComapny.setCompanies((List<Company>) returnedObject);
 					resultantComapny.setErrors(errors);
 					resultantComapny.setStatus(Status.SUCCESS);
-					resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+					resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("getCompanies"));
 				} else {
 					resultantComapny = new ResultantComapny();
 					resultantComapny.setCompanies(companies);
 					resultantComapny.setErrors(errors);
 					resultantComapny.setStatus(Status.SUCCESS);
-					resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+					resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("getCompanies"));
 				}
 			}
 		} catch (Exception e) {
@@ -151,7 +151,7 @@ public class CompanyService {
 			resultantComapny.setCompanies(companies);
 			resultantComapny.setErrors(errors);
 			resultantComapny.setStatus(Status.FAILURE);
-			resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("getCompanies"));
+			resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("getCompanies"));
 			companies = null;
 			errors = null;
 		}
@@ -173,7 +173,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.SUCCESS);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("updateCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("updateCompany"));
 			} else if (returnedObject instanceof CompanyException) {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -194,7 +194,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("updateCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("updateCompany"));
 			} else {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -215,7 +215,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("updateCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("updateCompany"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating company
@@ -237,7 +237,7 @@ public class CompanyService {
 			resultantComapny.setCompanies(companies);
 			resultantComapny.setErrors(errors);
 			resultantComapny.setStatus(Status.FAILURE);
-			resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("updateCompany"));
+			resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("updateCompany"));
 			companies = null;
 			errors = null;
 		}
@@ -257,7 +257,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.SUCCESS);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("deleteCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("deleteCompany"));
 			} else if (returnedObject instanceof CompanyException) {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -274,7 +274,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("deleteCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("deleteCompany"));
 			} else {
 				// Creating Error for updating company
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -291,7 +291,7 @@ public class CompanyService {
 				resultantComapny.setCompanies(companies);
 				resultantComapny.setErrors(errors);
 				resultantComapny.setStatus(Status.FAILURE);
-				resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("deleteCompany"));
+				resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("deleteCompany"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating company
@@ -309,7 +309,7 @@ public class CompanyService {
 			resultantComapny.setCompanies(companies);
 			resultantComapny.setErrors(errors);
 			resultantComapny.setStatus(Status.FAILURE);
-			resultantComapny.setLinks(GenerateLinkService.generateCompanyLink("deleteCompany"));
+			resultantComapny.setLinks(GenerateLinkService.mapOfLinks.get("deleteCompany"));
 			companies = null;
 			errors = null;
 		}

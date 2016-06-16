@@ -35,7 +35,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.SUCCESS);
-				resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			} else {
 				// Creating Error for updating USERTYPE
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -56,7 +56,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating USERTYPE
@@ -78,7 +78,7 @@ public class UserTypeService {
 			resultantUserType.setUserType(userTypes);
 			resultantUserType.setErrors(errors);
 			resultantUserType.setStatus(Status.FAILURE);
-			resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 		}
 		userTypes = null;
 		errors = null;
@@ -104,7 +104,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating UserType
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -121,7 +121,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			} else {
 
 				if (((List<Category>) returnedObject).size() > 0) {
@@ -132,7 +132,7 @@ public class UserTypeService {
 					resultantUserType.setUserType((List<UserType>) returnedObject);
 					resultantUserType.setErrors(errors);
 					resultantUserType.setStatus(Status.SUCCESS);
-					resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUserType.setLinks((GenerateLinkService.mapOfLinks).get("getUserTypes"));
 				} else {
 					// Creating ResultantUserPlatform object
 					resultantUserType = new ResultantUserType();
@@ -140,7 +140,7 @@ public class UserTypeService {
 					resultantUserType.setUserType(userTypes);
 					resultantUserType.setErrors(errors);
 					resultantUserType.setStatus(Status.SUCCESS);
-					resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUserType.setLinks((GenerateLinkService.mapOfLinks).get("getUserTypes"));
 				}
 			}
 		} catch (Exception e) {
@@ -159,7 +159,7 @@ public class UserTypeService {
 			resultantUserType.setUserType(userTypes);
 			resultantUserType.setErrors(errors);
 			resultantUserType.setStatus(Status.FAILURE);
-			resultantUserType.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			userTypes = null;
 			errors = null;
 		}
@@ -181,7 +181,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.SUCCESS);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			} else if (returnedObject instanceof UserTypeException) {
 				// Creating Error for updating UserType
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -200,7 +200,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			} else {
 				// Creating Error for updating UserType
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -219,7 +219,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating UserType
@@ -239,7 +239,7 @@ public class UserTypeService {
 			resultantUserType.setUserType(userTypes);
 			resultantUserType.setErrors(errors);
 			resultantUserType.setStatus(Status.FAILURE);
-			resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			userTypes = null;
 			errors = null;
 		}
@@ -260,7 +260,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.SUCCESS);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			} else if (returnedObject instanceof UserPlatformException) {
 				// Creating Error for updating UserType
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -275,7 +275,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			} else {
 				// Creating Error for updating UserType
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -290,7 +290,7 @@ public class UserTypeService {
 				resultantUserType.setUserType(userTypes);
 				resultantUserType.setErrors(errors);
 				resultantUserType.setStatus(Status.FAILURE);
-				resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating UserType
@@ -306,7 +306,7 @@ public class UserTypeService {
 			resultantUserType.setUserType(userTypes);
 			resultantUserType.setErrors(errors);
 			resultantUserType.setStatus(Status.FAILURE);
-			resultantUserType.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			userTypes = null;
 			errors = null;
 		}

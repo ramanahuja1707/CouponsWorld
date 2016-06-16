@@ -48,7 +48,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getCategories"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("getCategories"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			errors = null;
@@ -68,7 +68,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("getCategories"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("getCategories"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			errors = null;
@@ -104,7 +104,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("createCategory"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("createCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 
@@ -166,7 +166,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 
@@ -191,7 +191,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("updateCategory"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			categories = null;
@@ -222,7 +222,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			categories = null;
@@ -243,7 +243,7 @@ public class CategoryResource {
 			errors.add(error);
 
 			resultantCategory.setErrors(errors);
-			resultantCategory.setLinks(GenerateLinkService.generateCategoryLink("deleteCategory"));
+			resultantCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteCategory"));
 			resultantCategory.setStatus(Status.FAILURE);
 			resultantCategory.setCategories(categories);
 			categories = null;

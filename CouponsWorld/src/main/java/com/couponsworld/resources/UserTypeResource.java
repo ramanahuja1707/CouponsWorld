@@ -46,7 +46,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -66,7 +66,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -99,7 +99,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -122,7 +122,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -154,7 +154,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -177,7 +177,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -205,7 +205,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks((GenerateLinkService.mapOfLinks.get("deleteUserType")));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
@@ -225,7 +225,7 @@ public class UserTypeResource {
 			errors.add(error);
 
 			resultantUserType.setErrors(errors);
-			resultantUserType.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;

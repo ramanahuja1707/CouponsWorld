@@ -2,7 +2,9 @@ package com.couponsworld.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.couponsworld.apiresults.Link;
 import com.couponsworld.apiresults.ResultantUsabilityStatus;
 import com.couponsworld.database.DatabaseService;
 import com.couponsworld.dto.Category;
@@ -10,7 +12,6 @@ import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.CategoryException;
-import com.couponsworld.exceptions.SubCategoryException;
 import com.couponsworld.exceptions.UsabilityStatusException;
 import com.couponsworld.utilities.GenerateLinkService;
 
@@ -35,7 +36,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.SUCCESS);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("createUsabilityStatus"));
 			} else {
 				// Creating Error for updating UsabilityStatus
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -56,7 +57,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("createUsabilityStatus"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating UsabilityStatus
@@ -78,7 +79,7 @@ public class UsabilityStatusService {
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
-			resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("createUsabilityStatus"));
 		}
 		usabilityStatuses = null;
 		errors = null;
@@ -103,7 +104,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating UsabilityStatus
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -119,7 +120,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 			} else {
 
 				if (((List<Category>) returnedObject).size() > 0) {
@@ -129,14 +130,14 @@ public class UsabilityStatusService {
 					resultantUsabilityStatus.setUsabilityStatus((List<UsabilityStatus>) returnedObject);
 					resultantUsabilityStatus.setErrors(errors);
 					resultantUsabilityStatus.setStatus(Status.SUCCESS);
-					resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 				} else {
 					// Creating ResulatantUsabilityStatus object
 					resultantUsabilityStatus = new ResultantUsabilityStatus();
 					resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 					resultantUsabilityStatus.setErrors(errors);
 					resultantUsabilityStatus.setStatus(Status.SUCCESS);
-					resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 				}
 			}
 		} catch (Exception e) {
@@ -153,7 +154,7 @@ public class UsabilityStatusService {
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
-			resultantUsabilityStatus.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 			usabilityStatuses = null;
 			errors = null;
 		}
@@ -176,7 +177,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.SUCCESS);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating UsabilityStaus
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -195,7 +196,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			} else {
 				// Creating Error for updating UsabilityStaus
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -214,7 +215,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating UsabilityStaus
@@ -234,7 +235,7 @@ public class UsabilityStatusService {
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
-			resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			usabilityStatuses = null;
 			errors = null;
 		}
@@ -255,7 +256,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.SUCCESS);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating Usability Status
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -270,7 +271,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			} else {
 				// Creating Error for updating Usability Status
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -285,7 +286,7 @@ public class UsabilityStatusService {
 				resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 				resultantUsabilityStatus.setErrors(errors);
 				resultantUsabilityStatus.setStatus(Status.FAILURE);
-				resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -301,7 +302,7 @@ public class UsabilityStatusService {
 			resultantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			resultantUsabilityStatus.setErrors(errors);
 			resultantUsabilityStatus.setStatus(Status.FAILURE);
-			resultantUsabilityStatus.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			usabilityStatuses = null;
 			errors = null;
 		}

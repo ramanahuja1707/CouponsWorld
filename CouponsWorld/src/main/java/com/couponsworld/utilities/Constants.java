@@ -138,6 +138,110 @@ public class Constants {
 	public static final String DELETESUBCATEGORY_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
 	public static final String DELETESUBCATEGORY_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
 
+	// ----------------------------------------------------------------------------------------------
+
+	// createUsabilityStatus link object details
+	public static final String CREATEUSABILITYSTATUS = "createUsabilityStatus";
+	public static final String CREATEUSABILITYSTATUS_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usabilitystatus";
+	public static final String CREATEUSABILITYSTATUS_REL = "To create a usability status in database";
+	public static final String CREATEUSABILITYSTATUS_METHOD = "POST";
+	public static final String CREATEUSABILITYSTATUS_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATEUSABILITYSTATUS_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// getUsabilityStatus link object details
+	public static final String GETUSABILITYSTATUS = "getUsabilityStatus";
+	public static final String GETUSABILITYSTATUS_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usabilitystatus";
+	public static final String GETUSABILITYSTATUS_REL = "To get all usability status from database";
+	public static final String GETUSABILITYSTATUS_METHOD = "GET";
+	public static final String GETUSABILITYSTATUS_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GETUSABILITYSTATUS_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateUsabilityStatus link object details
+	public static final String UPDATEUSABILITYSTATUS = "updateUsabilityStatus";
+	public static final String UPDATEUSABILITYSTATUS_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usabilitystatus/<usabilityStatusId>";
+	public static final String UPDATEUSABILITYSTATUS_REL = "To update a particular usability status in database";
+	public static final String UPDATEUSABILITYSTATUS_METHOD = "PUT";
+	public static final String UPDATEUSABILITYSTATUS_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATEUSABILITYSTATUS_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteUsabilityStatus link object details
+	public static final String DELETEUSABILITYSTATUS = "deleteUsabilityStatus";
+	public static final String DELETEUSABILITYSTATUS_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usabilitystatus/<usabilityStatusId>";
+	public static final String DELETEUSABILITYSTATUS_REL = "To delete a particular usability status from database";
+	public static final String DELETEUSABILITYSTATUS_METHOD = "DELETE";
+	public static final String DELETEUSABILITYSTATUS_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETEUSABILITYSTATUS_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ----------------------------------------------------------------------------------------------
+
+	// createUserPlatform_link object details
+	public static final String CREATEUSERPLATFORM = "createUserPlatform";
+	public static final String CREATEUSERPLATFORM_HREF = "http://1.couponsworld-1707.appspot.com/webapi/userplatform";
+	public static final String CREATEUSERPLATFORM_REL = "To create a user platform in database";
+	public static final String CREATEUSERPLATFORM_METHOD = "POST";
+	public static final String CREATEUSERPLATFORM_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATEUSERPLATFORM_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// getUserPlatform_link object details
+	public static final String GETUSERPLATFORM = "getUserPlatform";
+	public static final String GETUSERPLATFORM_HREF = "http://1.couponsworld-1707.appspot.com/webapi/userplatform";
+	public static final String GETUSERPLATFORM_REL = "To get all user platform from database";
+	public static final String GETUSERPLATFORM_METHOD = "GET";
+	public static final String GETUSERPLATFORM_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GETUSERPLATFORM_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateUserPlatform_link object details
+	public static final String UPDATEUSERPLATFORM = "updateUserPlatform";
+	public static final String UPDATEUSERPLATFORM_HREF = "http://1.couponsworld-1707.appspot.com/webapi/userplatform/<userPlatformId>";
+	public static final String UPDATEUSERPLATFORM_REL = "To update a particular user platform in database";
+	public static final String UPDATEUSERPLATFORM_METHOD = "PUT";
+	public static final String UPDATEUSERPLATFORM_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATEUSERPLATFORM_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteUserPlatform link object details
+	public static final String DELETEUSERPLATFORM = "deleteUsabilityStatus";
+	public static final String DELETEUSERPLATFORM_HREF = "http://1.couponsworld-1707.appspot.com/webapi/userplatform/<userPlatformId>";
+	public static final String DELETEUSERPLATFORM_REL = "To delete a particular user platform from database";
+	public static final String DELETEUSERPLATFORM_METHOD = "DELETE";
+	public static final String DELETEUSERPLATFORM_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETEUSERPLATFORM_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ----------------------------------------------------------------------------------------------
+
+	// createUserType_link object details
+	public static final String CREATEUSERTYPE = "createUserType";
+	public static final String CREATEUSERTYPE_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usertype";
+	public static final String CREATEUSERTYPE_REL = "To create a user type in database";
+	public static final String CREATEUSERTYPE_METHOD = "POST";
+	public static final String CREATEUSERTYPE_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATEUSERTYPE_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// getUserType_link object details
+	public static final String GETUSERTYPE = "getUserType";
+	public static final String GETUSERTYPE_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usertype";
+	public static final String GETUSERTYPE_REL = "To get all user type from database";
+	public static final String GETUSERTYPE_METHOD = "GET";
+	public static final String GETUSERTYPE_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GETUSERTYPE_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateUserType_link object details
+	public static final String UPDATEUSERTYPE = "updateUserType";
+	public static final String UPDATEUSERTYPE_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usertype/<userTypeId>";
+	public static final String UPDATEUSERTYPE_REL = "To update a particular user type in database";
+	public static final String UPDATEUSERTYPE_METHOD = "PUT";
+	public static final String UPDATEUSERTYPE_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATEUSERTYPE_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteUserType link object details
+	public static final String DELETEUSERTYPE = "deleteUsabilityStatus";
+	public static final String DELETEUSERTYPE_HREF = "http://1.couponsworld-1707.appspot.com/webapi/usertype/<userTypeId>";
+	public static final String DELETEUSERTYPE_REL = "To delete a particular user type from database";
+	public static final String DELETEUSERTYPE_METHOD = "DELETE";
+	public static final String DELETEUSERTYPE_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETEUSERTYPE_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ----------------------------------------------------------------------------------------------
+
 	// authentication password for web api
 	public final static String AUTH_PASSWORD = "garr.innovate";
 	// Authentication username for web API

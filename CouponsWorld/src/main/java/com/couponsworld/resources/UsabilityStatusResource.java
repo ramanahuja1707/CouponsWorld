@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.couponsworld.apiresults.Link;
 import com.couponsworld.apiresults.ResultantUsabilityStatus;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.enums.Errors;
@@ -46,7 +48,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -66,7 +68,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("getUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -99,7 +101,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("createUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -122,7 +124,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("createUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -155,7 +157,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -178,7 +180,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("updateUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -206,7 +208,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
@@ -226,7 +228,7 @@ public class UsabilityStatusResource {
 			errors.add(error);
 
 			resulatantUsabilityStatus.setErrors(errors);
-			resulatantUsabilityStatus.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resulatantUsabilityStatus.setLinks(GenerateLinkService.mapOfLinks.get("deleteUsabilityStatus"));
 			resulatantUsabilityStatus.setStatus(Status.FAILURE);
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;

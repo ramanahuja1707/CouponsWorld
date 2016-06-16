@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.couponsworld.apiresults.Link;
 import com.couponsworld.apiresults.ResultantUserPlatform;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.enums.Errors;
@@ -29,7 +31,7 @@ public class UserPlatformResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantUserPlatform getUserPlatform() {
+	public ResultantUserPlatform getUserPlatforms() {
 		try {
 			return UserPlatformService.getUserPlatforms();
 		} catch (NullPointerException npe) {
@@ -46,7 +48,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -66,7 +68,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -99,7 +101,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -122,7 +124,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -155,7 +157,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -178,7 +180,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -206,7 +208,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
@@ -226,7 +228,7 @@ public class UserPlatformResource {
 			errors.add(error);
 
 			resultantUserPlatform.setErrors(errors);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantUserPlatform.setStatus(Status.FAILURE);
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;

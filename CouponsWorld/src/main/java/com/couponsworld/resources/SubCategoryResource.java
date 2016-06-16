@@ -52,7 +52,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getCategories"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getCategories"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 			errors = null;
@@ -73,7 +73,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getCategories"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getCategories"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 			errors = null;
@@ -108,7 +108,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("createSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("createSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 
@@ -133,7 +133,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("createSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("createSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 			subCategories = null;
@@ -168,7 +168,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 
@@ -193,7 +193,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 
@@ -224,7 +224,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 			subCategories = null;
@@ -244,7 +244,7 @@ public class SubCategoryResource {
 			errors.add(error);
 
 			resultantSubCategory.setErrors(errors);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			resultantSubCategory.setStatus(Status.FAILURE);
 			resultantSubCategory.setSubCategories(subCategories);
 			subCategories = null;

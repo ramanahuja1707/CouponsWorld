@@ -34,7 +34,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.SUCCESS);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("createSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("createSubCategory"));
 			} else {
 				// Creating Error for updating Subcategory
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -56,7 +56,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("createSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("createSubCategory"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating Offer
@@ -78,7 +78,7 @@ public class SubCategoryService {
 			resultantSubCategory.setSubCategories(subCategories);
 			resultantSubCategory.setErrors(errors);
 			resultantSubCategory.setStatus(Status.FAILURE);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("createSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("createSubCategory"));
 		}
 		subCategories = null;
 		errors = null;
@@ -103,7 +103,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getSubCategories"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getSubCategories"));
 			} else if (returnedObject instanceof CategoryException) {
 				// Creating Error for updating subcategory
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -119,7 +119,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getSubCategories"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getSubCategories"));
 			} else {
 
 				if (((List<Category>) returnedObject).size() > 0) {
@@ -130,7 +130,7 @@ public class SubCategoryService {
 					resultantSubCategory.setSubCategories((List<SubCategory>) returnedObject);
 					resultantSubCategory.setErrors(errors);
 					resultantSubCategory.setStatus(Status.SUCCESS);
-					resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getSubCategories"));
+					resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getSubCategories"));
 				} else {
 					// Creating ResultantCategory object
 					resultantSubCategory = new ResultantSubCategory();
@@ -138,7 +138,7 @@ public class SubCategoryService {
 					resultantSubCategory.setSubCategories(subCategories);
 					resultantSubCategory.setErrors(errors);
 					resultantSubCategory.setStatus(Status.SUCCESS);
-					resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getSubCategories"));
+					resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getSubCategories"));
 				}
 			}
 		} catch (Exception e) {
@@ -156,7 +156,7 @@ public class SubCategoryService {
 			resultantSubCategory.setSubCategories(subCategories);
 			resultantSubCategory.setErrors(errors);
 			resultantSubCategory.setStatus(Status.FAILURE);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("getSubCategories"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("getSubCategories"));
 			subCategories = null;
 			errors = null;
 		}
@@ -178,7 +178,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.SUCCESS);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			} else if (returnedObject instanceof SubCategoryException) {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -197,7 +197,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -216,7 +216,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -236,7 +236,7 @@ public class SubCategoryService {
 			resultantSubCategory.setSubCategories(subCategories);
 			resultantSubCategory.setErrors(errors);
 			resultantSubCategory.setStatus(Status.FAILURE);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("updateSubCategory"));
 			subCategories = null;
 			errors = null;
 		}
@@ -257,7 +257,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.SUCCESS);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			} else if (returnedObject instanceof SubCategoryException) {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -272,7 +272,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -287,7 +287,7 @@ public class SubCategoryService {
 				resultantSubCategory.setSubCategories(subCategories);
 				resultantSubCategory.setErrors(errors);
 				resultantSubCategory.setStatus(Status.FAILURE);
-				resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -303,7 +303,7 @@ public class SubCategoryService {
 			resultantSubCategory.setSubCategories(subCategories);
 			resultantSubCategory.setErrors(errors);
 			resultantSubCategory.setStatus(Status.FAILURE);
-			resultantSubCategory.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantSubCategory.setLinks(GenerateLinkService.mapOfLinks.get("deleteSubCategory"));
 			subCategories = null;
 			errors = null;
 		}

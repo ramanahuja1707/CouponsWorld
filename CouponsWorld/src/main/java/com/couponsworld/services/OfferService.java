@@ -31,7 +31,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("createOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -52,7 +52,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("createOffer"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating Offer
@@ -74,7 +74,7 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("createOffer"));
 		}
 		offers = null;
 		errors = null;
@@ -93,7 +93,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -114,7 +114,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -135,7 +135,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -155,7 +155,7 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			offers = null;
 			errors = null;
 		}
@@ -183,7 +183,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			} else if (returnedObject instanceof OfferException) {
 
 				// Creating Error for updating Offer
@@ -201,7 +201,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			} else {
 
 				if (((List<Offer>) returnedObject).size() > 0) {
@@ -210,13 +210,13 @@ public class OfferService {
 					resultantOffer.setOffers((List<Offer>) returnedObject);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+					resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 				} else {
 					resultantOffer = new ResultantOffer();
 					resultantOffer.setOffers(offers);
 					resultantOffer.setErrors(errors);
 					resultantOffer.setStatus(Status.SUCCESS);
-					resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+					resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 				}
 			}
 		} catch (Exception e) {
@@ -233,7 +233,7 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			offers = null;
 			errors = null;
 		}
@@ -255,7 +255,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.SUCCESS);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			} else if (returnedObject instanceof OfferException) {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -272,7 +272,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			} else {
 				// Creating Error for updating Offer
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -289,7 +289,7 @@ public class OfferService {
 				resultantOffer.setOffers(offers);
 				resultantOffer.setErrors(errors);
 				resultantOffer.setStatus(Status.FAILURE);
-				resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating Offer
@@ -305,7 +305,7 @@ public class OfferService {
 			resultantOffer.setOffers(offers);
 			resultantOffer.setErrors(errors);
 			resultantOffer.setStatus(Status.FAILURE);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			offers = null;
 			errors = null;
 		}

@@ -34,7 +34,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.SUCCESS);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("createUserPlatform"));
 			} else {
 				// Creating Error for updating UserPlatform
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -55,7 +55,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("createUserPlatform"));
 			}
 		} catch (Exception exception) {
 			// Creating Error for updating UserPlatform
@@ -77,7 +77,7 @@ public class UserPlatformService {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			resultantUserPlatform.setErrors(errors);
 			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("createUserPlatform"));
 		}
 		userPlatforms = null;
 		errors = null;
@@ -103,7 +103,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getUserPlatforms"));
 			} else if (returnedObject instanceof UsabilityStatusException) {
 				// Creating Error for updating UsabilityStatus
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -120,7 +120,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getUserPlatforms"));
 			} else {
 
 				if (((List<Category>) returnedObject).size() > 0) {
@@ -131,7 +131,7 @@ public class UserPlatformService {
 					resultantUserPlatform.setUserPlatform((List<UserPlatform>) returnedObject);
 					resultantUserPlatform.setErrors(errors);
 					resultantUserPlatform.setStatus(Status.SUCCESS);
-					resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getUserPlatforms"));
 				} else {
 					// Creating ResultantUserPlatform object
 					resultantUserPlatform = new ResultantUserPlatform();
@@ -139,7 +139,7 @@ public class UserPlatformService {
 					resultantUserPlatform.setUserPlatform(userPlatforms);
 					resultantUserPlatform.setErrors(errors);
 					resultantUserPlatform.setStatus(Status.SUCCESS);
-					resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+					resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getUserPlatforms"));
 				}
 			}
 		} catch (Exception e) {
@@ -158,7 +158,7 @@ public class UserPlatformService {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			resultantUserPlatform.setErrors(errors);
 			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateCategoryLink(""));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("getUserPlatforms"));
 			userPlatforms = null;
 			errors = null;
 		}
@@ -180,7 +180,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.SUCCESS);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("updateUserPlatform"));
 			} else if (returnedObject instanceof UserPlatformException) {
 				// Creating Error for updating UserPlatform
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -199,7 +199,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("updateUserPlatform"));
 			} else {
 				// Creating Error for updating userPlatforms
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -218,7 +218,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("updateUserPlatform"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating userPlatforms
@@ -238,7 +238,7 @@ public class UserPlatformService {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			resultantUserPlatform.setErrors(errors);
 			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("updateSubCategory"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("updateUserPlatform"));
 			userPlatforms = null;
 			errors = null;
 		}
@@ -259,7 +259,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.SUCCESS);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserPlatform"));
 			} else if (returnedObject instanceof UserPlatformException) {
 				// Creating Error for updating UserPlatform
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -274,7 +274,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserPlatform"));
 			} else {
 				// Creating Error for updating UserPlatform
 				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -289,7 +289,7 @@ public class UserPlatformService {
 				resultantUserPlatform.setUserPlatform(userPlatforms);
 				resultantUserPlatform.setErrors(errors);
 				resultantUserPlatform.setStatus(Status.FAILURE);
-				resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+				resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserPlatform"));
 			}
 		} catch (Exception e) {
 			// Creating Error for updating UserPlatform
@@ -305,7 +305,7 @@ public class UserPlatformService {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			resultantUserPlatform.setErrors(errors);
 			resultantUserPlatform.setStatus(Status.FAILURE);
-			resultantUserPlatform.setLinks(GenerateLinkService.generateSubcategoryLink("deleteSubCategory"));
+			resultantUserPlatform.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserPlatform"));
 			userPlatforms = null;
 			errors = null;
 		}

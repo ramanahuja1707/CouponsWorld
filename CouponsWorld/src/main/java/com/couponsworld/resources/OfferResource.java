@@ -45,7 +45,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 			errors = null;
@@ -65,7 +65,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("getOffers"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 			errors = null;
@@ -94,7 +94,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("createOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 
@@ -119,7 +119,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("createOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("createOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 			errors = null;
@@ -148,7 +148,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 			offers = null;
@@ -173,7 +173,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("updateOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("updateOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 			offers = null;
@@ -202,7 +202,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 
@@ -223,7 +223,7 @@ public class OfferResource {
 			errors.add(error);
 
 			resultantOffer.setErrors(errors);
-			resultantOffer.setLinks(GenerateLinkService.generateOfferLink("deleteOffer"));
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("deleteOffer"));
 			resultantOffer.setStatus(Status.FAILURE);
 			resultantOffer.setOffers(offers);
 

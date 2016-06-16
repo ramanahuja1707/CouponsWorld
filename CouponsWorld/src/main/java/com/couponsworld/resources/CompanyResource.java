@@ -48,7 +48,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -70,7 +70,7 @@ public class CompanyResource {
 			// creating resultantCompany Object
 			resultantCompany = new ResultantComapny();
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 
@@ -108,7 +108,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -135,7 +135,7 @@ public class CompanyResource {
 			// creating resultantCompany Object
 			resultantCompany = new ResultantComapny();
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -171,7 +171,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -198,7 +198,7 @@ public class CompanyResource {
 			// creating resultantCompany Object
 			resultantCompany = new ResultantComapny();
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -228,7 +228,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
@@ -251,7 +251,7 @@ public class CompanyResource {
 			// creating resultantCompany Object
 			resultantCompany = new ResultantComapny();
 			resultantCompany.setErrors(errors);
-			resultantCompany.setLinks(GenerateLinkService.generateCategoryLink("getOffers"));
+			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
 			resultantCompany.setCompanies(companies);
 			errors = null;
