@@ -16,19 +16,30 @@
 		<filter-name>ObjectifyFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	
+
+
 	<servlet>
-	    <servlet-name>Coupon World Application</servlet-name>
-	    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-	    <init-param>
-	        <param-name>jersey.config.server.provider.packages</param-name>
-	        <param-value>com.couponsworld.resources</param-value>
-	    </init-param>
-	    <load-on-startup>1</load-on-startup>
+		<servlet-name>Coupon World Application</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.couponsworld.resources</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-	    <servlet-name>Coupon World Application</servlet-name>
-	    <url-pattern>/webapi/*</url-pattern>
+		<servlet-name>Coupon World Application</servlet-name>
+		<url-pattern>/webapi/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>UserTypeServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.UserTypeServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserTypeServlet</servlet-name>
+		<url-pattern>/addUserType</url-pattern>
 	</servlet-mapping>
 </web-app>

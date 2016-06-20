@@ -11,7 +11,9 @@ public enum Errors {
 													"Error related to Usability Status Occured"), USER_PLATFORM_ERROR(
 															108L,
 															"Error related to Usability Status Occured"), USER_TYPE_ERROR(
-																	109L, "Error related to Usability Status Occured");
+																	109L,
+																	"Error related to Usability Status Occured"), VALIDATION_ERROR(
+																			110L, "Validation Error Occured");
 
 	// data member
 	private String errorName;

@@ -10,14 +10,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import com.couponsworld.apiresults.Link;
-import com.couponsworld.apiresults.ResultantCategory;
-import com.couponsworld.apiresults.ResultantComapny;
-import com.couponsworld.apiresults.ResultantException;
 import com.couponsworld.apiresults.ResultantFilter;
-import com.couponsworld.apiresults.ResultantOffer;
-import com.couponsworld.dto.Category;
-import com.couponsworld.dto.Company;
-import com.couponsworld.dto.Offer;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.utilities.Constants;

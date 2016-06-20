@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Coupons World</title>
 </head>
 <body>
-	Hello ...
-
-	<a href="/webapi/offers">Get Offers</a>
-	<a href="show">Display category data</a>
+	<a href="addUserType.jsp">Add User Type</a>
 </body>
 </html>
