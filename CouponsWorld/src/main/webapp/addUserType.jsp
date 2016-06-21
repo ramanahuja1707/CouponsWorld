@@ -99,6 +99,8 @@
 			</nav>
 		</div>
 	</div>
+	<br />
+
 	<center>
 		<form action="userType" method="post">
 			UserType :<input type="text" name="userType"> <br /> <br />
