@@ -107,4 +107,69 @@ public class UserTypeServlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+
+			HttpURLConnection httpUrlConnection = HttpUrlService
+					.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
+							"text/html", "Basic " + new ApiAuthenticationService()
+									.generateAuthorizationKey("innovate.garr", "garr.innovate"),
+							Constants.DO_OUTPUT_FLAG_TRUE, null);
+			String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
+
+			System.out.println(urlResponse);
+
+			req.setAttribute("response", urlResponse.toString());
+			req.setAttribute("status", Status.SUCCESS);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch (IOException ioe) {
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(ioe.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			requestDispatcher.forward(req, resp);
+		} catch (MissingMandatoryParametersException mmpe) {
+
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(mmpe.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			requestDispatcher.forward(req, resp);
+		} catch (Exception e) {
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(e.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			requestDispatcher.forward(req, resp);
+		}
+
+	}
+
 }

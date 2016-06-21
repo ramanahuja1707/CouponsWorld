@@ -20,5 +20,4 @@ public class Error {
 		this.errorName = errorName;
 	}
 
-	
 }

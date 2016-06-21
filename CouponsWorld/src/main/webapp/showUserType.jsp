@@ -1,3 +1,4 @@
+<%@page import="com.couponsworld.dto.UserType"%>
 <%@page import="com.couponsworld.apiresults.ResultantFilter"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="com.couponsworld.apiresults.ResultantUserType"%>
@@ -16,11 +17,6 @@
 </head>
 <body>
 	<center>
-		<form action="userType" method="post">
-			UserType :<input type="text" name="userType"> <br /> <br />
-			<input type="submit" name="Add" value="Add">
-
-		</form>
 		<br /> <br />
 		<%
 			try {
@@ -35,10 +31,11 @@
 								ResultantUserType.class);
 
 						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
-							out.println(
-									"User Type : " + "<b>" + resultantUserType.getUserType().get(0).getUserTypeName()
-											+ "</b>" + " added Successfully");
-							out.println(resultantUserType.getUserType().get(0).getUserTypeName());
+
+							List<UserType> userTypes = (ArrayList<UserType>) request.getAttribute("userType");
+							for (UserType userType : userTypes) {
+								out.println(userType.getUserTypeName() + "<br/>");
+							}
 						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
 							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
 							for (Error e : errorList) {

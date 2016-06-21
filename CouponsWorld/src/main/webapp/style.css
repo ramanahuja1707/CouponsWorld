@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ margin:0; padding:0;}
+#wrapper{ width:100%; margin:0 auto;}
+.container{ width:100%; margin:0 auto;}
+.header{ width:100%; padding:25px 0; text-align:center; background-color:#993300}
+.header h1{ font-family:Arial, Helvetica, sans-serif; font-size:35px; color:#fff; text-align:center}
+nav{background-color:#999999; text-align:center;     height: 46px;    line-height: 39px;}
+nav ul{position:relative; list-style-type:none; font-family:Arial, Helvetica, sans-serif; margin:0; padding:0;}
+nav ul li{ margin-right:25px; display:inline-block;}
+.dropdown{ display:none;}
+.dropdown ul {list-style-type:none; font-family:Arial, Helvetica, sans-serif; margin:0; padding:0;}
+.dropdown ul li{ margin-right:25px; display:block; text-align:left; border-bottom:1px solid #ccc; padding:5px 100px 5px 15px; background-color:#993300; color:#fff}
+.dropdown ul li:hover, .active{background-color:#999999;}
+nav ul li:hover .dropdown{ position:absolute;  display:block}
+a{ color:#fff; text-decoration:none;}
+a:hover{ color:#fff;}
