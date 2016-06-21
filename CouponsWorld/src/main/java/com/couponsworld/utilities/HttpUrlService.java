@@ -19,32 +19,45 @@ public class HttpUrlService {
 	public static HttpURLConnection getHttpURLConnection(String httpURL, String httpMethod, String contentType,
 			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
 			throws IOException, MissingMandatoryParametersException {
+		System.out.println(
+				"----------------------HTTP URL CONNECTION OPENING- START------------------------------------");
 		if (checkMandatoryParameters(httpURL, httpMethod, contentType, apiAuthorizationKey, doOutputFlag, objectJson)) {
 			URL url = new URL(httpURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod(httpMethod);
 			// connection.setRequestProperty("User-Agent", USER_AGENT);
 			connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-			connection.setRequestProperty("content-type", contentType);
+			if (!(contentType.equals(""))) {
+				connection.setRequestProperty("content-type", contentType);
+			}
 			connection.setRequestProperty("Authorization", apiAuthorizationKey);
 			connection.setDoOutput(doOutputFlag);
 
-			if ((!objectJson.equals("")) || objectJson != null) {
+			if ((!objectJson.equals(""))) {
 				OutputStream os = connection.getOutputStream();
 				os.write(objectJson.getBytes());
 				os.close();
 			}
-
-			System.out.println("content-type : " + contentType);
+			System.out.println("<----------HTTP - URL - PARAMETERS------------->");
+			if (!(contentType.equals(""))) {
+				System.out.println("content-type : " + contentType);
+			}
 			System.out.println("Authorization : " + apiAuthorizationKey);
 			System.out.println("Method : " + httpMethod);
 			System.out.println("URL : " + httpURL);
 			System.out.println("DoOutputFlag : " + doOutputFlag);
 			System.out.println("objectJson : " + objectJson);
+			System.out.println("<----------HTTP - URL - PARAMETERS------------->");
 
+			System.out.println("Returning the HTTP URL CONNECTION Object Successfully....");
+			System.out.println(
+					"----------------------HTTP URL CONNECTION OPENING - END - SUCCESS------------------------------------");
 			return connection;
 
 		} else {
+			System.out.println("Throwing Missing Mandatory Parameters Exception....");
+			System.out.println(
+					"----------------------HTTP URL CONNECTION OPENING - END -FAILURE ------------------------------------");
 			throw new MissingMandatoryParametersException("MAndatory Parameters Missing");
 		}
 
@@ -53,18 +66,24 @@ public class HttpUrlService {
 	private static boolean checkMandatoryParameters(String httpURL, String httpMethod, String contentType,
 			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
 			throws MissingMandatoryParametersException {
+		System.out.println("<--------------Checking Manadatory Parameters....START----------------->");
 		if (httpURL == null || httpURL.equals("")) {
+			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
+			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 			throw new MissingMandatoryParametersException("Missing Http URL");
 		}
 		if (httpMethod == null || httpMethod.equals("")) {
+			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
+			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 			throw new MissingMandatoryParametersException("Missing Http Method");
 		}
-		if (contentType == null || contentType.equals("")) {
-			throw new MissingMandatoryParametersException("Missing Request Content Type");
-		}
 		if (apiAuthorizationKey == null || apiAuthorizationKey.equals("")) {
+			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
+			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+
 			throw new MissingMandatoryParametersException("Missing Auhtorization Key");
 		}
+		System.out.println("<--------------Checking Manadatory Parameters....END - SUCCESS----------------->");
 		return true;
 	}
 
@@ -76,7 +95,6 @@ public class HttpUrlService {
 		while ((responseString = br.readLine()) != null) {
 			response += responseString;
 		}
-		System.out.println(response);
 		return response;
 	}
 

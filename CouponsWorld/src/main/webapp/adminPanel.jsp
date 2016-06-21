@@ -83,10 +83,10 @@
 				<li><a href="#">User Type</a>
 					<div class="dropdown">
 						<ul>
-							<li><a href="#">Add</a></li>
+							<li><a href="addUserType.jsp">Add</a></li>
 							<li><a href="#">update</a></li>
 							<li><a href="#">delete</a></li>
-							<li><a href="#">display</a></li>
+							<li><a href="userType">display</a></li>
 						</ul>
 					</div></li>
 			</ul>

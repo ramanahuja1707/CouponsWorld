@@ -7,10 +7,6 @@
 <title>Coupons World</title>
 </head>
 <body>
-	<a href="addUserType.jsp">Add User Type</a>
-	<br />
-	<form action="showUserType" method="get">
-		<input type="submit" value="Show User Type">
-	</form>
+	<a href="adminPanel.jsp">Go to Admin Panel</a>
 </body>
 </html>

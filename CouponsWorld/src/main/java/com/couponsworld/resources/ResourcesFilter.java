@@ -27,9 +27,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		try {
-			System.out.println("Entered into resource filter");
-			System.out.println(requestContext.getUriInfo().getPath());
-			System.out.println(requestContext.getUriInfo().getAbsolutePath());
+
 			List<String> authHeaders = requestContext.getHeaders().get(AUTHORIZATION_KEY);
 			if ((authHeaders.size() >= 0 && authHeaders != null)) {
 

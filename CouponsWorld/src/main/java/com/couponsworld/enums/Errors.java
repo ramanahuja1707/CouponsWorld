@@ -13,7 +13,10 @@ public enum Errors {
 															"Error related to Usability Status Occured"), USER_TYPE_ERROR(
 																	109L,
 																	"Error related to Usability Status Occured"), VALIDATION_ERROR(
-																			110L, "Validation Error Occured");
+																			110L,
+																			"Validation Error Occured"), MISSING_MANDATORY_PARAMETERS(
+																					111L,
+																					"Missing Mandatory Parameters");
 
 	// data member
 	private String errorName;
