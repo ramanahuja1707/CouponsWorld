@@ -1,3 +1,4 @@
+<%@page import="com.couponsworld.enums.Errors"%>
 <%@page import="com.couponsworld.dto.UserType"%>
 <%@page import="com.couponsworld.apiresults.ResultantFilter"%>
 <%@page import="com.google.gson.JsonObject"%>
@@ -12,6 +13,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	function submitForm(clickedButton) {
+		if (clickedButton.name == "updateButton") {
+			document.updateUserTypeForm.action = "/userType";
+		}
+		document.updateUserTypeForm.submit();
+	}
+
+	function validateUpdateUserTypeForm(clickedButton) {
+
+		var userTypesSelected = document.getElementsByName("userTypeSelected");
+
+		var userTypeSelected = null;
+		for (var i = 0; i < userTypesSelected.length; i++) {
+			if (userTypesSelected[i].checked == true) {
+				userTypeSelected = userTypesSelected[i].value;
+			}
+		}
+		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
+		if (userTypeSelected == null || userTypeSelected == "") {
+			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
+		} else if (document.getElementById("updatedUserTypeSelected").value == "") {
+			document.getElementById("userTypeSelectedError").innerHTML = "Please specify updated value...";
+		} else {
+			document.getElementById("userTypeSelectedError").innerHTML = "";
+			submitForm(clickedButton);
+		}
+
+	}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="style.css" />
 <title>Coupons World</title>
@@ -22,7 +53,6 @@
 			<div class="header">
 				<h1>Coupons World Admin Panel</h1>
 			</div>
-
 			<nav>
 			<ul>
 				<li><a href="#">Home </a>
@@ -73,8 +103,6 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="#">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
 							<li><a href="#">display</a></li>
 						</ul>
 					</div></li>
@@ -82,8 +110,6 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="#">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
 							<li><a href="#">display</a></li>
 						</ul>
 					</div></li>
@@ -91,9 +117,11 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="addUserType.jsp">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
-							<li><a href="userType">display</a></li>
+							<li><form method="get" action="userType">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
 						</ul>
 					</div></li>
 			</ul>
@@ -115,10 +143,27 @@
 								ResultantUserType.class);
 						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
 							List<UserType> userTypes = (List<UserType>) resultantUserType.getUserType();
-							for (UserType userType : userTypes) {
-								out.println(userType.getUserTypeName() + "<br/>");
-							}
-						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
+		%><form action="#" method="get" name="updateUserTypeForm">
+			<input type="text" style="display: none;" value="PUT" name="_method">
+			<%
+				for (UserType userType : userTypes) {
+			%>
+			<input type="radio"
+				value="<%=userType.getUserTypeName() + "-" + userType.getUserTypeId()%>"
+				name="userTypeSelected" id="userTypeSelected" /> <input type="text"
+				style="visibility: hidden; display: none;"
+				value="<%userType.getUserTypeId();%>" name="userTypeSelectedId" />
+			<%
+				out.println(userType.getUserTypeName() + "<br/>");
+								}
+			%>
+			<br /> Please enter updated vaue of User Type :<input type="text"
+				name="updatedUserTypeSelected" id="updatedUserTypeSelected" /><br />
+			<br /> <input type="button" value="Update User Type"
+				name="updateButton" onclick="validateUpdateUserTypeForm(this)" />
+		</form>
+		<%
+			} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
 							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
 							for (Error e : errorList) {
 								out.println(e.getErrorName() + "<br/>");
@@ -132,16 +177,19 @@
 							out.println(e.getErrorName() + "<br/>");
 						}
 					}
+					request.removeAttribute("response");
+					request.removeAttribute("status");
+					request.removeAttribute("errors");
 				} else {
-					System.out.println("Nothing To Display");
+					System.out.println("Sorry, Nothing To Display");
 				}
-				request.removeAttribute("status");
-				request.removeAttribute("errors");
+
 			} catch (Exception e) {
-				out.println(e.getMessage());
 				e.printStackTrace();
+				out.println(e.getMessage());
 			}
 		%>
+		<p id="userTypeSelectedError" style="color: red;"></p>
 	</center>
 </body>
 </html>

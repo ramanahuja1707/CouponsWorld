@@ -86,7 +86,11 @@
 							<li><a href="addUserType.jsp">Add</a></li>
 							<li><a href="#">update</a></li>
 							<li><a href="#">delete</a></li>
-							<li><a href="userType">display</a></li>
+							<li><form method="get" action="userType">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
 						</ul>
 					</div></li>
 			</ul>
