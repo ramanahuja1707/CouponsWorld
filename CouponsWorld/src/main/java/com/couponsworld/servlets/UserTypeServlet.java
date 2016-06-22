@@ -198,6 +198,8 @@ public class UserTypeServlet extends HttpServlet {
 			if (req.getParameter("_method").equals("PUT")) {
 				// System.out.println("##########################----PUT----######################");
 				doPut(req, resp);
+			} else if (req.getParameter("_method").equals("DELETE")) {
+				doDelete(req, resp);
 			} else if (req.getParameter("_method").equals("GET")) {
 				String contentType = "", objectJson = "";
 
@@ -376,10 +378,10 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("status : " + Status.SUCCESS);
 
 				// Redirecting The control to the JSP Page successfully
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/successFailure.jsp");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the successFailure.jsp Page successfully");
+				System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page successfully");
 
 				System.out.println(
 						"#############################################PUT-UserTypeServlet-END#############################################");
@@ -404,10 +406,10 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("errors :" + errors.toString());
 				System.out.println("status : " + Status.FAILURE);
 
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("successFailure.jsp");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("updateUserTypeSuccessFailure.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the successFailure.jsp Page unsuccessfully");
+				System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 				System.out.println(
 						"#############################################PUT-UserTypeServlet-END#############################################");
@@ -435,10 +437,10 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/successFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the successFailure.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
 					"#############################################PUT-UserTypeServlet-END#############################################");
@@ -467,10 +469,10 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/successFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the successFailure.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
 					"#############################################PUT-UserTypeServlet-END#############################################");
@@ -496,10 +498,10 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/successFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the successFailure.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
 					"#############################################PUT-UserTypeServlet-END#############################################");
@@ -508,8 +510,173 @@ public class UserTypeServlet extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("_method :" + req.getParameter("_method"));
-		// resp.getWriter().println("_method :" + req.getParameter("_method"));
+
+		try {
+
+			String[] userTypeArray = req.getParameter("userTypeSelected").split("-");
+			String userTypeSelectedId = userTypeArray[1];
+			String contentType = "";
+			System.out.println(
+					"#############################################DELETE-UserTypeServlet-START################################################");
+
+			if (ValidationService.validateUserTypeForDeleteMethod(userTypeSelectedId) == null) {
+
+				System.out.println("Wrapping the Usertype parameter to USerType object...");
+
+				System.out.println("Validation of the Wrapped Object is successfull...");
+
+				System.out.println("Establishing URL Connection with the passed request parameters....");
+
+				String userTypeJsonString = "";
+
+				HttpURLConnection httpUrlConnection = HttpUrlService.getHttpURLConnection(
+						Constants.USERTYPE_URL + "/" + userTypeSelectedId,
+						"DELETE", contentType, "Basic " + new ApiAuthenticationService()
+								.generateAuthorizationKey("innovate.garr", "garr.innovate"),
+						Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+				String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
+
+				System.out.println("Successfully got the response read from URL connection.....");
+				System.out.println("Response : " + urlResponse);
+
+				// setting the Status of DELETE method execution - Success
+				req.setAttribute("response", urlResponse.toString());
+				req.setAttribute("status", Status.SUCCESS);
+
+				System.out.println("Execution Status Parameters attaching with the request :");
+				System.out.println("response :" + urlResponse.toString());
+				System.out.println("status : " + Status.SUCCESS);
+
+				// Redirecting The control to the JSP Page successfully
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+				requestDispatcher.forward(req, resp);
+
+				System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page successfully");
+
+				System.out.println(
+						"#############################################DELETE-UserTypeServlet-END#############################################");
+			} else {
+
+				// creation of Error
+				Error error = new Error();
+				error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+				error.setErrorName("Missing the Updated Value of User Type Or USer Type Id..");
+
+				// creation of Error List and embedding error into it
+				List<Error> errors = new ArrayList<>();
+				errors.add(error);
+
+				System.out.println("Attatching the errors list with the request object...");
+
+				// setting the Status of DELETE method execution - Failure
+				req.setAttribute("status", Status.FAILURE);
+				req.setAttribute("errors", errors);
+
+				System.out.println("Execution Status Parameters attaching with the request :");
+				System.out.println("errors :" + errors.toString());
+				System.out.println("status : " + Status.FAILURE);
+
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+				requestDispatcher.forward(req, resp);
+
+				System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+
+				System.out.println(
+						"#############################################DELETE-UserTypeServlet-END#############################################");
+			}
+
+		} catch (IOException ioe) {
+
+			System.out.println("IO Exception Caught in executing DELETE method :" + ioe.getMessage());
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(ioe.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			System.out.println("Attatching the errors list with the request object...");
+
+			// setting the Status of DELETE method execution - Failure
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+
+			System.out.println("Execution Status Parameters attaching with the request :");
+			System.out.println("errors :" + errors.toString());
+			System.out.println("status : " + Status.FAILURE);
+
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			requestDispatcher.forward(req, resp);
+
+			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+
+			System.out.println(
+					"#############################################DELETE-UserTypeServlet-END#############################################");
+
+		} catch (MissingMandatoryParametersException mmpe) {
+
+			System.out.println(
+					"Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
+
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.MISSING_MANDATORY_PARAMETERS.getErrorCode());
+			error.setErrorName(mmpe.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			System.out.println("Attatching the errors list with the request object...");
+
+			// setting the Status of DELETE method execution - Failure
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+
+			System.out.println("Execution Status Parameters attaching with the request :");
+			System.out.println("errors :" + errors.toString());
+			System.out.println("status : " + Status.FAILURE);
+
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			requestDispatcher.forward(req, resp);
+
+			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+
+			System.out.println(
+					"#############################################DELETE-UserTypeServlet-END#############################################");
+		} catch (Exception e) {
+			System.out.println("Exception Caught in executing DELETE method :" + e.getMessage());
+
+			// creation of Error
+			Error error = new Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(e.getMessage());
+
+			// creation of Error List and embedding error into it
+			List<Error> errors = new ArrayList<>();
+			errors.add(error);
+
+			System.out.println("Attatching the errors list with the request object...");
+
+			// setting the Status of DELETE method execution - Failure
+			req.setAttribute("status", Status.FAILURE);
+			req.setAttribute("errors", errors);
+
+			System.out.println("Execution Status Parameters attaching with the request :");
+			System.out.println("errors :" + errors.toString());
+			System.out.println("status : " + Status.FAILURE);
+
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			requestDispatcher.forward(req, resp);
+
+			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+
+			System.out.println(
+					"#############################################DELETE-UserTypeServlet-END#############################################");
+		}
+
 	}
 
 }

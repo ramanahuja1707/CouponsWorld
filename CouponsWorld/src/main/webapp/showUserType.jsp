@@ -17,6 +17,9 @@
 	function submitForm(clickedButton) {
 		if (clickedButton.name == "updateButton") {
 			document.updateUserTypeForm.action = "/userType";
+		} else if (clickedButton.name == "deleteButton") {
+			document.forms["updateUserTypeForm"]["_method"].value = "DELETE";
+			document.updateUserTypeForm.action = "/userType";
 		}
 		document.updateUserTypeForm.submit();
 	}
@@ -36,6 +39,24 @@
 			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
 		} else if (document.getElementById("updatedUserTypeSelected").value == "") {
 			document.getElementById("userTypeSelectedError").innerHTML = "Please specify updated value...";
+		} else {
+			document.getElementById("userTypeSelectedError").innerHTML = "";
+			submitForm(clickedButton);
+		}
+	}
+	function validateDeleteUserTypeForm(clickedButton) {
+
+		var userTypesSelected = document.getElementsByName("userTypeSelected");
+
+		var userTypeSelected = null;
+		for (var i = 0; i < userTypesSelected.length; i++) {
+			if (userTypesSelected[i].checked == true) {
+				userTypeSelected = userTypesSelected[i].value;
+			}
+		}
+		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
+		if (userTypeSelected == null || userTypeSelected == "") {
+			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
 		} else {
 			document.getElementById("userTypeSelectedError").innerHTML = "";
 			submitForm(clickedButton);
@@ -143,6 +164,7 @@
 								ResultantUserType.class);
 						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
 							List<UserType> userTypes = (List<UserType>) resultantUserType.getUserType();
+							if (userTypes != null) {
 		%><form action="#" method="get" name="updateUserTypeForm">
 			<input type="text" style="display: none;" value="PUT" name="_method">
 			<%
@@ -155,15 +177,20 @@
 				value="<%userType.getUserTypeId();%>" name="userTypeSelectedId" />
 			<%
 				out.println(userType.getUserTypeName() + "<br/>");
-								}
+									}
 			%>
-			<br /> Please enter updated vaue of User Type :<input type="text"
+			<br /> Please enter updated value of User Type :<input type="text"
 				name="updatedUserTypeSelected" id="updatedUserTypeSelected" /><br />
 			<br /> <input type="button" value="Update User Type"
-				name="updateButton" onclick="validateUpdateUserTypeForm(this)" />
+				name="updateButton" onclick="validateUpdateUserTypeForm(this)" /> <br />
+			<br /> <input type="button" value="Delete User Type"
+				name="deleteButton" onclick="validateDeleteUserTypeForm(this)" />
 		</form>
 		<%
-			} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
+			} else {
+								out.println("No User Types Found...");
+							}
+						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
 							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
 							for (Error e : errorList) {
 								out.println(e.getErrorName() + "<br/>");
