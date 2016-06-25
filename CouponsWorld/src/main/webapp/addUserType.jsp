@@ -16,6 +16,12 @@
 <title>Coupons World</title>
 </head>
 <body>
+	<%
+		if (session.getAttribute("username") == null && session.getAttribute("password") == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/notInSession.jsp");
+			rd.forward(request, response);
+		}
+	%>
 	<div id="wrapper">
 		<div class="container">
 			<div class="header">
@@ -27,7 +33,7 @@
 				<li><a href="#">Home </a>
 					<div class="dropdown">
 						<ul>
-							<li><a href="#">Logout</a></li>
+							<li><a href="logout">Logout</a></li>
 						</ul>
 					</div></li>
 

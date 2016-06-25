@@ -1,7 +1,5 @@
 package com.couponsworld.utilities;
 
-import javax.ws.rs.core.MediaType;
-
 public class Constants {
 
 	// createOffer link object details
@@ -253,7 +251,7 @@ public class Constants {
 	public static final String URL_PATTERN_DELETE_PUT = "(http://1.couponsworld-1707.appspot.com/webapi)\\/(offers|categories|subcategories|companies)(\\/?)((\\d)*)";
 
 	// URL OF REST-API
-	public static final String USERTYPE_URL = "http://localhost:8888/webapi/usertype";
+	public static final String USERTYPE_URL = "http://1.couponsworld-1707.appspot.com/webapi/usertype";
 
 	// URL PROPERTIES
 	public static final boolean DO_OUTPUT_FLAG_TRUE = true;

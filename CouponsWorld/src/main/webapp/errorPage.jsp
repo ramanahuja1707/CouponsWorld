@@ -10,9 +10,100 @@
 <title>Coupons World</title>
 </head>
 <body>
+	<div id="wrapper">
+		<div class="container">
+			<div class="header">
+				<h1>Coupons World Admin Panel</h1>
+			</div>
 
+			<nav>
+			<ul>
+				<li><a href="#">Home </a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="logout">Logout</a></li>
+						</ul>
+					</div></li>
+
+				<li><a href="#">Offers</a>
+
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">Categories</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">Companies</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">Sub Categories</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">Usabilty Status</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">User Platform</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="#">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><a href="#">display</a></li>
+						</ul>
+					</div></li>
+				<li><a href="#">User Type</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="addUserType.jsp">Add</a></li>
+							<li><a href="#">update</a></li>
+							<li><a href="#">delete</a></li>
+							<li><form method="get" action="userType">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
+						</ul>
+					</div></li>
+			</ul>
+			</nav>
+		</div>
+	</div>
+	<br />
 
 	<%
+		if (session.getAttribute("username") == null && session.getAttribute("password") == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/notInSession.jsp");
+			rd.forward(request, response);
+		}
 		if (request.getAttribute("errors") != null) {
 			out.println("Errors Occured :");
 			List<Error> errors = (ArrayList<Error>) request.getAttribute("errors");

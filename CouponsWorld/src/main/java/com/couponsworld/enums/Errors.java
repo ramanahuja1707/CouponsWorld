@@ -16,7 +16,10 @@ public enum Errors {
 																			110L,
 																			"Validation Error Occured"), MISSING_MANDATORY_PARAMETERS(
 																					111L,
-																					"Missing Mandatory Parameters");
+																					"Missing Mandatory Parameters"), LOGIN_AUTHENTICATION_ERROR(
+																							112L,
+																							"Username/Password Incorrect");
+	;
 
 	// data member
 	private String errorName;

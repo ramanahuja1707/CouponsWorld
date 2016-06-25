@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,10 +19,14 @@ import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.services.UserTypeService;
+import com.couponsworld.servlets.AdminLoginAccessServlet;
 import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/usertype")
 public class UserTypeResource {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(UserTypeResource.class.getName());
 
 	private List<UserType> userTypes = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
@@ -31,8 +36,10 @@ public class UserTypeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUserType getUserTypes() {
 		try {
+			log.info("enetered into get method of resource class of REST API...");
 			return UserTypeService.getUserTypes();
 		} catch (NullPointerException npe) {
+			log.severe("");
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
 

@@ -7,7 +7,9 @@
         index.jsp
     </welcome-file>
 	</welcome-file-list>
-
+	<session-config>
+	<session-timeout>2</session-timeout>
+</session-config>
 	<filter>
 		<filter-name>ObjectifyFilter</filter-name>
 		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
@@ -41,6 +43,27 @@
 	<servlet-mapping>
 		<servlet-name>UserTypeServlet</servlet-name>
 		<url-pattern>/userType</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>AdminLoginAccessServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.AdminLoginAccessServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminLoginAccessServlet</servlet-name>
+		<url-pattern>/accessAdmin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminLogoutAccessServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.AdminLogoutAccessServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminLogoutAccessServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 
 </web-app>
