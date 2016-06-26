@@ -253,6 +253,9 @@ public class Constants {
 	// URL OF REST-API
 	public static final String USERTYPE_URL = "http://1.couponsworld-1707.appspot.com/webapi/usertype";
 
+	// URL OF REST-API
+	public static final String USERPLATFORM_URL = "http://1.couponsworld-1707.appspot.com/webapi/userplatform";
+
 	// URL PROPERTIES
 	public static final boolean DO_OUTPUT_FLAG_TRUE = true;
 	public static final boolean DO_OUTPUT_FLAG_FALSE = false;

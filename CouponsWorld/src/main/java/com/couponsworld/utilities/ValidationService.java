@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.Error;
+import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 
@@ -53,4 +54,47 @@ public class ValidationService {
 		return null;
 	}
 
+	public static List<Error> validateUserPlatformForPostMethod(UserPlatform userPlatform) {
+		List<Error> errors = null;
+		if (userPlatform.getUserPlatformName().equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("User Platform Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateUserPlatformForPutMethod(UserPlatform userPlatform, String userPlatformId) {
+		List<Error> errors = null;
+		if (userPlatform.getUserPlatformName().equals("") || userPlatformId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Updated User Platform or User Platform Id Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateUserPlatformForDeleteMethod(String userPlatformId) {
+		List<Error> errors = null;
+		if (userPlatformId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("User Platform Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
 }

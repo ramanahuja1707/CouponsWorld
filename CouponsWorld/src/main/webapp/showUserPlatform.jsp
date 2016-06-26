@@ -1,3 +1,5 @@
+<%@page import="com.couponsworld.dto.UserPlatform"%>
+<%@page import="com.couponsworld.apiresults.ResultantUserPlatform"%>
 <%@page import="com.couponsworld.enums.Errors"%>
 <%@page import="com.couponsworld.dto.UserType"%>
 <%@page import="com.couponsworld.apiresults.ResultantFilter"%>
@@ -16,49 +18,51 @@
 <script type="text/javascript">
 	function submitForm(clickedButton) {
 		if (clickedButton.name == "updateButton") {
-			document.updateUserTypeForm.action = "/userType";
+			document.updateUserPlatformForm.action = "/userPlatform";
 		} else if (clickedButton.name == "deleteButton") {
-			document.forms["updateUserTypeForm"]["_method"].value = "DELETE";
-			document.updateUserTypeForm.action = "/userType";
+			document.forms["updateUserPlatformForm"]["_method"].value = "DELETE";
+			document.updateUserPlatformForm.action = "/userPlatform";
 		}
-		document.updateUserTypeForm.submit();
+		document.updateUserPlatformForm.submit();
 	}
 
-	function validateUpdateUserTypeForm(clickedButton) {
+	function validateUpdateUserPlatformForm(clickedButton) {
 
-		var userTypesSelected = document.getElementsByName("userTypeSelected");
+		var userPlatformsSelected = document
+				.getElementsByName("userPlatformSelected");
 
-		var userTypeSelected = null;
-		for (var i = 0; i < userTypesSelected.length; i++) {
-			if (userTypesSelected[i].checked == true) {
-				userTypeSelected = userTypesSelected[i].value;
+		var userPlatformSelected = null;
+		for (var i = 0; i < userPlatformsSelected.length; i++) {
+			if (userPlatformsSelected[i].checked == true) {
+				userPlatformSelected = userPlatformsSelected[i].value;
 			}
 		}
 		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
-		if (userTypeSelected == null || userTypeSelected == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
-		} else if (document.getElementById("updatedUserTypeSelected").value == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please specify updated value...";
+		if (userPlatformSelected == null || userPlatformSelected == "") {
+			document.getElementById("userPlatformSelectedError").innerHTML = "Please Select a User Platform ...";
+		} else if (document.getElementById("updatedUserPlatformSelected").value == "") {
+			document.getElementById("userPlatformSelectedError").innerHTML = "Please specify updated value...";
 		} else {
-			document.getElementById("userTypeSelectedError").innerHTML = "";
+			document.getElementById("userPlatformSelectedError").innerHTML = "";
 			submitForm(clickedButton);
 		}
 	}
-	function validateDeleteUserTypeForm(clickedButton) {
+	function validateDeleteUserPlatformForm(clickedButton) {
 
-		var userTypesSelected = document.getElementsByName("userTypeSelected");
+		var userPlatformsSelected = document
+				.getElementsByName("userPlatformSelected");
 
-		var userTypeSelected = null;
-		for (var i = 0; i < userTypesSelected.length; i++) {
-			if (userTypesSelected[i].checked == true) {
-				userTypeSelected = userTypesSelected[i].value;
+		var userPlatformSelected = null;
+		for (var i = 0; i < userPlatformsSelected.length; i++) {
+			if (userPlatformsSelected[i].checked == true) {
+				userPlatformSelected = userPlatformsSelected[i].value;
 			}
 		}
 		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
-		if (userTypeSelected == null || userTypeSelected == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
+		if (userPlatformSelected == null || userPlatformSelected == "") {
+			document.getElementById("userPlatformSelectedError").innerHTML = "Please Select a User Platform ...";
 		} else {
-			document.getElementById("userTypeSelectedError").innerHTML = "";
+			document.getElementById("userPlatformSelectedError").innerHTML = "";
 			submitForm(clickedButton);
 		}
 
@@ -173,38 +177,42 @@
 						//JsonObject jsonObject = new JsonObject(request.getAttribute("response"));
 						//gson.fromJson(request.getAttribute("response"), ResultantUserType.class);
 
-						ResultantUserType resultantUserType = gson.fromJson(request.getAttribute("response").toString(),
-								ResultantUserType.class);
-						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
-							List<UserType> userTypes = (List<UserType>) resultantUserType.getUserType();
-							if (userTypes != null) {
-		%><form action="#" method="get" name="updateUserTypeForm">
+						ResultantUserPlatform resultantUserPlatform = gson
+								.fromJson(request.getAttribute("response").toString(), ResultantUserPlatform.class);
+						if (resultantUserPlatform.getStatus().equals(Status.SUCCESS)) {
+							List<UserPlatform> userPlatforms = (List<UserPlatform>) resultantUserPlatform
+									.getUserPlatform();
+							if (userPlatforms != null) {
+		%><form action="#" method="get" name="updateUserPlatformForm">
 			<input type="text" style="display: none;" value="PUT" name="_method">
 			<%
-				for (UserType userType : userTypes) {
+				for (UserPlatform userPlatform : userPlatforms) {
 			%>
 			<input type="radio"
-				value="<%=userType.getUserTypeName() + "-" + userType.getUserTypeId()%>"
-				name="userTypeSelected" id="userTypeSelected" /> <input type="text"
-				style="visibility: hidden; display: none;"
-				value="<%userType.getUserTypeId();%>" name="userTypeSelectedId" />
+				value="<%=userPlatform.getUserPlatformName() + "-"
+											+ userPlatform.getUserPlatformId()%>"
+				name="userPlatformSelected" id="userPlatformSelected" /> <input
+				type="text" style="visibility: hidden; display: none;"
+				value="<%userPlatform.getUserPlatformId();%>"
+				name="userPlatformSelectedId" />
 			<%
-				out.println(userType.getUserTypeName() + "<br/>");
+				out.println(userPlatform.getUserPlatformName() + "<br/>");
 									}
 			%>
-			<br /> Please enter updated value of User Type :<input type="text"
-				name="updatedUserTypeSelected" id="updatedUserTypeSelected" /><br />
-			<br /> <input type="button" value="Update User Type"
-				name="updateButton" onclick="validateUpdateUserTypeForm(this)" /> <br />
-			<br /> <input type="button" value="Delete User Type"
-				name="deleteButton" onclick="validateDeleteUserTypeForm(this)" />
+			<br /> Please enter updated value of User Platform :<input
+				type="text" name="updatedUserPlatformSelected"
+				id="updatedUserPlatformSelected" /><br /> <br /> <input
+				type="button" value="Update User Platform" name="updateButton"
+				onclick="validateUpdateUserPlatformForm(this)" /> <br /> <br /> <input
+				type="button" value="Delete User Platform" name="deleteButton"
+				onclick="validateDeleteUserPlatformForm(this)" />
 		</form>
 		<%
 			} else {
-								out.println("No User Types Found...");
+								out.println("No User Platforms Found...");
 							}
-						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
-							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
+						} else if (resultantUserPlatform.getStatus().equals(Status.FAILURE)) {
+							List<Error> errorList = (List<Error>) resultantUserPlatform.getErrors();
 							for (Error e : errorList) {
 								out.println(e.getErrorName() + "<br/>");
 							}
@@ -229,7 +237,7 @@
 				out.println(e.getMessage());
 			}
 		%>
-		<p id="userTypeSelectedError" style="color: red;"></p>
+		<p id="userPlatformSelectedError" style="color: red;"></p>
 	</center>
 </body>
 </html>

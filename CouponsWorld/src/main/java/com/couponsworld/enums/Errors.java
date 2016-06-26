@@ -18,7 +18,9 @@ public enum Errors {
 																					111L,
 																					"Missing Mandatory Parameters"), LOGIN_AUTHENTICATION_ERROR(
 																							112L,
-																							"Username/Password Incorrect");
+																							"Username/Password Incorrect"), SESSION_EXPIRED_ERROR(
+																									113L,
+																									"Session Expired");
 	;
 
 	// data member

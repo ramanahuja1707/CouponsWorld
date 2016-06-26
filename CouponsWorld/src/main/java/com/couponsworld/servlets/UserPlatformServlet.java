@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.couponsworld.apiresults.Error;
+import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
@@ -23,12 +24,21 @@ import com.couponsworld.utilities.HttpUrlService;
 import com.couponsworld.utilities.ValidationService;
 import com.google.gson.Gson;
 
-@SuppressWarnings("serial")
-public class UserTypeServlet extends HttpServlet {
-
+/**
+ * Servlet implementation class UserPlatformServlet
+ */
+public class UserPlatformServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	private final String CONTENT_TYPE_JSON = "application/json";
 
-	@Override
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UserPlatformServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 
@@ -38,18 +48,18 @@ public class UserTypeServlet extends HttpServlet {
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 
 				System.out.println(
-						"#############################################POST-UserTypeServlet-START#######################################################");
+						"#############################################POST-UserPlatformServlet-START#######################################################");
 
 				// Wrapping the Usertype parameter to USerType object...
-				UserType userType = new UserType();
-				userType.setUserTypeName(req.getParameter("userType"));
+				UserPlatform userPlatform = new UserPlatform();
+				userPlatform.setUserPlatformName(req.getParameter("userPlatform"));
 
-				System.out.println("Wrapping the Usertype parameter to USerType object...");
+				System.out.println("Wrapping the UserPlatform parameter to UserPlatform object...");
 
 				// VAlidating the USerTYpe parameter
-				List<Error> errors = ValidationService.validateUserTypeForPostMethod(userType);
+				List<Error> errors = ValidationService.validateUserPlatformForPostMethod(userPlatform);
 
-				System.out.println("Validating the UserType wrapped object...");
+				System.out.println("Validating the UserPlatform wrapped object...");
 
 				if (errors == null) {
 					System.out.println("Validation of the Wrapped Object is successfull...");
@@ -57,15 +67,15 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
-					String userTypeJsonString = gson.toJson(userType);
+					String userPlatformJsonString = gson.toJson(userPlatform);
 
 					System.out.println("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
+							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(),
 									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
 											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					System.out.println("Successfully got the response read from URL connection.....");
@@ -80,13 +90,13 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserPlatform.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUserType.jsp Page successfully");
+					System.out.println("Redirecting The control to the addUserPlatform.jsp Page successfully");
 
 					System.out.println(
-							"#############################################POST-UserTypeServlet-END#############################################");
+							"#############################################POST-UserPlatformServlet-END#############################################");
 				} else {
 					System.out.println("Validation of the Wrapped Object is failed...");
 
@@ -99,12 +109,12 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserPlatform.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUserType.jsp Page successfully");
+					System.out.println("Redirecting The control to the addUserPlatform.jsp Page successfully");
 					System.out.println(
-							"#############################################POST-UserTypeServlet-END#############################################");
+							"#############################################POST-UserPlatformServlet-END#############################################");
 				}
 			} else {
 				System.out.println("Username and Password not in session.....Session Expired....");
@@ -134,7 +144,7 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
 				System.out.println(
-						"#############################################POST-UserTypeServlet-END#############################################");
+						"#############################################POST-UserPlatformServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
@@ -158,13 +168,13 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the addUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################POST-UserTypeServlet-END#############################################");
+					"#############################################POST-UserPlatformServlet-END#############################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
 			System.out.println(
@@ -189,13 +199,13 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the addUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################POST-UserTypeServlet-END#############################################");
+					"#############################################POST-UserPlatformServlet-END#############################################");
 		} catch (Exception e) {
 			System.out.println("Exception Caught in executing POST method :" + e.getMessage());
 
@@ -218,17 +228,16 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the addUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################POST-UserTypeServlet-END#############################################");
+					"#############################################POST-UserPlatformServlet-END#############################################");
 		}
 	}
 
-	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			HttpSession session = req.getSession(false);
@@ -245,13 +254,13 @@ public class UserTypeServlet extends HttpServlet {
 					String contentType = "", objectJson = "";
 
 					System.out.println(
-							"################################################GET-UserTypeServlet-START################################################");
+							"################################################GET-UserPlatformServlet-START################################################");
 					// System.out.println(req.getContentType());
 					System.out.println("Establishing URL Connection with the passed request parameters....");
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
+							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(),
 									contentType, "Basic " + new ApiAuthenticationService()
 											.generateAuthorizationKey(username, password),
 									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
@@ -274,13 +283,13 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserPlatform.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the showUserType.jsp Page successfully");
+					System.out.println("Redirecting The control to the showUserPlatform.jsp Page successfully");
 
 					System.out.println(
-							"################################################GET-UserTypeServlet-END################################################");
+							"################################################GET-UserPlatformServlet-END################################################");
 				}
 			} else {
 
@@ -311,7 +320,7 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
 				System.out.println(
-						"################################################GET-UserTypeServlet-END################################################");
+						"################################################GET-UserPlatformServlet-END################################################");
 
 			}
 		} catch (IOException ioe) {
@@ -336,13 +345,13 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the showUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"################################################GET-UserTypeServlet-END################################################");
+					"################################################GET-UserPlatformServlet-END################################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
 			System.out.println(
@@ -367,13 +376,13 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the showUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"################################################GET-UserTypeServlet-END################################################");
+					"################################################GET-UserPlatformServlet-END################################################");
 		} catch (Exception e) {
 			System.out.println("Exception Caught in executing GET method :" + e.getMessage());
 
@@ -396,51 +405,50 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserPlatform.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			System.out.println("Redirecting The control to the showUserPlatform.jsp Page unsuccessfully");
 
 			System.out.println(
-					"################################################GET-UserTypeServlet-END################################################");
+					"################################################GET-UserPlatformServlet-END################################################");
 		}
 
 	}
 
-	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			HttpSession session = req.getSession(false);
 			String username = (String) session.getAttribute("username");
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
-				String[] userTypeArray = req.getParameter("userTypeSelected").split("-");
-				String userTypeSelectedId = userTypeArray[1];
-				String updatedUserTypeSelected = req.getParameter("updatedUserTypeSelected");
+				String[] userPlatformArray = req.getParameter("userPlatformSelected").split("-");
+				String userPlatformSelectedId = userPlatformArray[1];
+				String updatedUserPlatformSelected = req.getParameter("updatedUserPlatformSelected");
 				System.out.println(
-						"#############################################PUT-UserTypeServlet-START################################################");
-				// Wrapping the Usertype parameter to USerType object...
-				UserType userType = new UserType();
-				userType.setUserTypeName(updatedUserTypeSelected);
+						"#############################################PUT-UserPlatformServlet-START################################################");
+				// Wrapping the UserPlatform parameter to UserPlatform object...
+				UserPlatform userPlatform = new UserPlatform();
+				userPlatform.setUserPlatformName(updatedUserPlatformSelected);
 
-				if (ValidationService.validateUserTypeForPutMethod(userType, userTypeSelectedId) == null) {
+				if (ValidationService.validateUserPlatformForPutMethod(userPlatform, userPlatformSelectedId) == null) {
 
-					System.out.println("Wrapping the Usertype parameter to USerType object...");
+					System.out.println("Wrapping the userPlatform parameter to userPlatform object...");
 
 					System.out.println("Validation of the Wrapped Object is successfull...");
 
 					System.out.println("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
-					String userTypeJsonString = gson.toJson(userType);
+					String userPlatformJsonString = gson.toJson(userPlatform);
 
 					System.out.println("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL + "/" + userTypeSelectedId, "PUT",
+							.getHttpURLConnection(Constants.USERPLATFORM_URL + "/" + userPlatformSelectedId, "PUT",
 									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
 											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					System.out.println("Successfully got the response read from URL connection.....");
@@ -455,14 +463,15 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
+					RequestDispatcher requestDispatcher = req
+							.getRequestDispatcher("/updateUserPlatformSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
 					System.out.println(
-							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page successfully");
+							"Redirecting The control to the updateUserPlatformSuccessFailure.jsp Page successfully");
 
 					System.out.println(
-							"#############################################PUT-UserTypeServlet-END#############################################");
+							"#############################################PUT-UserPlatformServlet-END#############################################");
 				} else {
 
 					// creation of Error
@@ -484,14 +493,15 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("errors :" + errors.toString());
 					System.out.println("status : " + Status.FAILURE);
 
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("updateUserTypeSuccessFailure.jsp");
+					RequestDispatcher requestDispatcher = req
+							.getRequestDispatcher("updateUserPlatformSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
 					System.out.println(
-							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+							"Redirecting The control to the updateUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 					System.out.println(
-							"#############################################PUT-UserTypeServlet-END#############################################");
+							"#############################################PUT-UserPlatformServlet-END#############################################");
 				}
 			} else {
 				System.out.println("Username and Password not in session.....Session Expired....");
@@ -521,7 +531,7 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
 				System.out.println(
-						"#############################################PUT-UserTypeServlet-END#############################################");
+						"#############################################PUT-UserPlatformServlet-END#############################################");
 			}
 
 		} catch (IOException ioe) {
@@ -546,13 +556,14 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the updateUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################PUT-UserTypeServlet-END#############################################");
+					"#############################################PUT-UserPlatformServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
@@ -578,13 +589,14 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the updateUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################PUT-UserTypeServlet-END#############################################");
+					"#############################################PUT-UserPlatformServlet-END#############################################");
 		} catch (Exception e) {
 			System.out.println("Exception Caught in executing PUT method :" + e.getMessage());
 
@@ -607,46 +619,45 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the updateUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################PUT-UserTypeServlet-END#############################################");
+					"#############################################PUT-UserPlatformServlet-END#############################################");
 		}
 	}
 
-	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		try {
 			HttpSession session = req.getSession(false);
 			String username = (String) session.getAttribute("username");
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 
-				String[] userTypeArray = req.getParameter("userTypeSelected").split("-");
-				String userTypeSelectedId = userTypeArray[1];
+				String[] userPlatformArray = req.getParameter("userPlatformSelected").split("-");
+				String userPlatformSelectedId = userPlatformArray[1];
 				String contentType = "";
 				System.out.println(
-						"#############################################DELETE-UserTypeServlet-START################################################");
+						"#############################################DELETE-UserPlatformServlet-START################################################");
 
-				if (ValidationService.validateUserTypeForDeleteMethod(userTypeSelectedId) == null) {
+				if (ValidationService.validateUserPlatformForDeleteMethod(userPlatformSelectedId) == null) {
 
-					System.out.println("Wrapping the Usertype parameter to USerType object...");
+					System.out.println("Wrapping the UserPlatform parameter to USerPlatform object...");
 
 					System.out.println("Validation of the Wrapped Object is successfull...");
 
 					System.out.println("Establishing URL Connection with the passed request parameters....");
 
-					String userTypeJsonString = "";
+					String userPlatformJsonString = "";
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL + "/" + userTypeSelectedId, "DELETE",
+							.getHttpURLConnection(Constants.USERPLATFORM_URL + "/" + userPlatformSelectedId, "DELETE",
 									contentType, "Basic " + new ApiAuthenticationService()
 											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					System.out.println("Successfully got the response read from URL connection.....");
@@ -661,14 +672,15 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+					RequestDispatcher requestDispatcher = req
+							.getRequestDispatcher("/deleteUserPlatformSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
 					System.out.println(
-							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page successfully");
+							"Redirecting The control to the deleteUserPlatformSuccessFailure.jsp Page successfully");
 
 					System.out.println(
-							"#############################################DELETE-UserTypeServlet-END#############################################");
+							"#############################################DELETE-UserPlatformServlet-END#############################################");
 				} else {
 
 					// creation of Error
@@ -690,14 +702,15 @@ public class UserTypeServlet extends HttpServlet {
 					System.out.println("errors :" + errors.toString());
 					System.out.println("status : " + Status.FAILURE);
 
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+					RequestDispatcher requestDispatcher = req
+							.getRequestDispatcher("/deleteUserPlatformSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
 					System.out.println(
-							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+							"Redirecting The control to the deleteUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 					System.out.println(
-							"#############################################DELETE-UserTypeServlet-END#############################################");
+							"#############################################DELETE-UserPlatformServlet-END#############################################");
 				}
 			} else {
 				System.out.println("Username and Password not in session.....Session Expired....");
@@ -727,7 +740,7 @@ public class UserTypeServlet extends HttpServlet {
 				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
 				System.out.println(
-						"#############################################DELETE-UserTypeServlet-END#############################################");
+						"#############################################DELETE-UserPlatformServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
@@ -751,13 +764,14 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the deleteUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################DELETE-UserTypeServlet-END#############################################");
+					"#############################################DELETE-UserPlatformServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
@@ -783,13 +797,14 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the deleteUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################DELETE-UserTypeServlet-END#############################################");
+					"#############################################DELETE-UserPlatformServlet-END#############################################");
 		} catch (Exception e) {
 			System.out.println("Exception Caught in executing DELETE method :" + e.getMessage());
 
@@ -812,13 +827,14 @@ public class UserTypeServlet extends HttpServlet {
 			System.out.println("errors :" + errors.toString());
 			System.out.println("status : " + Status.FAILURE);
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserPlatformSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			System.out
+					.println("Redirecting The control to the deleteUserPlatformSuccessFailure.jsp Page unsuccessfully");
 
 			System.out.println(
-					"#############################################DELETE-UserTypeServlet-END#############################################");
+					"#############################################DELETE-UserPlatformServlet-END#############################################");
 		}
 
 	}

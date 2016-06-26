@@ -19,7 +19,7 @@ import com.couponsworld.utilities.Constants;
 @SuppressWarnings("serial")
 public class AdminLoginAccessServlet extends HttpServlet {
 
-	// declaration of logger
+	// declaration of loggern
 	private static final Logger log = Logger.getLogger(AdminLoginAccessServlet.class.getName());
 
 	private static List<com.couponsworld.apiresults.Error> errors = null;
