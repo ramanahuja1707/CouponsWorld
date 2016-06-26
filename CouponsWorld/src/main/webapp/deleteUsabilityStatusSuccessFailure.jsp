@@ -1,3 +1,7 @@
+<%@page import="com.couponsworld.apiresults.Error"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.couponsworld.enums.Status"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,10 +11,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 <title>Coupons World</title>
 </head>
-
-
 <body>
-
 	<%
 		if (session.getAttribute("username") == null && session.getAttribute("password") == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/notInSession.jsp");
@@ -73,14 +74,14 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="addUsabilityStatus.jsp">Add</a></li>
-							<li>
-							<li><form method="get" action="usabilityStatus">
+							<li><li><form method="get" action="usabilityStatus">
 									<input type="text" value="GET" name="_method"
 										style="display: none;" /> <input type="submit"
 										value="display" />
 								</form></li></li>
 
 			</ul>
+		
 		</div>
 		</li>
 		<li><a href="#">User Platform</a>
@@ -106,6 +107,32 @@
 		</ul>
 		</nav>
 	</div>
+	<br />
+								<center>
+		<%
+			//For Updation of the User Type
+			if (request.getAttribute("status") != null) {
+				if (request.getAttribute("status").equals(Status.SUCCESS)) {
+					out.println("Usability Status deleted successfully...:-)");
+				} else if (request.getAttribute("status").equals(Status.SUCCESS)) {
+					out.println("Úsability Status Updation Failed :-(");
+					out.println("Errors Occured : ");
+					List<Error> errors = (ArrayList<Error>) request.getAttribute("errors");
+					for (Error e : errors) {
+						out.println(e.getErrorName() + "<br/>");
+					}
 
-</body>
+				}
+				request.removeAttribute("errors");
+				request.removeAttribute("status");
+			}
+		%>
+
+
+	</center>
+
+
+
+
+							</body>
 </html>

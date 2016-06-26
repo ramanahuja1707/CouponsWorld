@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.Error;
+import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
@@ -90,6 +91,51 @@ public class ValidationService {
 			Error error = new Error();
 			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
 			error.setErrorName("User Platform Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateUsabilityStatusForPostMethod(UsabilityStatus usabilityStatus) {
+		List<Error> errors = null;
+		if (usabilityStatus.getUsabilityStatusName().equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Usability Status Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateUsabilityStatusForPutMethod(UsabilityStatus usabilityStatus,
+			String usabilityStatusId) {
+		List<Error> errors = null;
+		if (usabilityStatus.getUsabilityStatusName().equals("") || usabilityStatusId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Updated Usabiltiy Status or Usability Status Id Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateUsabilityStatusForDeleteMethod(String usabilityStatusId) {
+		List<Error> errors = null;
+		if (usabilityStatusId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Usability StatusId Not Specified...");
 			// Initializing error list
 			errors = new ArrayList<>();
 			errors.add(error);

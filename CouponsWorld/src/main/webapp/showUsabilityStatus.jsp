@@ -1,3 +1,7 @@
+<%@page import="com.couponsworld.dto.UsabilityStatus"%>
+<%@page import="com.couponsworld.apiresults.ResultantUsabilityStatus"%>
+<%@page import="com.couponsworld.dto.UserPlatform"%>
+<%@page import="com.couponsworld.apiresults.ResultantUserPlatform"%>
 <%@page import="com.couponsworld.enums.Errors"%>
 <%@page import="com.couponsworld.dto.UserType"%>
 <%@page import="com.couponsworld.apiresults.ResultantFilter"%>
@@ -16,49 +20,52 @@
 <script type="text/javascript">
 	function submitForm(clickedButton) {
 		if (clickedButton.name == "updateButton") {
-			document.updateUserTypeForm.action = "/userType";
+			document.updateUsabilityStatusForm.action = "/usabilityStatus";
 		} else if (clickedButton.name == "deleteButton") {
-			document.forms["updateUserTypeForm"]["_method"].value = "DELETE";
-			document.updateUserTypeForm.action = "/userType";
+			document.forms["updateUsabilityStatusForm"]["_method"].value = "DELETE";
+			document.updateUsabilityStatusForm.action = "/usabilityStatus";
 		}
-		document.updateUserTypeForm.submit();
+		document.updateUsabilityStatusForm.submit();
 	}
 
-	function validateUpdateUserTypeForm(clickedButton) {
+	function validateUpdateUsabilityStatusForm(clickedButton) {
 
-		var userTypesSelected = document.getElementsByName("userTypeSelected");
+		var usabilityStatusesSelected = document
+				.getElementsByName("usabilityStatusSelected");
 
-		var userTypeSelected = null;
-		for (var i = 0; i < userTypesSelected.length; i++) {
-			if (userTypesSelected[i].checked == true) {
-				userTypeSelected = userTypesSelected[i].value;
+		var usabilityStatusSelected = null;
+		for (var i = 0; i < usabilityStatusesSelected.length; i++) {
+			if (usabilityStatusesSelected[i].checked == true) {
+				usabilityStatusSelected = usabilityStatusesSelected[i].value;
 			}
 		}
 		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
-		if (userTypeSelected == null || userTypeSelected == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
-		} else if (document.getElementById("updatedUserTypeSelected").value == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please specify updated value...";
+
+		if (usabilityStatusSelected == null || usabilityStatusSelected == "") {
+			document.getElementById("usabilityStatusSelectedError").innerHTML = "Please Select a Usability Status ...";
+		} else if (document.getElementById("updatedUsabilityStatusSelected").value == "") {
+			document.getElementById("usabilityStatusSelectedError").innerHTML = "Please specify updated value...";
 		} else {
-			document.getElementById("userTypeSelectedError").innerHTML = "";
+			document.getElementById("usabilityStatusSelectedError").innerHTML = "";
 			submitForm(clickedButton);
 		}
 	}
-	function validateDeleteUserTypeForm(clickedButton) {
+	function validateDeleteUsabilityStatusForm(clickedButton) {
 
-		var userTypesSelected = document.getElementsByName("userTypeSelected");
+		var usabilityStatusesSelected = document
+				.getElementsByName("usabilityStatusSelected");
 
-		var userTypeSelected = null;
-		for (var i = 0; i < userTypesSelected.length; i++) {
-			if (userTypesSelected[i].checked == true) {
-				userTypeSelected = userTypesSelected[i].value;
+		var usabilityStatusSelected = null;
+		for (var i = 0; i < usabilityStatusesSelected.length; i++) {
+			if (usabilityStatusesSelected[i].checked == true) {
+				usabilityStatusSelected = usabilityStatusesSelected[i].value;
 			}
 		}
 		//var userTypeSelected = document.forms["updateUserTypeForm"]["userTypeSelected"].checked;
-		if (userTypeSelected == null || userTypeSelected == "") {
-			document.getElementById("userTypeSelectedError").innerHTML = "Please Select a User Type ...";
+		if (usabilityStatusSelected == null || usabilityStatusSelected == "") {
+			document.getElementById("usabilityStatusSelectedError").innerHTML = "Please Select a Usability Status ...";
 		} else {
-			document.getElementById("userTypeSelectedError").innerHTML = "";
+			document.getElementById("usabilityStatusSelectedError").innerHTML = "";
 			submitForm(clickedButton);
 		}
 
@@ -131,14 +138,14 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="addUsabilityStatus.jsp">Add</a></li>
-							<li>
-							<li><form method="get" action="usabilityStatus">
+							<li><li><form method="get" action="usabilityStatus">
 									<input type="text" value="GET" name="_method"
 										style="display: none;" /> <input type="submit"
 										value="display" />
 								</form></li></li>
 
 			</ul>
+		
 		</div>
 		</li>
 		<li><a href="#">User Platform</a>
@@ -176,38 +183,43 @@
 						//JsonObject jsonObject = new JsonObject(request.getAttribute("response"));
 						//gson.fromJson(request.getAttribute("response"), ResultantUserType.class);
 
-						ResultantUserType resultantUserType = gson.fromJson(request.getAttribute("response").toString(),
-								ResultantUserType.class);
-						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
-							List<UserType> userTypes = (List<UserType>) resultantUserType.getUserType();
-							if (userTypes != null) {
-		%><form action="#" method="get" name="updateUserTypeForm">
+						ResultantUsabilityStatus resultantUsabilityStatus = gson
+								.fromJson(request.getAttribute("response").toString(), ResultantUsabilityStatus.class);
+						if (resultantUsabilityStatus.getStatus().equals(Status.SUCCESS)) {
+							List<UsabilityStatus> usabilityStatuses = (List<UsabilityStatus>) resultantUsabilityStatus
+									.getUsabilityStatus();
+							if (usabilityStatuses != null) {
+		%><form action="#" method="get" name="updateUsabilityStatusForm">
 			<input type="text" style="display: none;" value="PUT" name="_method">
 			<%
-				for (UserType userType : userTypes) {
+				for (UsabilityStatus usabilityStatus : usabilityStatuses) {
 			%>
 			<input type="radio"
-				value="<%=userType.getUserTypeName() + "-" + userType.getUserTypeId()%>"
-				name="userTypeSelected" id="userTypeSelected" /> <input type="text"
-				style="visibility: hidden; display: none;"
-				value="<%userType.getUserTypeId();%>" name="userTypeSelectedId" />
+				value="<%=usabilityStatus.getUsabilityStatusName() + "-"
+											+ usabilityStatus.getUsabilityStatusId()%>"
+				name="usabilityStatusSelected" id="usabilityStatusSelected" /> <input
+				type="text" style="visibility: hidden; display: none;"
+				value="<%usabilityStatus.getUsabilityStatusId();%>"
+				name="usabilityStatusSelectedId" />
 			<%
-				out.println(userType.getUserTypeName() + "<br/>");
+				out.println(usabilityStatus.getUsabilityStatusName() + "<br/>");
 									}
 			%>
-			<br /> Please enter updated value of User Type :<input type="text"
-				name="updatedUserTypeSelected" id="updatedUserTypeSelected" /><br />
-			<br /> <input type="button" value="Update User Type"
-				name="updateButton" onclick="validateUpdateUserTypeForm(this)" /> <br />
-			<br /> <input type="button" value="Delete User Type"
-				name="deleteButton" onclick="validateDeleteUserTypeForm(this)" />
+			<br /> Please enter updated value of Usability Status :<input
+				type="text" name="updatedUsabilityStatusSelected"
+				id="updatedUsabilityStatusSelected" /><br /> <br /> <input
+				type="button" value="Update Usability Status" name="updateButton"
+				onclick="validateUpdateUsabilityStatusForm(this)" /> <br /> <br />
+			<input type="button" value="Delete Usability Status"
+				name="deleteButton"
+				onclick="validateDeleteUsabilityStatusForm(this)" />
 		</form>
 		<%
 			} else {
-								out.println("No User Types Found...");
+								out.println("No Usability Status Found...");
 							}
-						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
-							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
+						} else if (resultantUsabilityStatus.getStatus().equals(Status.FAILURE)) {
+							List<Error> errorList = (List<Error>) resultantUsabilityStatus.getErrors();
 							for (Error e : errorList) {
 								out.println(e.getErrorName() + "<br/>");
 							}
@@ -232,8 +244,7 @@
 				out.println(e.getMessage());
 			}
 		%>
-		<p id="userTypeSelectedError" style="color: red;"></p>
+		<p id="usabilityStatusSelectedError" style="color: red;"></p>
 	</center>
-
 </body>
 </html>

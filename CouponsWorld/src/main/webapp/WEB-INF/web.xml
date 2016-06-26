@@ -57,6 +57,19 @@
 		<url-pattern>/userPlatform</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>UsabilityStatusServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.UsabilityStatusServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UsabilityStatusServlet</servlet-name>
+		<url-pattern>/usabilityStatus</url-pattern>
+	</servlet-mapping>
+
+
+
 	<servlet>
 		<servlet-name>AdminLoginAccessServlet</servlet-name>
 		<servlet-class>com.couponsworld.servlets.AdminLoginAccessServlet</servlet-class>

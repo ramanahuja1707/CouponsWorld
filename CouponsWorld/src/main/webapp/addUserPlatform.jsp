@@ -31,7 +31,7 @@
 
 			<nav>
 			<ul>
-				<li><a href="#">Home </a>
+				<li><a href="adminPanel.jsp">Home </a>
 					<div class="dropdown">
 						<ul>
 							<li><a href="logout">Logout</a></li>
@@ -78,43 +78,44 @@
 				<li><a href="#">Usabilty Status</a>
 					<div class="dropdown">
 						<ul>
-							<li><a href="#">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
-							<li><a href="#">display</a></li>
-						</ul>
-					</div></li>
-				<li><a href="#">User Platform</a>
-					<div class="dropdown">
-						<ul>
-							<li><a href="addUserPlatform.jsp">Add</a></li>
-							<li><form method="get" action="userPlatform">
+							<li><a href="addUsabilityStatus.jsp">Add</a></li>
+							<li><li><form method="get" action="usabilityStatus">
 									<input type="text" value="GET" name="_method"
 										style="display: none;" /> <input type="submit"
 										value="display" />
-								</form></li>
-						</ul>
-					</div></li>
-				<li><a href="#">User Type</a>
-					<div class="dropdown">
-						<ul>
-							<li><a href="addUserType.jsp">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
-							<li><form method="get" action="userType">
-									<input type="text" value="GET" name="_method"
-										style="display: none;" /> <input type="submit"
-										value="display" />
-								</form></li>
-						</ul>
-					</div></li>
+								</form></li></li>
+
 			</ul>
-			</nav>
+		
 		</div>
+		</li>
+		<li><a href="#">User Platform</a>
+			<div class="dropdown">
+				<ul>
+					<li><a href="addUserPlatform.jsp">Add</a></li>
+					<li><form method="get" action="userPlatform">
+							<input type="text" value="GET" name="_method"
+								style="display: none;" /> <input type="submit" value="display" />
+						</form></li>
+				</ul>
+			</div></li>
+		<li><a href="#">User Type</a>
+			<div class="dropdown">
+				<ul>
+					<li><a href="addUserType.jsp">Add</a></li>
+					<li><form method="get" action="userType">
+							<input type="text" value="GET" name="_method"
+								style="display: none;" /> <input type="submit" value="display" />
+						</form></li>
+				</ul>
+			</div></li>
+		</ul>
+		</nav>
 	</div>
+
 	<br />
 
-	<center>
+								<center>
 		<form action="userPlatform" method="post">
 			Enter a User Platform :<input type="text" name="userPlatform">
 			<br /> <br /> <input type="submit" name="Add" value="Add">
@@ -156,5 +157,6 @@
 			}
 		%>
 	</center>
-</body>
+
+							</body>
 </html>
