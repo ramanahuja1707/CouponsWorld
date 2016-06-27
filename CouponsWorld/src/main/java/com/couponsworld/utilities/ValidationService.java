@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.Error;
+import com.couponsworld.dto.SubCategory;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
@@ -143,4 +144,49 @@ public class ValidationService {
 		}
 		return null;
 	}
+
+	public static List<Error> validateSubCategoryForPostMethod(SubCategory subCategory) {
+		List<Error> errors = null;
+		if (subCategory.getSubCategoryName().equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Sub Category Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateSubCategoryForPutMethod(SubCategory subCategory, String subCategoryId) {
+		List<Error> errors = null;
+		if (subCategory.getSubCategoryName().equals("") || subCategoryId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Updated SubCategory or SubCategory Id Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateSubCategoryForDeleteMethod(String subCategoryId) {
+		List<Error> errors = null;
+		if (subCategoryId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("subCategoryId Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
 }

@@ -25,9 +25,9 @@
 			//For Updation of the User Type
 			if (request.getAttribute("status") != null) {
 				if (request.getAttribute("status").equals(Status.SUCCESS)) {
-					out.println("User Platform deleted successfully...:-)");
+					out.println("Sub Category deleted successfully...:-)");
 				} else if (request.getAttribute("status").equals(Status.SUCCESS)) {
-					out.println("User Platform Updation Failed :-(");
+					out.println("Sub Category Updation Failed :-(");
 					out.println("Errors Occured : ");
 					List<Error> errors = (ArrayList<Error>) request.getAttribute("errors");
 					for (Error e : errors) {

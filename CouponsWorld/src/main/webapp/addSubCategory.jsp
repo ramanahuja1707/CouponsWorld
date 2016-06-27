@@ -1,3 +1,5 @@
+<%@page import="com.couponsworld.apiresults.ResultantSubCategory"%>
+<%@page import="com.couponsworld.apiresults.ResultantUsabilityStatus"%>
 <%@page import="com.couponsworld.apiresults.ResultantFilter"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="com.couponsworld.apiresults.ResultantUserType"%>
@@ -26,9 +28,9 @@
 	<br />
 
 	<center>
-		<form action="userType" method="post">
-			UserType :<input type="text" name="userType"> <br /> <br />
-			<input type="submit" name="Add" value="Add">
+		<form action="subCategories" method="post">
+			Enter Sub Category :<input type="text" name="subCategory"> <br />
+			<br /> <input type="submit" name="Add" value="Add">
 
 		</form>
 		<br /> <br />
@@ -41,16 +43,16 @@
 						//JsonObject jsonObject = new JsonObject(request.getAttribute("response"));
 						//gson.fromJson(request.getAttribute("response"), ResultantUserType.class);
 
-						ResultantUserType resultantUserType = gson.fromJson(request.getAttribute("response").toString(),
-								ResultantUserType.class);
+						ResultantSubCategory resultantSubCategory = gson
+								.fromJson(request.getAttribute("response").toString(), ResultantSubCategory.class);
 
-						if (resultantUserType.getStatus().equals(Status.SUCCESS)) {
-							out.println(
-									"User Type : " + "<b>" + resultantUserType.getUserType().get(0).getUserTypeName()
-											+ "</b>" + " added Successfully");
-							out.println(resultantUserType.getUserType().get(0).getUserTypeName());
-						} else if (resultantUserType.getStatus().equals(Status.FAILURE)) {
-							List<Error> errorList = (List<Error>) resultantUserType.getErrors();
+						if (resultantSubCategory.getStatus().equals(Status.SUCCESS)) {
+							out.println("Sub Category : " + "<b>"
+									+ resultantSubCategory.getSubCategories().get(0).getSubCategoryName() + "</b>"
+									+ " added Successfully");
+							out.println(resultantSubCategory.getSubCategories().get(0).getSubCategoryName());
+						} else if (resultantSubCategory.getStatus().equals(Status.FAILURE)) {
+							List<Error> errorList = (List<Error>) resultantSubCategory.getErrors();
 							for (Error e : errorList) {
 								out.println(e.getErrorName());
 							}
@@ -70,6 +72,7 @@
 			}
 		%>
 	</center>
+
 
 </body>
 </html>
