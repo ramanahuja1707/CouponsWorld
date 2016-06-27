@@ -35,7 +35,6 @@ public class AdminLoginAccessServlet extends HttpServlet {
 		username = request.getParameter("username");
 		password = request.getParameter("password");
 
-		log.warning("Entered into Login Servlet");
 		log.info("Checking the username and password supplied");
 
 		if (!(username.equals("") || password.equals(""))) {

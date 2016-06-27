@@ -7,20 +7,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import org.apache.commons.codec.binary.Base64;
+import java.util.logging.Logger;
 
 import com.couponsworld.exceptions.MissingMandatoryParametersException;
 
-import sun.misc.BASE64Encoder;
-
 public class HttpUrlService {
+	// declaration of loggern
+	private static final Logger log = Logger.getLogger(HttpUrlService.class.getName());
 
 	public static HttpURLConnection getHttpURLConnection(String httpURL, String httpMethod, String contentType,
 			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
 			throws IOException, MissingMandatoryParametersException {
-		System.out.println(
-				"----------------------HTTP URL CONNECTION OPENING- START------------------------------------");
+		log.info("----------------------HTTP URL CONNECTION OPENING- START------------------------------------");
 		if (checkMandatoryParameters(httpURL, httpMethod, contentType, apiAuthorizationKey, doOutputFlag, objectJson)) {
 			URL url = new URL(httpURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -38,25 +36,25 @@ public class HttpUrlService {
 				os.write(objectJson.getBytes());
 				os.close();
 			}
-			System.out.println("<----------HTTP - URL - PARAMETERS------------->");
+			log.info("<----------HTTP - URL - PARAMETERS------------->");
 			if (!(contentType.equals(""))) {
-				System.out.println("content-type : " + contentType);
+				log.info("content-type : " + contentType);
 			}
-			System.out.println("Authorization : " + apiAuthorizationKey);
-			System.out.println("Method : " + httpMethod);
-			System.out.println("URL : " + httpURL);
-			System.out.println("DoOutputFlag : " + doOutputFlag);
-			System.out.println("objectJson : " + objectJson);
-			System.out.println("<----------HTTP - URL - PARAMETERS------------->");
+			log.info("Authorization : " + apiAuthorizationKey);
+			log.info("Method : " + httpMethod);
+			log.info("URL : " + httpURL);
+			log.info("DoOutputFlag : " + doOutputFlag);
+			log.info("objectJson : " + objectJson);
+			log.info("<----------HTTP - URL - PARAMETERS------------->");
 
-			System.out.println("Returning the HTTP URL CONNECTION Object Successfully....");
-			System.out.println(
+			log.info("Returning the HTTP URL CONNECTION Object Successfully....");
+			log.info(
 					"----------------------HTTP URL CONNECTION OPENING - END - SUCCESS------------------------------------");
 			return connection;
 
 		} else {
-			System.out.println("Throwing Missing Mandatory Parameters Exception....");
-			System.out.println(
+			log.info("Throwing Missing Mandatory Parameters Exception....");
+			log.info(
 					"----------------------HTTP URL CONNECTION OPENING - END -FAILURE ------------------------------------");
 			throw new MissingMandatoryParametersException("MAndatory Parameters Missing");
 		}
@@ -66,24 +64,24 @@ public class HttpUrlService {
 	private static boolean checkMandatoryParameters(String httpURL, String httpMethod, String contentType,
 			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
 			throws MissingMandatoryParametersException {
-		System.out.println("<--------------Checking Manadatory Parameters....START----------------->");
+		log.info("<--------------Checking Manadatory Parameters....START----------------->");
 		if (httpURL == null || httpURL.equals("")) {
-			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
-			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 			throw new MissingMandatoryParametersException("Missing Http URL");
 		}
 		if (httpMethod == null || httpMethod.equals("")) {
-			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
-			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 			throw new MissingMandatoryParametersException("Missing Http Method");
 		}
 		if (apiAuthorizationKey == null || apiAuthorizationKey.equals("")) {
-			System.out.println("Throwing BAck Missing Mandatory Parameters Exception..");
-			System.out.println("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 
 			throw new MissingMandatoryParametersException("Missing Auhtorization Key");
 		}
-		System.out.println("<--------------Checking Manadatory Parameters....END - SUCCESS----------------->");
+		log.info("<--------------Checking Manadatory Parameters....END - SUCCESS----------------->");
 		return true;
 	}
 

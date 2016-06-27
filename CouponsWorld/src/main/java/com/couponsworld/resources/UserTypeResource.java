@@ -19,7 +19,6 @@ import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.services.UserTypeService;
-import com.couponsworld.servlets.AdminLoginAccessServlet;
 import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/usertype")
@@ -39,7 +38,7 @@ public class UserTypeResource {
 			log.info("enetered into get method of resource class of REST API...");
 			return UserTypeService.getUserTypes();
 		} catch (NullPointerException npe) {
-			log.severe("");
+
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
 

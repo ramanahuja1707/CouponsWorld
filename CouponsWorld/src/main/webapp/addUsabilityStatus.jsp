@@ -79,43 +79,43 @@
 					<div class="dropdown">
 						<ul>
 							<li><a href="addUsabilityStatus.jsp">Add</a></li>
-							<li><li><form method="get" action="usabilityStatus">
+							<li><form method="get" action="usabilityStatus">
 									<input type="text" value="GET" name="_method"
 										style="display: none;" /> <input type="submit"
 										value="display" />
-								</form></li></li>
+								</form></li>
 
+						</ul>
+					</div></li>
+				<li><a href="#">User Platform</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="addUserPlatform.jsp">Add</a></li>
+							<li><form method="get" action="userPlatform">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
+						</ul>
+					</div></li>
+				<li><a href="#">User Type</a>
+					<div class="dropdown">
+						<ul>
+							<li><a href="addUserType.jsp">Add</a></li>
+							<li><form method="get" action="userType">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
+						</ul>
+					</div></li>
 			</ul>
-		
+			</nav>
 		</div>
-		</li>
-		<li><a href="#">User Platform</a>
-			<div class="dropdown">
-				<ul>
-					<li><a href="addUserPlatform.jsp">Add</a></li>
-					<li><form method="get" action="userPlatform">
-							<input type="text" value="GET" name="_method"
-								style="display: none;" /> <input type="submit" value="display" />
-						</form></li>
-				</ul>
-			</div></li>
-		<li><a href="#">User Type</a>
-			<div class="dropdown">
-				<ul>
-					<li><a href="addUserType.jsp">Add</a></li>
-					<li><form method="get" action="userType">
-							<input type="text" value="GET" name="_method"
-								style="display: none;" /> <input type="submit" value="display" />
-						</form></li>
-				</ul>
-			</div></li>
-		</ul>
-		</nav>
 	</div>
-
 	<br />
 
-								<center>
+	<center>
 		<form action="usabilityStatus" method="post">
 			Usability Status :<input type="text" name="usabilityStatus">
 			<br /> <br /> <input type="submit" name="Add" value="Add">
@@ -161,5 +161,6 @@
 		%>
 	</center>
 
-							</body>
+
+</body>
 </html>

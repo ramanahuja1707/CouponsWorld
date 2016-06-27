@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +26,9 @@ import com.google.gson.Gson;
 
 public class UsabilityStatusServlet extends HttpServlet {
 
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(UsabilityStatusServlet.class.getName());
+
 	/**
 	 * 
 	 */
@@ -40,17 +44,17 @@ public class UsabilityStatusServlet extends HttpServlet {
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 				// configuration for PUT Request
 				if (req.getParameter("_method").equals("PUT")) {
-					// System.out.println("##########################----PUT----######################");
+					// log.info("##########################----PUT----######################");
 					doPut(req, resp);
 				} else if (req.getParameter("_method").equals("DELETE")) {
 					doDelete(req, resp);
 				} else if (req.getParameter("_method").equals("GET")) {
 					String contentType = "", objectJson = "";
 
-					System.out.println(
+					log.info(
 							"################################################GET-UsabilityStatusServlet-START################################################");
-					// System.out.println(req.getContentType());
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					// log.info(req.getContentType());
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
@@ -59,35 +63,35 @@ public class UsabilityStatusServlet extends HttpServlet {
 											.generateAuthorizationKey(username, password),
 									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
 
-					System.out.println("URL Connection with the passed request parameters Successfully created....");
-					System.out.println("Reading the response from the URL connection........");
+					log.info("URL Connection with the passed request parameters Successfully created....");
+					log.info("Reading the response from the URL connection........");
 
 					// Getting Response from the URL
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of Get method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUsabilityStatus.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the showUsabilityStatus.jsp Page successfully");
+					log.info("Redirecting The control to the showUsabilityStatus.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"################################################GET-UsabilityStatusServlet-END################################################");
 				}
 			} else {
 
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -98,28 +102,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of Get method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"################################################GET-UsabilityStatusServlet-END################################################");
 
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing GET method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing GET method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -129,26 +133,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UsabilityStatusServlet-END################################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -160,25 +164,25 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UsabilityStatusServlet-END################################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing GET method :" + e.getMessage());
+			log.info("Exception Caught in executing GET method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -189,22 +193,22 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UsabilityStatusServlet-END################################################");
 		}
 
@@ -219,29 +223,29 @@ public class UsabilityStatusServlet extends HttpServlet {
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 				String CONTENT_TYPE_JSON = "application/json";
-				System.out.println(
+				log.info(
 						"#############################################POST-UsabilityStatusServlet-START#######################################################");
 
 				// Wrapping the Usertype parameter to USerType object...
 				UsabilityStatus usabilityStatus = new UsabilityStatus();
 				usabilityStatus.setUsabilityStatusName(req.getParameter("usabilityStatus"));
 
-				System.out.println("Wrapping the UsabilityStatus parameter to UsabilityStatus object...");
+				log.info("Wrapping the UsabilityStatus parameter to UsabilityStatus object...");
 
 				// VAlidating the USerTYpe parameter
 				List<Error> errors = ValidationService.validateUsabilityStatusForPostMethod(usabilityStatus);
 
-				System.out.println("Validating the UsabilityStatus wrapped object...");
+				log.info("Validating the UsabilityStatus wrapped object...");
 
 				if (errors == null) {
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Converting the Wrapped object into Json String...");
+					log.info("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
 					String usabilityStatusJsonString = gson.toJson(usabilityStatus);
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USABILITYSTATUS_URL, req.getMethod(),
@@ -250,46 +254,46 @@ public class UsabilityStatusServlet extends HttpServlet {
 									Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of Get method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUsabilityStatus.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUsabilityStatus.jsp Page successfully");
+					log.info("Redirecting The control to the addUsabilityStatus.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################POST-UsabilityStatusServlet-END#############################################");
 				} else {
-					System.out.println("Validation of the Wrapped Object is failed...");
+					log.info("Validation of the Wrapped Object is failed...");
 
 					// setting the Status of POST method execution - FAILED
 					req.setAttribute("errors", errors);
 					req.setAttribute("status", Status.FAILURE);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUsabilityStatus.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUsabilityStatus.jsp Page successfully");
-					System.out.println(
+					log.info("Redirecting The control to the addUsabilityStatus.jsp Page successfully");
+					log.info(
 							"#############################################POST-UsabilityStatusServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -300,27 +304,27 @@ public class UsabilityStatusServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of POST method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################POST-UsabilityStatusServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing POST method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing POST method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -330,26 +334,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UsabilityStatusServlet-END#############################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -361,25 +365,25 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UsabilityStatusServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing POST method :" + e.getMessage());
+			log.info("Exception Caught in executing POST method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -390,22 +394,22 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUsabilityStatus.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUsabilityStatus.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UsabilityStatusServlet-END#############################################");
 		}
 	}
@@ -421,7 +425,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 				String[] usabilityStatusArray = req.getParameter("usabilityStatusSelected").split("-");
 				String usabilityStatusSelectedId = usabilityStatusArray[1];
 				String updatedUsabilityStatusSelected = req.getParameter("updatedUsabilityStatusSelected");
-				System.out.println(
+				log.info(
 						"#############################################PUT-UsabilityStatusServlet-START################################################");
 				// Wrapping the usabiltiyStatus parameter to usabiltiyStatus
 				// object...
@@ -431,16 +435,16 @@ public class UsabilityStatusServlet extends HttpServlet {
 				if (ValidationService.validateUsabilityStatusForPutMethod(usabilityStatus,
 						usabilityStatusSelectedId) == null) {
 
-					System.out.println("Wrapping the usabilityStatus parameter to usabilityStatus object...");
+					log.info("Wrapping the usabilityStatus parameter to usabilityStatus object...");
 
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Converting the Wrapped object into Json String...");
+					log.info("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
 					String usabilityStatusJsonString = gson.toJson(usabilityStatus);
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService.getHttpURLConnection(
 							Constants.USABILITYSTATUS_URL + "/" + usabilityStatusSelectedId, "PUT", CONTENT_TYPE_JSON,
@@ -448,26 +452,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 							Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of PUT method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req
 							.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################PUT-UsabilityStatusServlet-END#############################################");
 				} else {
 
@@ -480,28 +484,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 					List<Error> errors = new ArrayList<>();
 					errors.add(error);
 
-					System.out.println("Attatching the errors list with the request object...");
+					log.info("Attatching the errors list with the request object...");
 
 					// setting the Status of PUT method execution - Failure
 					req.setAttribute("status", Status.FAILURE);
 					req.setAttribute("errors", errors);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.FAILURE);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.FAILURE);
 
 					RequestDispatcher requestDispatcher = req
 							.getRequestDispatcher("updateUsabilityStatusSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-					System.out.println(
+					log.info(
 							"#############################################PUT-UsabilityStatusServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -512,28 +516,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of PUT method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################PUT-UsabilityStatusServlet-END#############################################");
 			}
 
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing PUT method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing PUT method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -543,28 +547,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UsabilityStatusServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -576,26 +580,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UsabilityStatusServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing PUT method :" + e.getMessage());
+			log.info("Exception Caught in executing PUT method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -606,23 +610,23 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UsabilityStatus-END#############################################");
 		}
 	}
@@ -639,16 +643,16 @@ public class UsabilityStatusServlet extends HttpServlet {
 				String[] usabilityStatusArray = req.getParameter("usabilityStatusSelected").split("-");
 				String usabilityStatusSelectedId = usabilityStatusArray[1];
 				String contentType = "";
-				System.out.println(
+				log.info(
 						"#############################################DELETE-UsabilityStatusServlet-START################################################");
 
 				if (ValidationService.validateUsabilityStatusForDeleteMethod(usabilityStatusSelectedId) == null) {
 
-					System.out.println("Wrapping the UsabilityStatus parameter to UsabilityStatus object...");
+					log.info("Wrapping the UsabilityStatus parameter to UsabilityStatus object...");
 
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					String usabilityStatusJsonString = "";
 
@@ -658,26 +662,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 							Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of DELETE method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req
 							.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 				} else {
 
@@ -690,28 +694,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 					List<Error> errors = new ArrayList<>();
 					errors.add(error);
 
-					System.out.println("Attatching the errors list with the request object...");
+					log.info("Attatching the errors list with the request object...");
 
 					// setting the Status of DELETE method execution - Failure
 					req.setAttribute("status", Status.FAILURE);
 					req.setAttribute("errors", errors);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.FAILURE);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.FAILURE);
 
 					RequestDispatcher requestDispatcher = req
 							.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-					System.out.println(
+					log.info(
 							"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -722,27 +726,27 @@ public class UsabilityStatusServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of DELETE method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing DELETE method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing DELETE method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -752,28 +756,28 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -785,26 +789,26 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing DELETE method :" + e.getMessage());
+			log.info("Exception Caught in executing DELETE method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -815,23 +819,23 @@ public class UsabilityStatusServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println(
+			log.info(
 					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 		}
 

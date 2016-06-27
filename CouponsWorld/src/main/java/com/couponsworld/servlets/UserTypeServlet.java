@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.MissingMandatoryParametersException;
+import com.couponsworld.resources.UserTypeResource;
 import com.couponsworld.utilities.ApiAuthenticationService;
 import com.couponsworld.utilities.Constants;
 import com.couponsworld.utilities.HttpUrlService;
@@ -25,6 +27,9 @@ import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public class UserTypeServlet extends HttpServlet {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(UserTypeServlet.class.getName());
 
 	private final String CONTENT_TYPE_JSON = "application/json";
 
@@ -37,29 +42,32 @@ public class UserTypeServlet extends HttpServlet {
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 
-				System.out.println(
+				log.info(
+						"#############################################POST-UserTypeServlet-START#######################################################");
+
+				log.info(
 						"#############################################POST-UserTypeServlet-START#######################################################");
 
 				// Wrapping the Usertype parameter to USerType object...
 				UserType userType = new UserType();
 				userType.setUserTypeName(req.getParameter("userType"));
 
-				System.out.println("Wrapping the Usertype parameter to USerType object...");
+				log.info("Wrapping the Usertype parameter to USerType object...");
 
 				// VAlidating the USerTYpe parameter
 				List<Error> errors = ValidationService.validateUserTypeForPostMethod(userType);
 
-				System.out.println("Validating the UserType wrapped object...");
+				log.info("Validating the UserType wrapped object...");
 
 				if (errors == null) {
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Converting the Wrapped object into Json String...");
+					log.info("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
 					String userTypeJsonString = gson.toJson(userType);
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
@@ -68,46 +76,46 @@ public class UserTypeServlet extends HttpServlet {
 									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of Get method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUserType.jsp Page successfully");
+					log.info("Redirecting The control to the addUserType.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################POST-UserTypeServlet-END#############################################");
 				} else {
-					System.out.println("Validation of the Wrapped Object is failed...");
+					log.info("Validation of the Wrapped Object is failed...");
 
 					// setting the Status of POST method execution - FAILED
 					req.setAttribute("errors", errors);
 					req.setAttribute("status", Status.FAILURE);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the addUserType.jsp Page successfully");
-					System.out.println(
+					log.info("Redirecting The control to the addUserType.jsp Page successfully");
+					log.info(
 							"#############################################POST-UserTypeServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -118,27 +126,27 @@ public class UserTypeServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of POST method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################POST-UserTypeServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing POST method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing POST method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -148,26 +156,26 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UserTypeServlet-END#############################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -179,25 +187,25 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UserTypeServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing POST method :" + e.getMessage());
+			log.info("Exception Caught in executing POST method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -208,22 +216,22 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of POST method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the addUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the addUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################POST-UserTypeServlet-END#############################################");
 		}
 	}
@@ -237,17 +245,17 @@ public class UserTypeServlet extends HttpServlet {
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 				// configuration for PUT Request
 				if (req.getParameter("_method").equals("PUT")) {
-					// System.out.println("##########################----PUT----######################");
+					// log.info("##########################----PUT----######################");
 					doPut(req, resp);
 				} else if (req.getParameter("_method").equals("DELETE")) {
 					doDelete(req, resp);
 				} else if (req.getParameter("_method").equals("GET")) {
 					String contentType = "", objectJson = "";
 
-					System.out.println(
+					log.info(
 							"################################################GET-UserTypeServlet-START################################################");
-					// System.out.println(req.getContentType());
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					// log.info(req.getContentType());
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
@@ -256,35 +264,35 @@ public class UserTypeServlet extends HttpServlet {
 											.generateAuthorizationKey(username, password),
 									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
 
-					System.out.println("URL Connection with the passed request parameters Successfully created....");
-					System.out.println("Reading the response from the URL connection........");
+					log.info("URL Connection with the passed request parameters Successfully created....");
+					log.info("Reading the response from the URL connection........");
 
 					// Getting Response from the URL
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of Get method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println("Redirecting The control to the showUserType.jsp Page successfully");
+					log.info("Redirecting The control to the showUserType.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"################################################GET-UserTypeServlet-END################################################");
 				}
 			} else {
 
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -295,28 +303,28 @@ public class UserTypeServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of Get method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"################################################GET-UserTypeServlet-END################################################");
 
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing GET method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing GET method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -326,26 +334,26 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UserTypeServlet-END################################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -357,25 +365,25 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UserTypeServlet-END################################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing GET method :" + e.getMessage());
+			log.info("Exception Caught in executing GET method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -386,22 +394,22 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showUserType.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the showUserType.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the showUserType.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"################################################GET-UserTypeServlet-END################################################");
 		}
 
@@ -417,7 +425,7 @@ public class UserTypeServlet extends HttpServlet {
 				String[] userTypeArray = req.getParameter("userTypeSelected").split("-");
 				String userTypeSelectedId = userTypeArray[1];
 				String updatedUserTypeSelected = req.getParameter("updatedUserTypeSelected");
-				System.out.println(
+				log.info(
 						"#############################################PUT-UserTypeServlet-START################################################");
 				// Wrapping the Usertype parameter to USerType object...
 				UserType userType = new UserType();
@@ -425,16 +433,16 @@ public class UserTypeServlet extends HttpServlet {
 
 				if (ValidationService.validateUserTypeForPutMethod(userType, userTypeSelectedId) == null) {
 
-					System.out.println("Wrapping the Usertype parameter to USerType object...");
+					log.info("Wrapping the Usertype parameter to USerType object...");
 
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Converting the Wrapped object into Json String...");
+					log.info("Converting the Wrapped object into Json String...");
 					// converting the Object Of UserType to Json Format
 					Gson gson = new Gson();
 					String userTypeJsonString = gson.toJson(userType);
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERTYPE_URL + "/" + userTypeSelectedId, "PUT",
@@ -443,25 +451,25 @@ public class UserTypeServlet extends HttpServlet {
 									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of PUT method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################PUT-UserTypeServlet-END#############################################");
 				} else {
 
@@ -474,27 +482,27 @@ public class UserTypeServlet extends HttpServlet {
 					List<Error> errors = new ArrayList<>();
 					errors.add(error);
 
-					System.out.println("Attatching the errors list with the request object...");
+					log.info("Attatching the errors list with the request object...");
 
 					// setting the Status of PUT method execution - Failure
 					req.setAttribute("status", Status.FAILURE);
 					req.setAttribute("errors", errors);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.FAILURE);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.FAILURE);
 
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("updateUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-					System.out.println(
+					log.info(
 							"#############################################PUT-UserTypeServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -505,28 +513,28 @@ public class UserTypeServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of PUT method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################PUT-UserTypeServlet-END#############################################");
 			}
 
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing PUT method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing PUT method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -536,27 +544,27 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UserTypeServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -568,25 +576,25 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UserTypeServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing PUT method :" + e.getMessage());
+			log.info("Exception Caught in executing PUT method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -597,22 +605,22 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of PUT method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################PUT-UserTypeServlet-END#############################################");
 		}
 	}
@@ -629,16 +637,16 @@ public class UserTypeServlet extends HttpServlet {
 				String[] userTypeArray = req.getParameter("userTypeSelected").split("-");
 				String userTypeSelectedId = userTypeArray[1];
 				String contentType = "";
-				System.out.println(
+				log.info(
 						"#############################################DELETE-UserTypeServlet-START################################################");
 
 				if (ValidationService.validateUserTypeForDeleteMethod(userTypeSelectedId) == null) {
 
-					System.out.println("Wrapping the Usertype parameter to USerType object...");
+					log.info("Wrapping the Usertype parameter to USerType object...");
 
-					System.out.println("Validation of the Wrapped Object is successfull...");
+					log.info("Validation of the Wrapped Object is successfull...");
 
-					System.out.println("Establishing URL Connection with the passed request parameters....");
+					log.info("Establishing URL Connection with the passed request parameters....");
 
 					String userTypeJsonString = "";
 
@@ -649,25 +657,25 @@ public class UserTypeServlet extends HttpServlet {
 									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
-					System.out.println("Successfully got the response read from URL connection.....");
-					System.out.println("Response : " + urlResponse);
+					log.info("Successfully got the response read from URL connection.....");
+					log.info("Response : " + urlResponse);
 
 					// setting the Status of DELETE method execution - Success
 					req.setAttribute("response", urlResponse.toString());
 					req.setAttribute("status", Status.SUCCESS);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("response :" + urlResponse.toString());
-					System.out.println("status : " + Status.SUCCESS);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("response :" + urlResponse.toString());
+					log.info("status : " + Status.SUCCESS);
 
 					// Redirecting The control to the JSP Page successfully
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page successfully");
 
-					System.out.println(
+					log.info(
 							"#############################################DELETE-UserTypeServlet-END#############################################");
 				} else {
 
@@ -680,27 +688,27 @@ public class UserTypeServlet extends HttpServlet {
 					List<Error> errors = new ArrayList<>();
 					errors.add(error);
 
-					System.out.println("Attatching the errors list with the request object...");
+					log.info("Attatching the errors list with the request object...");
 
 					// setting the Status of DELETE method execution - Failure
 					req.setAttribute("status", Status.FAILURE);
 					req.setAttribute("errors", errors);
 
-					System.out.println("Execution Status Parameters attaching with the request :");
-					System.out.println("errors :" + errors.toString());
-					System.out.println("status : " + Status.FAILURE);
+					log.info("Execution Status Parameters attaching with the request :");
+					log.info("errors :" + errors.toString());
+					log.info("status : " + Status.FAILURE);
 
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					System.out.println(
+					log.info(
 							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-					System.out.println(
+					log.info(
 							"#############################################DELETE-UserTypeServlet-END#############################################");
 				}
 			} else {
-				System.out.println("Username and Password not in session.....Session Expired....");
+				log.info("Username and Password not in session.....Session Expired....");
 
 				// creation of Error
 				Error error = new Error();
@@ -711,27 +719,27 @@ public class UserTypeServlet extends HttpServlet {
 				List<Error> errors = new ArrayList<>();
 				errors.add(error);
 
-				System.out.println("Attatching the errors list with the request object...");
+				log.info("Attatching the errors list with the request object...");
 
 				// setting the Status of DELETE method execution - Failure
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors", errors);
 
-				System.out.println("Execution Status Parameters attaching with the request :");
-				System.out.println("errors :" + errors.toString());
-				System.out.println("status : " + Status.FAILURE);
+				log.info("Execution Status Parameters attaching with the request :");
+				log.info("errors :" + errors.toString());
+				log.info("status : " + Status.FAILURE);
 
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/notInSession.jsp");
 				requestDispatcher.forward(req, resp);
 
-				System.out.println("Redirecting The control to the notInSession.jsp Page unsuccessfully");
+				log.info("Redirecting The control to the notInSession.jsp Page unsuccessfully");
 
-				System.out.println(
+				log.info(
 						"#############################################DELETE-UserTypeServlet-END#############################################");
 			}
 		} catch (IOException ioe) {
 
-			System.out.println("IO Exception Caught in executing DELETE method :" + ioe.getMessage());
+			log.info("IO Exception Caught in executing DELETE method :" + ioe.getMessage());
 			// creation of Error
 			Error error = new Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
@@ -741,27 +749,27 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UserTypeServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			System.out.println(
+			log.info(
 					"Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
 
 			// creation of Error
@@ -773,25 +781,25 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UserTypeServlet-END#############################################");
 		} catch (Exception e) {
-			System.out.println("Exception Caught in executing DELETE method :" + e.getMessage());
+			log.info("Exception Caught in executing DELETE method :" + e.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -802,22 +810,22 @@ public class UserTypeServlet extends HttpServlet {
 			List<Error> errors = new ArrayList<>();
 			errors.add(error);
 
-			System.out.println("Attatching the errors list with the request object...");
+			log.info("Attatching the errors list with the request object...");
 
 			// setting the Status of DELETE method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", errors);
 
-			System.out.println("Execution Status Parameters attaching with the request :");
-			System.out.println("errors :" + errors.toString());
-			System.out.println("status : " + Status.FAILURE);
+			log.info("Execution Status Parameters attaching with the request :");
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			System.out.println("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
 
-			System.out.println(
+			log.info(
 					"#############################################DELETE-UserTypeServlet-END#############################################");
 		}
 

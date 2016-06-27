@@ -26,7 +26,7 @@
 
 			<nav>
 			<ul>
-				<li><a href="#">Home </a>
+				<li><a href="adminPanel.jsp">Home </a>
 					<div class="dropdown">
 						<ul>
 							<li><a href="logout">Logout</a></li>
@@ -73,10 +73,13 @@
 				<li><a href="#">Usabilty Status</a>
 					<div class="dropdown">
 						<ul>
-							<li><a href="#">Add</a></li>
-							<li><a href="#">update</a></li>
-							<li><a href="#">delete</a></li>
-							<li><a href="#">display</a></li>
+							<li><a href="addUsabilityStatus.jsp">Add</a></li>
+							<li><form method="get" action="usabilityStatus">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit"
+										value="display" />
+								</form></li>
+
 						</ul>
 					</div></li>
 				<li><a href="#">User Platform</a>
