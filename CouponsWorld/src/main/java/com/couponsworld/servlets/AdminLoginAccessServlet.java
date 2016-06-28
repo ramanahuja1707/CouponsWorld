@@ -42,13 +42,15 @@ public class AdminLoginAccessServlet extends HttpServlet {
 			// System.out.println("Not null");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 				log.info("Username and password are successfully validated..");
-				// System.out.println("Correct Credentials ...");
+				// System.out.println("Correct Credentials...");
 
 				log.info("Diverting the control to the Admin Panel : adminPanel.jsp");
 
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);
 				session.setAttribute("password", password);
+				session.setAttribute("accessId", Constants.ADMIN_ACCESS_ID);
+				session.setAttribute("accessPlatform", Constants.WEB_ACCESS_PLATFORM);
 				response.sendRedirect("adminPanel.jsp");
 			} else {
 				log.info("Username and password validation failure occured..");

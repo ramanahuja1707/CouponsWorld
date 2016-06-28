@@ -27,6 +27,8 @@ public class AdminLogoutAccessServlet extends HttpServlet {
 
 			session.removeAttribute("username");
 			session.removeAttribute("password");
+			session.removeAttribute("accessId");
+			session.removeAttribute("accessPlatform");
 
 			log.info("Removing the credentials from session object...and making it null");
 			session = null;

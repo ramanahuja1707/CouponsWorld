@@ -265,6 +265,18 @@ public class Constants {
 	// URL OF REST-API
 	public static final String CATEGORY_URL = "http://1.couponsworld-1707.appspot.com/webapi/categories";
 
+	// Access Id OF REST-API
+	public static final String ADMIN_ACCESS_ID = "ADMIN";
+
+	// ACCESS ID OF REST-API
+	public static final String USER_ACCESS_ID = "USER";
+
+	// ACCESS PLATFORM OF REST-API
+	public static final String WEB_ACCESS_PLATFORM = "WEB";
+
+	// ACCESS PLATFORM OF REST-API
+	public static final String ANDROID_ACCESS_PLATFORM = "ANDROID";
+
 	// URL PROPERTIES
 	public static final boolean DO_OUTPUT_FLAG_TRUE = true;
 	public static final boolean DO_OUTPUT_FLAG_FALSE = false;

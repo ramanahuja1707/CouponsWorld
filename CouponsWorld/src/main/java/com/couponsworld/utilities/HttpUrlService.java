@@ -16,15 +16,21 @@ public class HttpUrlService {
 	private static final Logger log = Logger.getLogger(HttpUrlService.class.getName());
 
 	public static HttpURLConnection getHttpURLConnection(String httpURL, String httpMethod, String contentType,
-			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
-			throws IOException, MissingMandatoryParametersException {
+			String apiAuthorizationKey, boolean doOutputFlag, String objectJson, String username, String password,
+			String accessId, String accessPlatform) throws IOException, MissingMandatoryParametersException {
 		log.info("----------------------HTTP URL CONNECTION OPENING- START------------------------------------");
-		if (checkMandatoryParameters(httpURL, httpMethod, contentType, apiAuthorizationKey, doOutputFlag, objectJson)) {
+		if (checkMandatoryParameters(httpURL, httpMethod, contentType, apiAuthorizationKey, doOutputFlag, objectJson,
+				username, password, accessId, accessPlatform)) {
 			URL url = new URL(httpURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod(httpMethod);
 			// connection.setRequestProperty("User-Agent", USER_AGENT);
 			connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+			connection.setRequestProperty("username", username);
+			connection.setRequestProperty("password", password);
+			connection.setRequestProperty("accessId", accessId);
+			connection.setRequestProperty("accessPlatform", accessPlatform);
+
 			if (!(contentType.equals(""))) {
 				connection.setRequestProperty("content-type", contentType);
 			}
@@ -62,8 +68,8 @@ public class HttpUrlService {
 	}
 
 	private static boolean checkMandatoryParameters(String httpURL, String httpMethod, String contentType,
-			String apiAuthorizationKey, boolean doOutputFlag, String objectJson)
-			throws MissingMandatoryParametersException {
+			String apiAuthorizationKey, boolean doOutputFlag, String objectJson, String username, String password,
+			String accessId, String accessPlatform) throws MissingMandatoryParametersException {
 		log.info("<--------------Checking Manadatory Parameters....START----------------->");
 		if (httpURL == null || httpURL.equals("")) {
 			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
@@ -80,6 +86,30 @@ public class HttpUrlService {
 			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
 
 			throw new MissingMandatoryParametersException("Missing Auhtorization Key");
+		}
+		if (username == null || username.equals("")) {
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+
+			throw new MissingMandatoryParametersException("Missing username..");
+		}
+		if (password == null || password.equals("")) {
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+
+			throw new MissingMandatoryParametersException("Missing password..");
+		}
+		if (accessId == null || accessId.equals("")) {
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+
+			throw new MissingMandatoryParametersException("Missing access Id..");
+		}
+		if (accessPlatform == null || accessPlatform.equals("")) {
+			log.info("Throwing BAck Missing Mandatory Parameters Exception..");
+			log.info("<--------------Checking Manadatory Parameters....END - FAILURE----------------->");
+
+			throw new MissingMandatoryParametersException("Missing access platform..");
 		}
 		log.info("<--------------Checking Manadatory Parameters....END - SUCCESS----------------->");
 		return true;

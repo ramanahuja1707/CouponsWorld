@@ -58,10 +58,12 @@ public class UsabilityStatusServlet extends HttpServlet {
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USABILITYSTATUS_URL, req.getMethod(),
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
+							.getHttpURLConnection(Constants.USABILITYSTATUS_URL, req.getMethod(), contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, objectJson, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 
 					log.info("URL Connection with the passed request parameters Successfully created....");
 					log.info("Reading the response from the URL connection........");
@@ -152,8 +154,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 					"################################################GET-UsabilityStatusServlet-END################################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -248,10 +249,12 @@ public class UsabilityStatusServlet extends HttpServlet {
 					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USABILITYSTATUS_URL, req.getMethod(),
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
+							.getHttpURLConnection(Constants.USABILITYSTATUS_URL, req.getMethod(), CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -353,8 +356,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 					"#############################################POST-UsabilityStatusServlet-END#############################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -446,10 +448,14 @@ public class UsabilityStatusServlet extends HttpServlet {
 
 					log.info("Establishing URL Connection with the passed request parameters....");
 
-					HttpURLConnection httpUrlConnection = HttpUrlService.getHttpURLConnection(
-							Constants.USABILITYSTATUS_URL + "/" + usabilityStatusSelectedId, "PUT", CONTENT_TYPE_JSON,
-							"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username, password),
-							Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
+					HttpURLConnection httpUrlConnection = HttpUrlService
+							.getHttpURLConnection(Constants.USABILITYSTATUS_URL + "/" + usabilityStatusSelectedId,
+									"PUT", CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -560,16 +566,14 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################PUT-UsabilityStatusServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -593,8 +597,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################PUT-UsabilityStatusServlet-END#############################################");
@@ -623,8 +626,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the updateUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################PUT-UsabilityStatus-END#############################################");
@@ -656,10 +658,14 @@ public class UsabilityStatusServlet extends HttpServlet {
 
 					String usabilityStatusJsonString = "";
 
-					HttpURLConnection httpUrlConnection = HttpUrlService.getHttpURLConnection(
-							Constants.USABILITYSTATUS_URL + "/" + usabilityStatusSelectedId, "DELETE", contentType,
-							"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username, password),
-							Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString);
+					HttpURLConnection httpUrlConnection = HttpUrlService
+							.getHttpURLConnection(Constants.USABILITYSTATUS_URL + "/" + usabilityStatusSelectedId,
+									"DELETE", contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, usabilityStatusJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -769,16 +775,14 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -802,8 +806,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");
@@ -832,8 +835,7 @@ public class UsabilityStatusServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUsabilityStatusSuccessFailure.jsp");
 			requestDispatcher.forward(req, resp);
 
-			log.info(
-					"Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
+			log.info("Redirecting The control to the deleteUsabilityStatusSuccessFailure.jsp Page unsuccessfully");
 
 			log.info(
 					"#############################################DELETE-UsabilityStatusServlet-END#############################################");

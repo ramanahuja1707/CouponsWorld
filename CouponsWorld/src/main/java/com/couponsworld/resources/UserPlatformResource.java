@@ -2,7 +2,6 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,7 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.couponsworld.apiresults.Link;
 import com.couponsworld.apiresults.ResultantUserPlatform;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.enums.Errors;

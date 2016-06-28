@@ -18,7 +18,6 @@ import com.couponsworld.dto.UserType;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.MissingMandatoryParametersException;
-import com.couponsworld.resources.UserTypeResource;
 import com.couponsworld.utilities.ApiAuthenticationService;
 import com.couponsworld.utilities.Constants;
 import com.couponsworld.utilities.HttpUrlService;
@@ -70,10 +69,12 @@ public class UserTypeServlet extends HttpServlet {
 					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(), CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -175,8 +176,7 @@ public class UserTypeServlet extends HttpServlet {
 					"#############################################POST-UserTypeServlet-END#############################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing POST method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -259,10 +259,12 @@ public class UserTypeServlet extends HttpServlet {
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(),
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
+							.getHttpURLConnection(Constants.USERTYPE_URL, req.getMethod(), contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, objectJson, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 
 					log.info("URL Connection with the passed request parameters Successfully created....");
 					log.info("Reading the response from the URL connection........");
@@ -353,8 +355,7 @@ public class UserTypeServlet extends HttpServlet {
 					"################################################GET-UserTypeServlet-END################################################");
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing GET method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -446,9 +447,12 @@ public class UserTypeServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERTYPE_URL + "/" + userTypeSelectedId, "PUT",
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+									CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -466,8 +470,7 @@ public class UserTypeServlet extends HttpServlet {
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/updateUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					log.info(
-							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page successfully");
+					log.info("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page successfully");
 
 					log.info(
 							"#############################################PUT-UserTypeServlet-END#############################################");
@@ -495,8 +498,7 @@ public class UserTypeServlet extends HttpServlet {
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("updateUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					log.info(
-							"Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
+					log.info("Redirecting The control to the updateUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 					log.info(
 							"#############################################PUT-UserTypeServlet-END#############################################");
@@ -564,8 +566,7 @@ public class UserTypeServlet extends HttpServlet {
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing PUT method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();
@@ -652,9 +653,12 @@ public class UserTypeServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERTYPE_URL + "/" + userTypeSelectedId, "DELETE",
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString);
+									contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userTypeJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -672,8 +676,7 @@ public class UserTypeServlet extends HttpServlet {
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					log.info(
-							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page successfully");
+					log.info("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page successfully");
 
 					log.info(
 							"#############################################DELETE-UserTypeServlet-END#############################################");
@@ -701,8 +704,7 @@ public class UserTypeServlet extends HttpServlet {
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/deleteUserTypeSuccessFailure.jsp");
 					requestDispatcher.forward(req, resp);
 
-					log.info(
-							"Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
+					log.info("Redirecting The control to the deleteUserTypeSuccessFailure.jsp Page unsuccessfully");
 
 					log.info(
 							"#############################################DELETE-UserTypeServlet-END#############################################");
@@ -769,8 +771,7 @@ public class UserTypeServlet extends HttpServlet {
 
 		} catch (MissingMandatoryParametersException mmpe) {
 
-			log.info(
-					"Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
+			log.info("Missing Manadatory Parameters Exception Caught in executing DELETE method :" + mmpe.getMessage());
 
 			// creation of Error
 			Error error = new Error();

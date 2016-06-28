@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.couponsworld.apiresults.Link;
-import com.couponsworld.dto.UsabilityStatus;
-import com.couponsworld.utilities.Constants;
-import com.google.api.server.spi.Constant;
 
 public class GenerateLinkService {
 

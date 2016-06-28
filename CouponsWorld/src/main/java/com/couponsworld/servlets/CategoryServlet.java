@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import com.couponsworld.apiresults.Error;
 import com.couponsworld.dto.Category;
-import com.couponsworld.dto.SubCategory;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.MissingMandatoryParametersException;
@@ -57,10 +56,12 @@ public class CategoryServlet extends HttpServlet {
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.CATEGORY_URL, req.getMethod(),
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
+							.getHttpURLConnection(Constants.CATEGORY_URL, req.getMethod(), contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, objectJson, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 
 					log.info("URL Connection with the passed request parameters Successfully created....");
 					log.info("Reading the response from the URL connection........");
@@ -245,10 +246,12 @@ public class CategoryServlet extends HttpServlet {
 					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.CATEGORY_URL, req.getMethod(),
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString);
+							.getHttpURLConnection(Constants.CATEGORY_URL, req.getMethod(), CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -441,9 +444,12 @@ public class CategoryServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.CATEGORY_URL + "/" + categorySelectedId, "PUT",
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString);
+									CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -644,9 +650,12 @@ public class CategoryServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.CATEGORY_URL + "/" + categorySelectedId, "DELETE",
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString);
+									contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, categoryJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");

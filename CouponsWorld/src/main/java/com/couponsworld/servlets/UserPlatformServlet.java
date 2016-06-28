@@ -69,10 +69,12 @@ public class UserPlatformServlet extends HttpServlet {
 					log.info("Establishing URL Connection with the passed request parameters....");
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(),
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
+							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(), CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -256,10 +258,12 @@ public class UserPlatformServlet extends HttpServlet {
 
 					// Creating Connection from the URL passed
 					HttpURLConnection httpUrlConnection = HttpUrlService
-							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(),
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, objectJson);
+							.getHttpURLConnection(Constants.USERPLATFORM_URL, req.getMethod(), contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, objectJson, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 
 					log.info("URL Connection with the passed request parameters Successfully created....");
 					log.info("Reading the response from the URL connection........");
@@ -441,9 +445,12 @@ public class UserPlatformServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERPLATFORM_URL + "/" + userPlatformSelectedId, "PUT",
-									CONTENT_TYPE_JSON, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
+									CONTENT_TYPE_JSON,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
@@ -647,9 +654,12 @@ public class UserPlatformServlet extends HttpServlet {
 
 					HttpURLConnection httpUrlConnection = HttpUrlService
 							.getHttpURLConnection(Constants.USERPLATFORM_URL + "/" + userPlatformSelectedId, "DELETE",
-									contentType, "Basic " + new ApiAuthenticationService()
-											.generateAuthorizationKey(username, password),
-									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString);
+									contentType,
+									"Basic " + new ApiAuthenticationService().generateAuthorizationKey(username,
+											password),
+									Constants.DO_OUTPUT_FLAG_TRUE, userPlatformJsonString, username, password,
+									session.getAttribute("accessId").toString(),
+									session.getAttribute("accessPlatform").toString());
 					String urlResponse = HttpUrlService.readHttpUrlResponse(httpUrlConnection.getInputStream());
 
 					log.info("Successfully got the response read from URL connection.....");
