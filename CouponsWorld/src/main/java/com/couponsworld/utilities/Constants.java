@@ -262,6 +262,9 @@ public class Constants {
 	// URL OF REST-API
 	public static final String SUBCATEGORY_URL = "http://1.couponsworld-1707.appspot.com/webapi/subcategories";
 
+	// URL OF REST-API
+	public static final String CATEGORY_URL = "http://1.couponsworld-1707.appspot.com/webapi/categories";
+
 	// URL PROPERTIES
 	public static final boolean DO_OUTPUT_FLAG_TRUE = true;
 	public static final boolean DO_OUTPUT_FLAG_FALSE = false;

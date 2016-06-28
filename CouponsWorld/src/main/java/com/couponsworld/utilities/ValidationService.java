@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.couponsworld.apiresults.Error;
+import com.couponsworld.dto.Category;
 import com.couponsworld.dto.SubCategory;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
@@ -189,4 +190,47 @@ public class ValidationService {
 		return null;
 	}
 
+	public static List<Error> validateCategoryForPostMethod(Category category) {
+		List<Error> errors = null;
+		if (category.getCategoryName().equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Category Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCategoryForPutMethod(Category category, String categoryId) {
+		List<Error> errors = null;
+		if (category.getCategoryName().equals("") || categoryId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Updated Category or Category Id Not Specified...");
+
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCategoryForDeleteMethod(String categoryId) {
+		List<Error> errors = null;
+		if (categoryId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("categoryId Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
 }

@@ -82,6 +82,17 @@
 
 
 	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.CategoryServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/categories</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
 		<servlet-name>AdminLoginAccessServlet</servlet-name>
 		<servlet-class>com.couponsworld.servlets.AdminLoginAccessServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
