@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.couponsworld.apiresults.Error;
 import com.couponsworld.dto.Category;
+import com.couponsworld.dto.Company;
 import com.couponsworld.dto.SubCategory;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
@@ -226,6 +227,66 @@ public class ValidationService {
 			Error error = new Error();
 			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
 			error.setErrorName("categoryId Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCompanyForPostMethod(Company company) {
+		List<Error> errors = null;
+		Error error = new Error();
+		errors = new ArrayList<>();
+		error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+		if (company.getCompanyName().equals("")) {
+			error.setErrorName("Company Name Not Specified...");
+			errors.add(error);
+			return errors;
+		} else if (company.getCompanyDescription().equals("")) {
+			error.setErrorName("Company Description Not Specified...");
+			errors.add(error);
+			return errors;
+		} else if (company.getCompanyLogoName().equals("")) {
+			error.setErrorName("Company Logo Name Not Specified...");
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCompanyForPutMethod(Company company, String companyId) {
+		List<Error> errors = null;
+		Error error = new Error();
+		errors = new ArrayList<>();
+		error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+		if (company.getCompanyName().equals("")) {
+			error.setErrorName("Company Name Not Specified...");
+			errors.add(error);
+			return errors;
+		} else if (company.getCompanyDescription().equals("")) {
+			error.setErrorName("Company Description Not Specified...");
+			errors.add(error);
+			return errors;
+		} else if (company.getCompanyLogoName().equals("")) {
+			error.setErrorName("Company Logo Name Not Specified...");
+			errors.add(error);
+			return errors;
+		} else if (companyId.equals("")) {
+			error.setErrorName("Company Id Not Specified...");
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCompanyForDeleteMethod(String companyId) {
+		List<Error> errors = null;
+		if (companyId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Company Id Id Not Specified...");
 			// Initializing error list
 			errors = new ArrayList<>();
 			errors.add(error);

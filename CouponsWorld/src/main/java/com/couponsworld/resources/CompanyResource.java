@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.couponsworld.apiresults.ResultantComapny;
+import com.couponsworld.apiresults.ResultantCompany;
 import com.couponsworld.dto.Company;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
@@ -24,11 +24,11 @@ import com.couponsworld.utilities.GenerateLinkService;
 public class CompanyResource {
 	private List<Company> companies = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
-	private ResultantComapny resultantCompany;
+	private ResultantCompany resultantCompany;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantComapny getCompanies() {
+	public ResultantCompany getCompanies() {
 		try {
 
 			return CompanyService.getCompanies();
@@ -36,7 +36,7 @@ public class CompanyResource {
 		} catch (NullPointerException nle) {
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -56,7 +56,7 @@ public class CompanyResource {
 			return resultantCompany;
 		} catch (Exception exception) {
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -68,7 +68,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 			resultantCompany.setErrors(errors);
 			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
@@ -84,7 +84,7 @@ public class CompanyResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantComapny createCompany(Company company) {
+	public ResultantCompany createCompany(Company company) {
 		try {
 
 			return CompanyService.createCompany(company);
@@ -92,7 +92,7 @@ public class CompanyResource {
 		} catch (NullPointerException npe) {
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating company List to wrap the input Offer Object into it
 			companies = new ArrayList<Company>();
@@ -117,7 +117,7 @@ public class CompanyResource {
 		} catch (Exception exception) {
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating company List to wrap the input Offer Object into it
 			companies = new ArrayList<Company>();
@@ -133,7 +133,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 			resultantCompany.setErrors(errors);
 			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
@@ -148,14 +148,14 @@ public class CompanyResource {
 	@Path("/{companyId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ResultantComapny updateCompany(@PathParam("companyId") long companyId, Company company) {
+	public ResultantCompany updateCompany(@PathParam("companyId") long companyId, Company company) {
 		try {
 
 			return CompanyService.updateCompany(companyId, company);
 
 		} catch (NullPointerException npe) {
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating company List to wrap the input Offer Object into it
 			companies = new ArrayList<Company>();
@@ -180,7 +180,7 @@ public class CompanyResource {
 		} catch (Exception exception) {
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating company List to wrap the input Offer Object into it
 			companies = new ArrayList<Company>();
@@ -196,7 +196,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 			resultantCompany.setErrors(errors);
 			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);
@@ -210,13 +210,13 @@ public class CompanyResource {
 	@DELETE
 	@Path("/{companyId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantComapny deleteCompany(@PathParam("companyId") long companyId) {
+	public ResultantCompany deleteCompany(@PathParam("companyId") long companyId) {
 		try {
 
 			return CompanyService.deleteCompany(companyId);
 		} catch (NullPointerException npe) {
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -237,7 +237,7 @@ public class CompanyResource {
 		} catch (Exception exception) {
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
@@ -249,7 +249,7 @@ public class CompanyResource {
 			errors.add(error);
 
 			// creating resultantCompany Object
-			resultantCompany = new ResultantComapny();
+			resultantCompany = new ResultantCompany();
 			resultantCompany.setErrors(errors);
 			resultantCompany.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
 			resultantCompany.setStatus(Status.FAILURE);

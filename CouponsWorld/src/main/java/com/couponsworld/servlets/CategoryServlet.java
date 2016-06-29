@@ -33,7 +33,7 @@ public class CategoryServlet extends HttpServlet {
 	private String CONTENT_TYPE_JSON = "application/json";
 
 	// declaration of logger
-	private static final Logger log = Logger.getLogger(UserTypeServlet.class.getName());
+	private static final Logger log = Logger.getLogger(CategoryServlet.class.getName());
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

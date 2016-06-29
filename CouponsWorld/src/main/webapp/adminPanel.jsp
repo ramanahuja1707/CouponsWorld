@@ -7,10 +7,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 <title>Coupons World</title>
 </head>
-
-
 <body>
-
 	<%
 		if (session.getAttribute("username") == null && session.getAttribute("password") == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/notInSession.jsp");
@@ -18,5 +15,13 @@
 		}
 	%>
 	<jsp:include page="adminPanelHeader.jsp"></jsp:include>
+	<center>
+		<p
+			style="color: red; font-size: medium; font-style: italic; font-family: sans-serif;">
+			<%
+				out.println("Welcome ADMIN - Home Page");
+			%>
+		</p>
+	</center>
 </body>
 </html>

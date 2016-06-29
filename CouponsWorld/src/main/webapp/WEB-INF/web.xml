@@ -19,6 +19,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- Mapping of the Resource Servlets -->
 
 	<servlet>
 		<servlet-name>Coupon World Application</servlet-name>
@@ -91,6 +92,96 @@
 		<url-pattern>/categories</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>CompanyServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.CompanyServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CompanyServlet</servlet-name>
+		<url-pattern>/companies</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Mapping of the JSP Pages -->
+
+	<servlet>
+		<servlet-name>AddCompanyPage</servlet-name>
+		<jsp-file>/addCompany.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCompanyPage</servlet-name>
+		<url-pattern>/addCompany</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>AddCategoryPage</servlet-name>
+		<jsp-file>/addCategory.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCategoryPage</servlet-name>
+		<url-pattern>/addCategory</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>AddOfferPage</servlet-name>
+		<jsp-file>/addOffer.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddOfferPage</servlet-name>
+		<url-pattern>/addOffer</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddSubCategoryPage</servlet-name>
+		<jsp-file>/addSubCategory.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddSubCategoryPage</servlet-name>
+		<url-pattern>/addSubCategory</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddUsabilityStatusPage</servlet-name>
+		<jsp-file>/addUsabilityStatus.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddUsabilityStatusPage</servlet-name>
+		<url-pattern>/addUsabilityStatus</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddUserPlatformPage</servlet-name>
+		<jsp-file>/addUserPlatform.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddUserPlatformPage</servlet-name>
+		<url-pattern>/addUserPlatform</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddUserTypePage</servlet-name>
+		<jsp-file>/addUserType.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddUserTypePage</servlet-name>
+		<url-pattern>/addUserType</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Mapping of the JSP Pages -->
+
+	<!-- Mapping of the Admin Login & Logout Servlets -->
 
 	<servlet>
 		<servlet-name>AdminLoginAccessServlet</servlet-name>
