@@ -104,6 +104,17 @@
 	</servlet-mapping>
 
 
+	<servlet>
+		<servlet-name>GenerateOfferPageServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.GenerateOfferPageServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerateOfferPageServlet</servlet-name>
+		<url-pattern>/addOffer</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- Mapping of the JSP Pages -->
 
 	<servlet>
@@ -127,16 +138,6 @@
 		<url-pattern>/addCategory</url-pattern>
 	</servlet-mapping>
 
-
-	<servlet>
-		<servlet-name>AddOfferPage</servlet-name>
-		<jsp-file>/addOffer.jsp</jsp-file>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddOfferPage</servlet-name>
-		<url-pattern>/addOffer</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AddSubCategoryPage</servlet-name>

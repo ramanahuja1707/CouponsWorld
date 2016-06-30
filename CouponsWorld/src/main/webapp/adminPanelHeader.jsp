@@ -32,7 +32,11 @@
 
 					<div class="dropdown">
 						<ul>
-							<li><a href="addOffer">Add</a></li>
+							<li><form method="get" action="addOffer">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="submit" value="Add" />
+								</form>
+								</a></li>
 							<li><form method="get" action="offers">
 									<input type="text" value="GET" name="_method"
 										style="display: none;" /> <input type="submit"
