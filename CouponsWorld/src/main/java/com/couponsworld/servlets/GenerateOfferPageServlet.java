@@ -51,6 +51,10 @@ public class GenerateOfferPageServlet extends HttpServlet {
 				log.info("Fetching all Data required to load addOffer.jsp Page ...");
 				String accessId = session.getAttribute("accessId").toString();
 				String accessPlatform = session.getAttribute("accessPlatform").toString();
+
+				String allCategorySubCategoryMappings = GenerateOfferPageDataService
+						.getAllCategoriesSubCategoriesMapping(username, password, accessId, accessPlatform);
+
 				String allCompanies = GenerateOfferPageDataService.getAllCompanies(username, password, accessId,
 						accessPlatform);
 				String allCategories = GenerateOfferPageDataService.getAllCategories(username, password, accessId,
@@ -125,6 +129,16 @@ public class GenerateOfferPageServlet extends HttpServlet {
 					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorInLoadingOfferPage.jsp");
 					requestDispatcher.forward(req, resp);
 
+				} else if (allCategorySubCategoryMappings.equals("")) {
+					log.info("Required Data category sub category mappings Fetching Error Occured...FAILURE");
+					// setting the Status of Get method execution - Failure
+					req.setAttribute("status", Status.FAILURE);
+					req.setAttribute("errors", getErrorsList("Error in Fetching all category sub category mappings...",
+							Errors.GENERAL_ERROR.getErrorCode()));
+
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorInLoadingOfferPage.jsp");
+					requestDispatcher.forward(req, resp);
+
 				} else {
 					log.info("Required Data Fetched Successfully...");
 
@@ -136,10 +150,18 @@ public class GenerateOfferPageServlet extends HttpServlet {
 					req.setAttribute("allUsabilityStatuses", allUsabilityStatuses);
 					req.setAttribute("allUserPlatforms", allUserPlatforms);
 					req.setAttribute("allUserTypes", allUserTypes);
+					req.setAttribute("allCategorySubCategoryMappings", allCategorySubCategoryMappings);
 
-					log.info("Redirecting the control to load the addOffer.jsp Page...");
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addOffer.jsp");
-					requestDispatcher.forward(req, resp);
+					if (req.getParameter("_page").equals("addOffer.jsp")) {
+
+						log.info("Redirecting the control to load the addOffer.jsp Page...");
+						RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addOffer.jsp");
+						requestDispatcher.forward(req, resp);
+					} else if (req.getParameter("_page").equals("searchOffer.jsp")) {
+						log.info("Redirecting the control to load the searchOffer.jsp Page...");
+						RequestDispatcher requestDispatcher = req.getRequestDispatcher("/searchOffer.jsp");
+						requestDispatcher.forward(req, resp);
+					}
 
 				}
 

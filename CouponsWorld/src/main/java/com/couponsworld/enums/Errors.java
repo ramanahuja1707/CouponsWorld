@@ -20,7 +20,9 @@ public enum Errors {
 																							112L,
 																							"Username/Password Incorrect"), SESSION_EXPIRED_ERROR(
 																									113L,
-																									"Session Expired");
+																									"Session Expired"), CATEGORY_SUBCATEGORY_MAPPING_ERROR(
+																											114L,
+																											"Error related to Usability Status Occured");
 	;
 
 	// data member

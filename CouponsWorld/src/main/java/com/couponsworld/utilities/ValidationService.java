@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.couponsworld.apiresults.Error;
 import com.couponsworld.dto.Category;
+import com.couponsworld.dto.CategorySubCategoryMapping;
 import com.couponsworld.dto.Company;
+import com.couponsworld.dto.Offer;
 import com.couponsworld.dto.SubCategory;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
@@ -294,4 +296,49 @@ public class ValidationService {
 		}
 		return null;
 	}
+
+	public static List<Error> validateOfferForPostMethod(Offer offer) {
+		List<Error> errors = null;
+		if (false) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Ofer Cash back Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateOfferForDeleteMethod(String offerId) {
+		List<Error> errors = null;
+		if (offerId.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Offer Id Id Not Specified...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
+	public static List<Error> validateCategorySubCategoryMappingForPostMethod(
+			CategorySubCategoryMapping categorySubCategoryMapping) {
+		List<Error> errors = null;
+		if (categorySubCategoryMapping.getCategoryName().equals("")
+				|| categorySubCategoryMapping.getSubCategoryNames().equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Input supplied are missing category / subcategories ...");
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
 }

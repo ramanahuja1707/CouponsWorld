@@ -103,7 +103,7 @@
 				for (SubCategory subCategory : subCategories) {
 			%>
 			<input type="radio"
-				value="<%=subCategory.getSubCategoryName() + "-" + subCategory.getSubCategoryId()%>"
+				value="<%=subCategory.getSubCategoryName() + "#" + subCategory.getSubCategoryId()%>"
 				name="subCategorySelected" id="subCategorySelected" /> <input
 				type="text" style="visibility: hidden; display: none;"
 				value="<%subCategory.getSubCategoryId();%>"

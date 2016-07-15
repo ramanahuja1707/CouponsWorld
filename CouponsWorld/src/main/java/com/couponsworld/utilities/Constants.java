@@ -240,6 +240,40 @@ public class Constants {
 
 	// ----------------------------------------------------------------------------------------------
 
+	// getCategorySubCategoryMappings link object details
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING = "getCategorySubCategoryMappings";
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping";
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING_REL = "To create an CATEGORY SUBCATEGORY MAPPING in database";
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING_METHOD = "GET";
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String GET_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// createCategorySubCategoryMapping link object details
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING = "createCategorySubCategoryMapping";
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping";
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING_REL = "To get all CATEGORY SUBCATEGORY MAPPING from database";
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING_METHOD = "POST";
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String CREATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// updateCategorySubCategoryMapping link object details
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING = "updateCategorySubCategoryMapping";
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping/<categorySubCategoryMappingId>";
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING_REL = "To update a particular CATEGORY SUBCATEGORY MAPPING  in database";
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING_METHOD = "PUT";
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES = "APPLICATION_JSON";
+	public static final String UPDATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// deleteCategorySubCategoryMapping link object details
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING = "deleteCategorySubCategoryMapping";
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING_HREF = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping/<categorySubCategoryMappingId>";
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING_REL = "To delete a particular category SubCategory Mapping from database";
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING_METHOD = "DELETE";
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES = "TEXT_HTML";
+	public static final String DELETE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES = "APPLICATION_JSON";
+
+	// ----------------------------------------------------------------------------------------------------------
+
 	// authentication password for web api
 	public final static String AUTH_PASSWORD = "garr.innovate";
 	// Authentication username for web API
@@ -268,6 +302,12 @@ public class Constants {
 	// URL OF REST-API
 	public static final String COMPANY_URL = "http://1.couponsworld-1707.appspot.com/webapi/companies";
 
+	// URL OF REST-API
+	public static final String OFFER_URL = "http://1.couponsworld-1707.appspot.com/webapi/offers";
+
+	// URL OF REST-API
+	public static final String CATEGORY_SUBCATEGORY_MAPPING_URL = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping";
+
 	// Access Id OF REST-API
 	public static final String ADMIN_ACCESS_ID = "ADMIN";
 
@@ -279,6 +319,16 @@ public class Constants {
 
 	// ACCESS PLATFORM OF REST-API
 	public static final String ANDROID_ACCESS_PLATFORM = "ANDROID";
+
+	// static values of the id's of the entities
+	public static long OFFER_NO = 0L;
+	public static long CATEGORY_NO = 0L;
+	public static long COMPANY_NO = 0L;
+	public static long SUBCATEGORY_NO = 0L;
+	public static long USABILITYSTATUS_NO = 0L;
+	public static long USERTYPE_NO = 0L;
+	public static long USERPLATFORM_NO = 0L;
+	public static long CATEGORYSUBCATEGORYMAPPING_NO = 0L;
 
 	// URL PROPERTIES
 	public static final boolean DO_OUTPUT_FLAG_TRUE = true;

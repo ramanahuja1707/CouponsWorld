@@ -3,8 +3,10 @@ package com.couponsworld.database;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.couponsworld.dto.Category;
+import com.couponsworld.dto.CategorySubCategoryMapping;
 import com.couponsworld.dto.Company;
 import com.couponsworld.dto.Offer;
 import com.couponsworld.dto.SubCategory;
@@ -12,15 +14,23 @@ import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
 import com.couponsworld.exceptions.CategoryException;
+import com.couponsworld.exceptions.CategorySubCategoryMappingException;
 import com.couponsworld.exceptions.CompanyException;
 import com.couponsworld.exceptions.OfferException;
 import com.couponsworld.exceptions.SubCategoryException;
 import com.couponsworld.exceptions.UsabilityStatusException;
 import com.couponsworld.exceptions.UserPlatformException;
 import com.couponsworld.exceptions.UserTypeException;
+import com.couponsworld.servlets.CategorySubCategoryMappingServlet;
+import com.couponsworld.utilities.Constants;
+import com.google.api.server.spi.Constant;
 import com.googlecode.objectify.ObjectifyService;
 
 public class DatabaseService {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(DatabaseService.class.getName());
+
 	static {
 		// Registeration of the entities (dto's)
 		ObjectifyService.register(Offer.class);
@@ -30,16 +40,82 @@ public class DatabaseService {
 		ObjectifyService.register(UsabilityStatus.class);
 		ObjectifyService.register(UserPlatform.class);
 		ObjectifyService.register(UserType.class);
+		ObjectifyService.register(CategorySubCategoryMapping.class);
 	}
 
-	private static long offerNo = 0L;
-	private static long categoryNo = 0L;
-	private static long companyNo = 0L;
-	private static long subCategoryNo = 0L;
-	private static long usabilityStatusNo = 0L;
-	private static long userPlatformNo = 0L;
-	private static long userTypeNo = 0L;
+	public static long offerNo = Constants.OFFER_NO;
+	public static long categoryNo = Constants.CATEGORY_NO;
+	public static long companyNo = Constants.COMPANY_NO;
+	public static long subCategoryNo = Constants.SUBCATEGORY_NO;
+	public static long usabilityStatusNo = Constants.USABILITYSTATUS_NO;
+	public static long userPlatformNo = Constants.USERPLATFORM_NO;
+	public static long userTypeNo = Constants.USERTYPE_NO;
+	public static long categorySubCategoryMappingId = Constants.CATEGORYSUBCATEGORYMAPPING_NO;
 
+	public static CategorySubCategoryMapping createCategorySubCategoryMappingInDatabase(
+			CategorySubCategoryMapping categorySubCategoryMapping) throws Exception {
+		try {
+
+			categorySubCategoryMapping.setCategorySubCategoryMappingId(++categorySubCategoryMappingId);
+			ofy().save().entity(categorySubCategoryMapping);
+			return categorySubCategoryMapping;
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static CategorySubCategoryMapping updateCategorySubCategoryMappingInDatabase(
+			long categorySubCategoryMappingId, CategorySubCategoryMapping categorySubCategoryMapping)
+			throws CategorySubCategoryMappingException, Exception {
+		try {
+			CategorySubCategoryMapping categorySubCategoryMappingRetreivedFromDatabase = ofy().load()
+					.type(CategorySubCategoryMapping.class).id(categorySubCategoryMappingId).now();
+			if (categorySubCategoryMappingRetreivedFromDatabase != null) {
+				categorySubCategoryMapping.setCategorySubCategoryMappingId(categorySubCategoryMappingId);
+				ofy().delete().entities(categorySubCategoryMappingRetreivedFromDatabase).now();
+				ofy().save().entity(categorySubCategoryMapping).now();
+				return categorySubCategoryMapping;
+			} else {
+				throw new CategorySubCategoryMappingException(
+						"Category Sub Category Mapping not existing with Id : " + categorySubCategoryMappingId);
+			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static List<CategorySubCategoryMapping> getCategorySubCategoryMappingsFromDatabase()
+			throws CategorySubCategoryMappingException, Exception {
+		try {
+			List<CategorySubCategoryMapping> categorySubCategoryMappingRetreivedFromDatabase = ofy().load()
+					.type(CategorySubCategoryMapping.class).list();
+			// if (offersRetreivedFromDatabase.size() != 0) {
+
+			return categorySubCategoryMappingRetreivedFromDatabase;
+			// }
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static CategorySubCategoryMapping deleteCategorySubCategoryMappingFromDatabase(
+			long categorySubCategoryMappingId) throws CategorySubCategoryMappingException, Exception {
+		try {
+			CategorySubCategoryMapping categorySubCategoryMappingRetreivedFromDatabase = ofy().load()
+					.type(CategorySubCategoryMapping.class).id(categorySubCategoryMappingId).now();
+			if (categorySubCategoryMappingRetreivedFromDatabase != null) {
+				ofy().delete().entities(categorySubCategoryMappingRetreivedFromDatabase).now();
+				return categorySubCategoryMappingRetreivedFromDatabase;
+			} else {
+				throw new CategorySubCategoryMappingException(
+						"Category Sub Category Mapping not existing with Id : " + categorySubCategoryMappingId);
+			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	// ----------------------------------------------------------------------------------------------------------
 	public static Offer createOfferInDatabase(Offer offer) throws Exception {
 		try {
 
@@ -73,6 +149,49 @@ public class DatabaseService {
 			// if (offersRetreivedFromDatabase.size() != 0) {
 
 			return offersRetreivedFromDatabase;
+			// }
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static List<Offer> getOffersFromDatabase(String company, String category, String subCategory,
+			String userType, String userPlatform, String usabilityStatus, String cashBackMode, String offerType)
+			throws OfferException, Exception {
+		try {
+			com.googlecode.objectify.cmd.Query<Offer> offersRetreivedFromDatabaseQuery = ofy().load().type(Offer.class);
+			if (!(category.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("category", category);
+			}
+			if (!(company.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("company", company);
+			}
+			if (!(subCategory.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("subCategory", subCategory);
+			}
+			if (!(userType.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("userType", userType);
+			}
+			if (!(userPlatform.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("userPlatform",
+						userPlatform);
+			}
+			if (!(usabilityStatus.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("usabilityStatus",
+						usabilityStatus);
+			}
+			if (!(cashBackMode.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("cashBackMode",
+						cashBackMode);
+			}
+			if (!(offerType.equals(""))) {
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("offerType", offerType);
+			}
+			List<Offer> offersRetreivedFromDatabaseList = offersRetreivedFromDatabaseQuery.list();
+
+			// if (offersRetreivedFromDatabase.size() != 0) {
+
+			return offersRetreivedFromDatabaseList;
 			// }
 		} catch (Exception exception) {
 			throw exception;

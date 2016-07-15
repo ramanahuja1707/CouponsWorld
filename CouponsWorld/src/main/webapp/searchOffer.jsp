@@ -1,6 +1,3 @@
-<%@page import="com.couponsworld.dto.CategorySubCategoryMapping"%>
-<%@page
-	import="com.couponsworld.apiresults.ResultantCategorySubCategoryMapping"%>
 <%@page import="com.couponsworld.enums.OfferTypeEnum"%>
 <%@page import="com.couponsworld.enums.CashBackMode"%>
 <%@page import="com.couponsworld.dto.UsabilityStatus"%>
@@ -58,6 +55,15 @@
 								.fromJson(request.getAttribute("allCompanies").toString(), ResultantCompany.class);
 						List<Company> allCompanies = (ArrayList<Company>) resultantCompany.getCompanies();
 
+						//out.println(resultantCompany.getCompanies().get(0).getCompanyName());
+						ResultantCategory resultantCategory = gson
+								.fromJson(request.getAttribute("allCategories").toString(), ResultantCategory.class);
+						List<Category> allCategories = (ArrayList<Category>) resultantCategory.getCategories();
+
+						ResultantSubCategory resultantSubCategory = gson.fromJson(
+								request.getAttribute("allSubCategories").toString(), ResultantSubCategory.class);
+						List<SubCategory> allSubCategories = resultantSubCategory.getSubCategories();
+
 						ResultantUserType resultantUserType = gson
 								.fromJson(request.getAttribute("allUserTypes").toString(), ResultantUserType.class);
 						List<UserType> allUserTypes = resultantUserType.getUserType();
@@ -70,23 +76,18 @@
 								request.getAttribute("allUsabilityStatuses").toString(),
 								ResultantUsabilityStatus.class);
 						List<UsabilityStatus> allUsabilityStatuses = resultantUsabilityStatus.getUsabilityStatus();
-
-						ResultantCategorySubCategoryMapping resultantCategorySubCategoryMapping = gson.fromJson(
-								request.getAttribute("allCategorySubCategoryMappings").toString(),
-								ResultantCategorySubCategoryMapping.class);
-						List<CategorySubCategoryMapping> allCategorySubCategoryMappings = resultantCategorySubCategoryMapping
-								.getCategorySubCategoryMappings();
 		%>
 		<br /> <br />
 
-		<form action="offers" method="post">
-			Select the Offer Type : <select name="offerType">
-
+		<form action="offers" method="get">
+			<input type="text" style="visibility: hidden; display: none;"
+				value="GET" name="_method"> Select the Offer Type : <select
+				name="offerType">
 				<option value="<%=OfferTypeEnum.CASHBACK.getOfferTypeName()%>"><%=OfferTypeEnum.CASHBACK.getOfferTypeName()%></option>
 				<option value="<%=OfferTypeEnum.DEAL.getOfferTypeName()%>"><%=OfferTypeEnum.DEAL.getOfferTypeName()%></option>
 				<option value="<%=OfferTypeEnum.DISCOUNT.getOfferTypeName()%>"><%=OfferTypeEnum.DISCOUNT.getOfferTypeName()%></option>
 				<option value="" selected="selected"></option>
-			</select><br /> <br /> Select the company : <select name="company">
+			</select><br /> <br />Select the company : <select name="company">
 				<%
 					if (resultantCompany.getCompanies() != null) {
 									for (Company company : resultantCompany.getCompanies()) {
@@ -100,39 +101,35 @@
 								}
 				%>
 				<option value="" selected="selected"></option>
-			</select><br /> <br /> Select A Sub Category<select name="category"
-				style="width: 150px">
+			</select><br /> <br />Select the category : <select name="category">
 				<%
-					if (resultantCategorySubCategoryMapping.getCategorySubCategoryMappings() != null) {
-									for (CategorySubCategoryMapping categorySubCategoryMapping : allCategorySubCategoryMappings) {
+					if (resultantCategory.getCategories() != null) {
+									for (Category category : resultantCategory.getCategories()) {
 										//out.println(category.getCategoryName());
 				%>
-				<option value="<%=categorySubCategoryMapping.getCategoryName()%>">
-					<%=categorySubCategoryMapping.getCategoryName()%>
+				<option value="<%=category.getCategoryName()%>">
+					<%=category.getCategoryName()%>
 				</option>
 				<%
 					}
 								}
 				%>
 				<option value="" selected="selected"></option>
-			</select>Select A Sub Category <select name="subCategory" style="width: 150px">
+			</select> <br /> <br />Select the Sub Category : <select name="subCategory">
 				<%
-					if (resultantCategorySubCategoryMapping.getCategorySubCategoryMappings() != null) {
-									for (CategorySubCategoryMapping categorySubCategoryMapping : allCategorySubCategoryMappings) {
+					if (resultantSubCategory.getSubCategories() != null) {
+									for (SubCategory subCategory : resultantSubCategory.getSubCategories()) {
 										//out.println(category.getCategoryName());
-										String[] subCategoryNames = categorySubCategoryMapping.getSubCategoryNames().split(",");
-										for (int j = 0; j < subCategoryNames.length; j++) {
 				%>
-				<option value="<%=subCategoryNames[j]%>">
-					<%=categorySubCategoryMapping.getCategoryName() + "-" + subCategoryNames[j]%>
+				<option value="<%=subCategory.getSubCategoryName()%>">
+					<%=subCategory.getSubCategoryName()%>
 				</option>
 				<%
 					}
-									}
 								}
 				%>
 				<option value="" selected="selected"></option>
-			</select><br /> <br />Select the User Type : <select name="userType">
+			</select> <br /> <br />Select the User Type : <select name="userType">
 				<%
 					if (resultantUserType.getUserType() != null) {
 									for (UserType userType : resultantUserType.getUserType()) {
@@ -176,10 +173,8 @@
 								}
 				%>
 				<option value="" selected="selected"></option>
-			</select> <br /> <br />Enter the minimum offer Amount :<input type="text"
-				name="minimumAmount"><br /> <br /> Enter the cashback : <input
-				type="text" name="cashBack"> <br /> <br /> Select the
-			cashBackMode : <select name="cashBackMode">
+			</select> <br /> <br /> Select the cashBackMode : <select
+				name="cashBackMode">
 				<option value="<%=CashBackMode.PERCENTAGE.getCashBackModeName()%>">
 					<%=CashBackMode.PERCENTAGE.getCashBackModeName()%>
 				</option>
@@ -187,47 +182,27 @@
 					<%=CashBackMode.AMOUNT.getCashBackModeName()%>
 				</option>
 				<option value="" selected="selected"></option>
-			</select> <br /> <br />Enter the description :
-			<textarea cols="80" rows="10" name="description"></textarea>
-			<br /> <br /> Enter the termsAndConditions :
-			<textarea cols="80" rows="10" name="termsAndConditions"></textarea>
-			<br /> <br /> Enter the promoCode :<input type="text"
-				name="promoCode"> <br /> <br /> Enter the startDate :<input
-				type="date" name="startDate"> <br /> <br /> Enter the
-			expiryDate :<input type="date" name="expiryDate"> <br /> <br />
-			Enter the extraOfferReference :<input type="text"
-				name="extraOfferReference"> <br /> <br /> Enter the
-			totalExtraOffers :<input type="text" name="totalExtraOffers">
-			<br /> <br /> Enter the restrictions :
-			<textarea cols="80" rows="10" name="restrictions"></textarea>
-			<br /> <br /> Enter the Catchy Heading :
-			<textarea cols="80" rows="10" name="catchyHeading"></textarea>
-			<br /> <br /> Enter the maximumCashBack :<input type="text"
-				name="maximumCashBack"> <br /> <br /> <input type="submit"
-				value="Add Offer">
+			</select> <br /> <br /> <input type="submit" value="Search Offer">
 		</form>
-
-
-
-	</center>
-	<center>
-		<form name="classic"></form>
-	</center>
-
-	<%
-		} else if (request.getAttribute("errors") != null) {
-					List<Error> errors = (ArrayList<Error>) request.getAttribute("errors");
-					for (Error e : errors) {
-						out.println(e.getErrorName());
+		<br /> <br /> <input type="button" value="clear">
+		<%
+			} else if (request.getAttribute("errors") != null) {
+						List<Error> errors = (ArrayList<Error>) request.getAttribute("errors");
+						for (Error e : errors) {
+							out.println(e.getErrorName());
+						}
 					}
 				}
+				request.removeAttribute("status");
+				request.removeAttribute("errors");
+			} catch (Exception e) {
+				out.println(e.getMessage());
+				e.printStackTrace();
 			}
-			request.removeAttribute("status");
-			request.removeAttribute("errors");
-		} catch (Exception e) {
-			out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	%>
+		%>
+
+
+	</center>
+
 </body>
 </html>

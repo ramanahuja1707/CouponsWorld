@@ -2,30 +2,66 @@ package com.couponsworld.dto;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Offer {
 
+	// Mandatory Param - M
+	// Optional Parameters - O
+
 	@Id
-	private long offerId;
-	private String category;
-	private String company;
-	private long cashBack;
-	private String cashBackMode;
-	private String description;
-	private String termsAndConditions;
-	private String promoCode;
-	private String startDate;
-	private String expiryDate;
-	private String extraOfferReference;
-	private long totalExtraOffers;
-	private String restrictions;
-	private String userType;
-	private String userPlatform;
-	private String usabilityStatus;
-	private String catchyHeading;
-	private String subCategory;
-	private long maximumCashBack;
+	private long offerId; // M
+	@Index
+	private String offerType;
+	@Index
+	private String category; // M
+	@Index
+	private String company; // M
+	private long cashBack; // M
+	@Index
+	private long minimumAmount;
+	@Index
+	private String cashBackMode; // M
+	private String description; // M
+	private String termsAndConditions; // O
+	@Index
+	private String promoCode; // O
+	@Index
+	private String startDate; // M
+	@Index
+	private String expiryDate; // M
+	private String extraOfferReference; // O
+	private long totalExtraOffers; // O
+	private String restrictions; // O
+	@Index
+	private String userType; // M
+	@Index
+	private String userPlatform; // M
+	@Index
+	private String usabilityStatus; // M
+	private String catchyHeading; // O
+	@Index
+	private String subCategory; // M4
+	@Index
+	private long maximumCashBack; // depend upon condition if
+									// cashBackMode=PERCENTAGE
+
+	public long getMinimumAmount() {
+		return minimumAmount;
+	}
+
+	public void setMinimumAmount(long minimumAmount) {
+		this.minimumAmount = minimumAmount;
+	}
+
+	public String getOfferType() {
+		return offerType;
+	}
+
+	public void setOfferType(String offerType) {
+		this.offerType = offerType;
+	}
 
 	public long getOfferId() {
 		return offerId;

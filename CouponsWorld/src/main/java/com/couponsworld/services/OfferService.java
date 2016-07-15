@@ -242,6 +242,86 @@ public class OfferService {
 		return resultantOffer;
 	}
 
+	public static ResultantOffer getOffers(String company, String category, String subCategory, String userType,
+			String userPlatform, String usabilityStatus, String cashBackMode, String offerType) {
+		try {
+			Object returnedObject = DatabaseService.getOffersFromDatabase(company, category, subCategory, userType,
+					userPlatform, usabilityStatus, cashBackMode, offerType);
+			if (returnedObject instanceof Exception) {
+				// Creating Error for updating Offer
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+				error.setErrorName(((Exception) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
+				errors.add(error);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.FAILURE);
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
+			} else if (returnedObject instanceof OfferException) {
+
+				// Creating Error for updating Offer
+				com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+				error.setErrorCode(Errors.OFFER_ERROR.getErrorCode());
+				error.setErrorName(((OfferException) returnedObject).getMessage());
+
+				// wrapping the error into errors list
+				errors = new ArrayList<com.couponsworld.apiresults.Error>();
+				errors.add(error);
+
+				// offer does not created and error returned....
+				// Creating ResultantOffer object
+				resultantOffer = new ResultantOffer();
+				resultantOffer.setOffers(offers);
+				resultantOffer.setErrors(errors);
+				resultantOffer.setStatus(Status.FAILURE);
+				resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
+			} else {
+
+				if (((List<Offer>) returnedObject).size() > 0) {
+
+					resultantOffer = new ResultantOffer();
+					resultantOffer.setOffers((List<Offer>) returnedObject);
+					resultantOffer.setErrors(errors);
+					resultantOffer.setStatus(Status.SUCCESS);
+					resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
+				} else {
+					resultantOffer = new ResultantOffer();
+					resultantOffer.setOffers(offers);
+					resultantOffer.setErrors(errors);
+					resultantOffer.setStatus(Status.SUCCESS);
+					resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
+				}
+			}
+		} catch (Exception e) {
+			// Creating Error for updating Offer
+			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
+			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
+			error.setErrorName(e.getMessage());
+
+			// wrapping the error into errors list
+			errors = new ArrayList<com.couponsworld.apiresults.Error>();
+			errors.add(error);
+
+			resultantOffer = new ResultantOffer();
+			resultantOffer.setOffers(offers);
+			resultantOffer.setErrors(errors);
+			resultantOffer.setStatus(Status.FAILURE);
+			resultantOffer.setLinks(GenerateLinkService.mapOfLinks.get("getOffers"));
+			offers = null;
+			errors = null;
+		}
+		offers = null;
+		errors = null;
+		return resultantOffer;
+	}
+
 	public static ResultantOffer deleteOffer(long offerId) {
 		try {
 			Object returnedObject = DatabaseService.deleteOfferFromDatabase(offerId);

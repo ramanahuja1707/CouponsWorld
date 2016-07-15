@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="style.css" />
 <title>Coupons World</title>
 </head>
 <body>
@@ -32,15 +33,17 @@
 
 					<div class="dropdown">
 						<ul>
-							<li><form method="get" action="addOffer">
+							<li><form method="get" action="OfferPage">
 									<input type="text" value="GET" name="_method"
-										style="display: none;" /> <input type="submit" value="Add" />
-								</form>
-								</a></li>
-							<li><form method="get" action="offers">
+										style="display: none;" /> <input type="text"
+										value="addOffer.jsp" name="_page" style="display: none;" /><input
+										type="submit" value="Add" />
+								</form></li>
+							<li><form method="get" action="OfferPage">
 									<input type="text" value="GET" name="_method"
-										style="display: none;" /> <input type="submit"
-										value="display" />
+										style="display: none;" /><input type="text"
+										value="searchOffer.jsp" name="_page" style="display: none;" />
+									<input type="submit" value="display" />
 								</form></li>
 						</ul>
 					</div></li>
@@ -112,9 +115,33 @@
 								</form></li>
 						</ul>
 					</div></li>
+				<li><a href="#">Map Categories</a>
+					<div class="dropdown">
+						<ul>
+							<li><form method="get"
+									action="CategorySubCategoryMappingPage">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="text"
+										value="addCategorySubCategoryMapping.jsp" name="_page"
+										style="display: none;" /><input type="submit" value="Add" />
+								</form></li>
+
+							<li><form method="get" action="#">
+									<input type="text" value="GET" name="_method"
+										style="display: none;" /> <input type="text"
+										value="addOffer.jsp" name="_page" style="display: none;" /><input
+										type="submit" value="Add" />
+								</form></li>
+						</ul>
+					</div></li>
 			</ul>
 			</nav>
 		</div>
 	</div>
+	<center>
+		<p style="color: red;">
+			<b> NOTE : Dont Use "-" in any insertion of data</b>
+		</p>
+	</center>
 </body>
 </html>

@@ -9,6 +9,12 @@ import com.couponsworld.apiresults.Link;
 
 public class GenerateLinkService {
 
+	// CategorySubCategoryMapping CRUD Links
+	private static Link getCategorySubCategoryMapping_Link = null;
+	private static Link createCategorySubCategoryMapping_Link = null;
+	private static Link updateCategorySubCategoryMapping_Link = null;
+	private static Link deleteCategorySubCategoryMapping_Link = null;
+
 	// Offer CRUD Links
 	private static Link getOffers_Link = null;
 	private static Link createOffer_Link = null;
@@ -59,6 +65,7 @@ public class GenerateLinkService {
 	private static List<Link> usabilityStatusLinks = null;
 	private static List<Link> userTypeLinks = null;
 	private static List<Link> userPlatformLinks = null;
+	private static List<Link> categorySubCategoryMappingLinks = null;
 	public static Map<String, List<Link>> mapOfLinks = null;
 
 	// private static List<Link> exceptionLinks = null;
@@ -300,6 +307,52 @@ public class GenerateLinkService {
 		deleteUserType_Link.setMethod(Constants.DELETEUSERTYPE_METHOD);
 		deleteUserType_Link.setRel(Constants.DELETEUSERTYPE_REL);
 
+		// ----------------------------------------------------------------------------------------------------------------------------------
+
+		// creating the getCategorySubCategoryMapping_Link object
+		getCategorySubCategoryMapping_Link = new Link();
+		getCategorySubCategoryMapping_Link
+				.setContentTypeConsumes(Constants.GET_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES);
+		getCategorySubCategoryMapping_Link
+				.setContentTypeProduces(Constants.GET_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES);
+		getCategorySubCategoryMapping_Link.setHref(Constants.GET_CATEGORY_SUBCATEGORY_MAPPING_HREF);
+		getCategorySubCategoryMapping_Link.setMethod(Constants.GET_CATEGORY_SUBCATEGORY_MAPPING_METHOD);
+		getCategorySubCategoryMapping_Link.setRel(Constants.GET_CATEGORY_SUBCATEGORY_MAPPING_REL);
+
+		// creating the createCategorySubCategoryMappingr_Link object
+		createCategorySubCategoryMapping_Link = new Link();
+		createCategorySubCategoryMapping_Link
+				.setContentTypeConsumes(Constants.CREATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES);
+		createCategorySubCategoryMapping_Link
+				.setContentTypeProduces(Constants.CREATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES);
+		createCategorySubCategoryMapping_Link.setHref(Constants.CREATE_CATEGORY_SUBCATEGORY_MAPPING_HREF);
+		createCategorySubCategoryMapping_Link.setMethod(Constants.CREATE_CATEGORY_SUBCATEGORY_MAPPING_METHOD);
+		createCategorySubCategoryMapping_Link.setRel(Constants.CREATE_CATEGORY_SUBCATEGORY_MAPPING_REL);
+
+		// creating the updateCategorySubCategoryMapping_Link object
+		updateCategorySubCategoryMapping_Link = new Link();
+		updateCategorySubCategoryMapping_Link
+				.setContentTypeConsumes(Constants.UPDATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES);
+		updateCategorySubCategoryMapping_Link
+				.setContentTypeProduces(Constants.UPDATE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES);
+		updateCategorySubCategoryMapping_Link.setHref(Constants.UPDATE_CATEGORY_SUBCATEGORY_MAPPING_HREF);
+		updateCategorySubCategoryMapping_Link.setMethod(Constants.UPDATE_CATEGORY_SUBCATEGORY_MAPPING_METHOD);
+		updateCategorySubCategoryMapping_Link.setRel(Constants.UPDATE_CATEGORY_SUBCATEGORY_MAPPING_REL);
+
+		// creating the deleteOffer_Link object
+		deleteCategorySubCategoryMapping_Link = new Link();
+		deleteCategorySubCategoryMapping_Link
+				.setContentTypeConsumes(Constants.DELETE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_CONSUMES);
+		deleteCategorySubCategoryMapping_Link
+				.setContentTypeProduces(Constants.DELETE_CATEGORY_SUBCATEGORY_MAPPING_CONTENT_TYPE_PRODUCES);
+		deleteCategorySubCategoryMapping_Link.setHref(Constants.DELETE_CATEGORY_SUBCATEGORY_MAPPING_HREF);
+		deleteCategorySubCategoryMapping_Link.setMethod(Constants.DELETE_CATEGORY_SUBCATEGORY_MAPPING_METHOD);
+		deleteCategorySubCategoryMapping_Link.setRel(Constants.DELETE_CATEGORY_SUBCATEGORY_MAPPING_REL);
+
+		// ----------------------------------------------------------------------------------------------------------------------------------
+
+		// ------------------------------------Mapping of the
+		// links----------------------------------------------------------
 		mapOfLinks = new HashMap<>();
 
 		// map with all the links
@@ -351,6 +404,17 @@ public class GenerateLinkService {
 		mapOfLinks.put("getUserPlatforms", GenerateLinkService.generateUserPlatformLink("getUserPlatforms"));
 		mapOfLinks.put("updateUserPlatform", GenerateLinkService.generateUserPlatformLink("updateUserPlatform"));
 		mapOfLinks.put("deleteUserPlatform", GenerateLinkService.generateUserPlatformLink("deleteUserPlatform"));
+
+		// ------------------------------------------------------------------------------------------------------
+
+		mapOfLinks.put("createCategorySubCategoryMapping",
+				GenerateLinkService.generateUserPlatformLink("createCategorySubCategoryMapping"));
+		mapOfLinks.put("getCategorySubCategoryMappings",
+				GenerateLinkService.generateUserPlatformLink("getCategorySubCategoryMappings"));
+		mapOfLinks.put("updateCategorySubCategoryMapping",
+				GenerateLinkService.generateUserPlatformLink("updateCategorySubCategoryMapping"));
+		mapOfLinks.put("deleteCategorySubCategoryMapping",
+				GenerateLinkService.generateUserPlatformLink("deleteCategorySubCategoryMapping"));
 
 		// ------------------------------------------------------------------------------------------------------
 
@@ -419,6 +483,14 @@ public class GenerateLinkService {
 		return userTypeLinks;
 	}
 
+	public static List<Link> generateCategorySubCategoryMappingLink(String methodName) {
+		categorySubCategoryMappingLinks = new ArrayList<Link>();
+		categorySubCategoryMappingLinks.add(createCategorySubCategoryMapping_Link);
+		categorySubCategoryMappingLinks.add(getCategorySubCategoryMapping_Link);
+		categorySubCategoryMappingLinks.add(updateCategorySubCategoryMapping_Link);
+		categorySubCategoryMappingLinks.add(deleteCategorySubCategoryMapping_Link);
+		return categorySubCategoryMappingLinks;
+	}
 	/*
 	 * public static List<Link> generateExceptionLinkw(String methodName) {
 	 * exceptionLinks = new ArrayList<Link>();

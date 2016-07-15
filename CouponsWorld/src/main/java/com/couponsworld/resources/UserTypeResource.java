@@ -35,47 +35,61 @@ public class UserTypeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUserType getUserTypes() {
 		try {
-			log.info("enetered into get method of resource class of REST API...");
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			log.info("User Type GET Resource fetched Successfully..");
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 			return UserTypeService.getUserTypes();
-		} catch (NullPointerException npe) {
 
+		} catch (NullPointerException npe) {
+			log.info("NullPointerException in the get method");
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
 			// creating the error getting
+			log.info("Creating Error getting");
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Generating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
+			log.info("UserType:" + resultantUserType.getUserType());
 			errors = null;
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 			return resultantUserType;
 		} catch (Exception exception) {
-
+			log.info("Exception Caught in Get Method UserTypeResource" + exception.getMessage());
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("getUserTypes"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
+			log.info("UserType:" + resultantUserType.getUserType());
 			errors = null;
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		}
 
@@ -86,52 +100,65 @@ public class UserTypeResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantUserType createUserType(UserType userType) {
 		try {
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ POST-UserTypeResource-START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			log.info("User Type POST Resource executed Successfully..");
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ POST-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 			return UserTypeService.createUserType(userType);
 		} catch (NullPointerException npe) {
-
+			log.info("Null pointer Exception in  the post method ");
 			userTypes = new ArrayList<UserType>();
 			userTypes.add(userType);
 
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 			errors = null;
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ POST-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		} catch (Exception exception) {
-
+			log.info("Exception Caught in Post Method UserTypeResource" + exception.getMessage());
 			userTypes = new ArrayList<UserType>();
 			userTypes.add(userType);
 
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("createUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 			errors = null;
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ POST-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		}
 	}
@@ -142,51 +169,67 @@ public class UserTypeResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantUserType updateUserType(@PathParam("userTypeId") long userTypeId, UserType userType) {
 		try {
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PUT-UserTypeResource-START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			log.info("User Type PUT Resource executed Successfully..");
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PUT-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			log.info("Entered into the PUT method of rest api");
 			return UserTypeService.updateUserType(userTypeId, userType);
 		} catch (NullPointerException npe) {
+			log.info("Null pointer Exception in  the put method ");
 			userTypes = new ArrayList<UserType>();
 			userTypes.add(userType);
 
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 			errors = null;
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PUT-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		} catch (Exception exception) {
-
+			log.info("Exception Caught in Put Method UserTypeResource" + exception.getMessage());
 			userTypes = new ArrayList<UserType>();
 			userTypes.add(userType);
 
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("updateUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
 			errors = null;
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
+			errors = null;
+			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PUT-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		}
 	}
@@ -196,28 +239,38 @@ public class UserTypeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUserType deleteUserType(@PathParam("userTypeId") long userTypeId) {
 		try {
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ DELETE-UserTypeResource-START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			log.info("User Type DELETE Resource executed Successfully..");
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ DELETE-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 			return UserTypeService.deleteUserType(userTypeId);
 		} catch (NullPointerException npe) {
+			log.info("Null pointer Exception in  the DELETE method ");
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
-
+			log.info("Creating Error getting");
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks((GenerateLinkService.mapOfLinks.get("deleteUserType")));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 			errors = null;
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ DELETE-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 			return resultantUserType;
 		} catch (Exception exception) {
-
+			log.info("Exception Caught in DELETE Method UserTypeResource" + exception.getMessage());
 			// creating resultantUserType Object
 			resultantUserType = new ResultantUserType();
 
@@ -225,16 +278,21 @@ public class UserTypeResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Creating Error list");
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
-
+			log.info("Error List Creation Success");
 			resultantUserType.setErrors(errors);
 			resultantUserType.setLinks(GenerateLinkService.mapOfLinks.get("deleteUserType"));
 			resultantUserType.setStatus(Status.FAILURE);
 			resultantUserType.setUserType(userTypes);
+			log.info("errors :" + errors.toString());
+			log.info("status : " + Status.FAILURE);
 			errors = null;
+			log.info(
+					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ DELETE-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 			return resultantUserType;
 		}
 

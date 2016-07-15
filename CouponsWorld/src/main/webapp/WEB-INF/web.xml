@@ -36,6 +36,8 @@
 	</servlet-mapping>
 
 
+
+
 	<servlet>
 		<servlet-name>UserTypeServlet</servlet-name>
 		<servlet-class>com.couponsworld.servlets.UserTypeServlet</servlet-class>
@@ -111,9 +113,42 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>GenerateOfferPageServlet</servlet-name>
-		<url-pattern>/addOffer</url-pattern>
+		<url-pattern>/OfferPage</url-pattern>
 	</servlet-mapping>
 
+
+
+
+	<servlet>
+		<servlet-name>OfferServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.OfferServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OfferServlet</servlet-name>
+		<url-pattern>/offers</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>GenerateCategorySubCategoryMappingPageServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.GenerateCategorySubCategoryMappingPageServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerateCategorySubCategoryMappingPageServlet</servlet-name>
+		<url-pattern>/CategorySubCategoryMappingPage</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CategorySubCategoryMappingServlet</servlet-name>
+		<servlet-class>com.couponsworld.servlets.CategorySubCategoryMappingServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategorySubCategoryMappingServlet</servlet-name>
+		<url-pattern>/categorySubCategoryMapping</url-pattern>
+	</servlet-mapping>
 
 	<!-- Mapping of the JSP Pages -->
 

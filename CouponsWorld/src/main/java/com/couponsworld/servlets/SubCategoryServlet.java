@@ -423,7 +423,7 @@ public class SubCategoryServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
-				String[] subCategoryArray = req.getParameter("subCategorySelected").split("-");
+				String[] subCategoryArray = req.getParameter("subCategorySelected").split("#");
 				String subCategorySelectedId = subCategoryArray[1];
 				String updatedSubCategorySelected = req.getParameter("updatedSubCategorySelected");
 				log.info(
@@ -637,7 +637,7 @@ public class SubCategoryServlet extends HttpServlet {
 			String password = (String) session.getAttribute("password");
 			if (Constants.AUTH_PASSWORD.equals(password) && Constants.AUTH_USERNAME.equals(username)) {
 
-				String[] subCategoryArray = req.getParameter("subCategorySelected").split("-");
+				String[] subCategoryArray = req.getParameter("subCategorySelected").split("#");
 				String subCategorySelectedId = subCategoryArray[1];
 				String contentType = "";
 				log.info(

@@ -12,4 +12,9 @@ public enum CashBackMode {
 	private CashBackMode(String cashBackModeName) {
 		this.cashBackModeName = cashBackModeName;
 	}
+
+	public String getCashBackModeName() {
+		return cashBackModeName;
+	}
+
 }

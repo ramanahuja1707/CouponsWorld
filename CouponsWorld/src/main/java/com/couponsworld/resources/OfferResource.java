@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.couponsworld.apiresults.ResultantOffer;
@@ -28,9 +29,21 @@ public class OfferResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResultantOffer getOffers() {
+	public ResultantOffer getOffers(@QueryParam("category") String category, @QueryParam("company") String company,
+			@QueryParam("subCategory") String subCategory, @QueryParam("userType") String userType,
+			@QueryParam("userPlatform") String userPlatform, @QueryParam("usabilityStatus") String usabilityStatus,
+			@QueryParam("cashBackMode") String cashBackMode, @QueryParam("offerType") String offerType) {
 		try {
-			return OfferService.getOffers();
+			if (category.replace("+", "").equals("") && company.replace("+", "").equals("")
+					&& subCategory.replace("+", "").equals("") && userType.replace("+", "").equals("")
+					&& userPlatform.replace("+", "").equals("") && usabilityStatus.replace("+", "").equals("")
+					&& cashBackMode.replace("+", "").equals("") && offerType.replace("+", "").equals("")) {
+				return OfferService.getOffers();
+			} else {
+				return OfferService.getOffers(company.replace("+", ""), category.replace("+", ""),
+						subCategory.replace("+", ""), userType.replace("+", ""), userPlatform.replace("+", ""),
+						usabilityStatus.replace("+", ""), cashBackMode, offerType.replace("+", ""));
+			}
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
 			resultantOffer = new ResultantOffer();
