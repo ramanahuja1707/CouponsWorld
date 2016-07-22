@@ -36,9 +36,7 @@ public class UserTypeResource {
 	public ResultantUserType getUserTypes() {
 		try {
 			log.info(
-					"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-START $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-			log.info("User Type GET Resource fetched Successfully..");
-			log.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ GET-UserTypeResource-END $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UserTypeService.getUserTypes();
 
 		} catch (NullPointerException npe) {

@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,6 +27,9 @@ import com.couponsworld.utilities.GenerateLinkService;
 @Path("/subcategories")
 public class SubCategoryResource {
 
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(SubCategoryResource.class.getName());
+
 	private List<SubCategory> subCategories = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantSubCategory resultantSubCategory;
@@ -34,7 +38,7 @@ public class SubCategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantSubCategory getSubCategories() {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return SubCategoryService.getSubCategories();
 
 		} catch (NullPointerException nle) {
@@ -46,7 +50,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -67,7 +71,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -79,6 +83,8 @@ public class SubCategoryResource {
 			errors = null;
 			subCategories = null;
 			return resultantSubCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -88,7 +94,7 @@ public class SubCategoryResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantSubCategory createSubCategory(SubCategory subCategory) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return SubCategoryService.createSubCategory(subCategory);
 
 		} catch (NullPointerException npe) {
@@ -99,7 +105,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			subCategories = new ArrayList<SubCategory>();
 			subCategories.add(subCategory);
 
@@ -127,7 +133,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -139,6 +145,8 @@ public class SubCategoryResource {
 			subCategories = null;
 			errors = null;
 			return resultantSubCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -149,7 +157,7 @@ public class SubCategoryResource {
 	public ResultantSubCategory updateSubCategory(@PathParam("subCategoryId") long subCategoryId,
 			SubCategory subCategory) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return SubCategoryService.updateSubCategory(subCategoryId, subCategory);
 		} catch (NullPointerException npe) {
 			// creating resultantSubCategory Object
@@ -162,7 +170,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -187,7 +195,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -200,6 +208,8 @@ public class SubCategoryResource {
 			subCategories = null;
 			errors = null;
 			return resultantSubCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -208,7 +218,7 @@ public class SubCategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantSubCategory deleteSubCategory(@PathParam("subCategoryId") long subCategoryId) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return SubCategoryService.deleteSubCategory(subCategoryId);
 
 		} catch (NullPointerException npe) {
@@ -218,7 +228,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -238,7 +248,7 @@ public class SubCategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in SubCategory Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -250,6 +260,8 @@ public class SubCategoryResource {
 			subCategories = null;
 			errors = null;
 			return resultantSubCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SubCategory Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}

@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,6 +24,9 @@ import com.couponsworld.utilities.GenerateLinkService;
 @Path("/userplatform")
 public class UserPlatformResource {
 
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(UserPlatformResource.class.getName());
+
 	private List<UserPlatform> userPlatforms = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantUserPlatform resultantUserPlatform;
@@ -31,6 +35,7 @@ public class UserPlatformResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUserPlatform getUserPlatforms() {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UserPlatformService.getUserPlatforms();
 		} catch (NullPointerException npe) {
 			// creating resultantUserPlatform Object
@@ -40,7 +45,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -60,7 +65,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -71,6 +76,8 @@ public class UserPlatformResource {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
 			return resultantUserPlatform;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -80,6 +87,7 @@ public class UserPlatformResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantUserPlatform createUserPlatform(UserPlatform userPlatform) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UserPlatformService.createUserPlatform(userPlatform);
 		} catch (NullPointerException npe) {
 
@@ -93,7 +101,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -116,7 +124,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -127,7 +135,10 @@ public class UserPlatformResource {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
 			return resultantUserPlatform;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
+
 	}
 
 	@PUT
@@ -137,6 +148,7 @@ public class UserPlatformResource {
 	public ResultantUserPlatform updateUserPlatform(@PathParam("userPlatformId") long userPlatformId,
 			UserPlatform userPlatform) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UserPlatformService.updateUserPlatform(userPlatformId, userPlatform);
 		} catch (NullPointerException npe) {
 			userPlatforms = new ArrayList<UserPlatform>();
@@ -149,7 +161,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -172,7 +184,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -183,6 +195,8 @@ public class UserPlatformResource {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
 			return resultantUserPlatform;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -191,6 +205,7 @@ public class UserPlatformResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUserPlatform deleteUserPlatform(@PathParam("userPlatformId") long userPlatformId) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UserPlatformService.deleteUserPlatform(userPlatformId);
 		} catch (NullPointerException npe) {
 			// creating resultantUserPlatform Object
@@ -200,7 +215,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -220,7 +235,7 @@ public class UserPlatformResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UserPlatform Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -231,6 +246,8 @@ public class UserPlatformResource {
 			resultantUserPlatform.setUserPlatform(userPlatforms);
 			errors = null;
 			return resultantUserPlatform;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UserPlatform Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 }

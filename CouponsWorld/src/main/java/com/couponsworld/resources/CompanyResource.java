@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,6 +23,10 @@ import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/companies")
 public class CompanyResource {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(CompanyResource.class.getName());
+
 	private List<Company> companies = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantCompany resultantCompany;
@@ -30,7 +35,7 @@ public class CompanyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantCompany getCompanies() {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CompanyService.getCompanies();
 
 		} catch (NullPointerException nle) {
@@ -42,7 +47,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -62,7 +67,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -77,6 +82,8 @@ public class CompanyResource {
 			errors = null;
 			companies = null;
 			return resultantCompany;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -86,7 +93,7 @@ public class CompanyResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantCompany createCompany(Company company) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CompanyService.createCompany(company);
 
 		} catch (NullPointerException npe) {
@@ -102,7 +109,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -127,7 +134,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -141,6 +148,8 @@ public class CompanyResource {
 			errors = null;
 			companies = null;
 			return resultantCompany;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -150,7 +159,7 @@ public class CompanyResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantCompany updateCompany(@PathParam("companyId") long companyId, Company company) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CompanyService.updateCompany(companyId, company);
 
 		} catch (NullPointerException npe) {
@@ -165,7 +174,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -190,7 +199,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -204,6 +213,8 @@ public class CompanyResource {
 			errors = null;
 			companies = null;
 			return resultantCompany;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -212,7 +223,7 @@ public class CompanyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantCompany deleteCompany(@PathParam("companyId") long companyId) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CompanyService.deleteCompany(companyId);
 		} catch (NullPointerException npe) {
 			// creating resultantCompany Object
@@ -222,7 +233,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -243,7 +254,7 @@ public class CompanyResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Company Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -257,6 +268,8 @@ public class CompanyResource {
 			errors = null;
 			companies = null;
 			return resultantCompany;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Company Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}

@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,6 +24,9 @@ import com.couponsworld.utilities.GenerateLinkService;
 @Path("/categorySubCategoryMapping")
 public class CategorySubCategoryMappingResource {
 
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(CategorySubCategoryMappingResource.class.getName());
+
 	private List<CategorySubCategoryMapping> categorySubCategoryMappings = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantCategorySubCategoryMapping resultantCategorySubCategoryMapping;
@@ -31,6 +35,8 @@ public class CategorySubCategoryMappingResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantCategorySubCategoryMapping getCategorySubCategoryMappings() {
 		try {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategorySubCategoryMappingService.getCategorySubCategoryMappings();
 
 		} catch (NullPointerException nle) {
@@ -42,7 +48,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -63,7 +70,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -79,6 +87,9 @@ public class CategorySubCategoryMappingResource {
 			errors = null;
 			categorySubCategoryMappings = null;
 			return resultantCategorySubCategoryMapping;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -89,7 +100,8 @@ public class CategorySubCategoryMappingResource {
 	public ResultantCategorySubCategoryMapping createCategorySubCategoryMapping(
 			CategorySubCategoryMapping categorySubCategoryMapping) {
 		try {
-
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategorySubCategoryMappingService.createCategorySubCategoryMapping(categorySubCategoryMapping);
 
 		} catch (NullPointerException npe) {
@@ -106,7 +118,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -133,7 +146,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -148,6 +162,9 @@ public class CategorySubCategoryMappingResource {
 			errors = null;
 			categorySubCategoryMappings = null;
 			return resultantCategorySubCategoryMapping;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -159,7 +176,8 @@ public class CategorySubCategoryMappingResource {
 			@PathParam("categorySubCategoryMappingId") long categorySubCategoryMappingId,
 			CategorySubCategoryMapping categorySubCategoryMapping) {
 		try {
-
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategorySubCategoryMappingService.updateCategorySubCategoryMapping(categorySubCategoryMappingId,
 					categorySubCategoryMapping);
 
@@ -176,7 +194,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -203,7 +222,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -219,6 +239,9 @@ public class CategorySubCategoryMappingResource {
 			errors = null;
 			categorySubCategoryMappings = null;
 			return resultantCategorySubCategoryMapping;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -228,7 +251,8 @@ public class CategorySubCategoryMappingResource {
 	public ResultantCategorySubCategoryMapping deleteCategorySubCategoryMappings(
 			@PathParam("categorySubCategoryMappingId") long categorySubCategoryMappingId) {
 		try {
-
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategorySubCategoryMappingService.deleteCategorySubCategoryMapping(categorySubCategoryMappingId);
 		} catch (NullPointerException npe) {
 			// creating resultantCategorySubCategoryMapping Object
@@ -238,7 +262,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -260,7 +285,8 @@ public class CategorySubCategoryMappingResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in CategorySubCategoryMapping Resource :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -275,6 +301,9 @@ public class CategorySubCategoryMappingResource {
 			errors = null;
 			categorySubCategoryMappings = null;
 			return resultantCategorySubCategoryMapping;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CategorySubCategoryMapping Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}

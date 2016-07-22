@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,6 +23,10 @@ import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/categories")
 public class CategoryResource {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(CategoryResource.class.getName());
+
 	private List<Category> categories = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantCategory resultantCategory;
@@ -30,9 +35,8 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantCategory getCategories() {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategoryService.getCategories();
-
 		} catch (NullPointerException nle) {
 
 			// creating resultantOffer Object
@@ -42,7 +46,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -62,7 +66,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -74,6 +78,8 @@ public class CategoryResource {
 			errors = null;
 			categories = null;
 			return resultantCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -83,7 +89,7 @@ public class CategoryResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantCategory createCategory(Category category) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategoryService.createCategory(category);
 
 		} catch (NullPointerException npe) {
@@ -94,7 +100,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// creating Category List to wrap the input Offer Object into it
 			categories = new ArrayList<Category>();
 			categories.add(category);
@@ -124,7 +130,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -136,6 +142,8 @@ public class CategoryResource {
 			categories = null;
 			errors = null;
 			return resultantCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -145,7 +153,7 @@ public class CategoryResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantCategory updateCategory(@PathParam("categoryId") long categoryId, Category category) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategoryService.updateCategory(categoryId, category);
 
 		} catch (NullPointerException npe) {
@@ -160,7 +168,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -185,7 +193,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -197,6 +205,8 @@ public class CategoryResource {
 			categories = null;
 			errors = null;
 			return resultantCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -205,7 +215,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantCategory deleteCategory(@PathParam("categoryId") long categoryId) {
 		try {
-
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return CategoryService.deleteCategory(categoryId);
 
 		} catch (NullPointerException npe) {
@@ -216,7 +226,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -237,7 +247,7 @@ public class CategoryResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Category Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -249,6 +259,8 @@ public class CategoryResource {
 			categories = null;
 			errors = null;
 			return resultantCategory;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Category Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}

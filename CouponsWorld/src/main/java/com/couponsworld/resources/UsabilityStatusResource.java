@@ -3,6 +3,7 @@ package com.couponsworld.resources;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,6 +26,9 @@ import com.couponsworld.utilities.GenerateLinkService;
 @Path("/usabilitystatus")
 public class UsabilityStatusResource {
 
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(UsabilityStatusResource.class.getName());
+
 	private List<UsabilityStatus> usabilityStatuses = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantUsabilityStatus resulatantUsabilityStatus;
@@ -33,6 +37,8 @@ public class UsabilityStatusResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUsabilityStatus getUsabilityStatus() {
 		try {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UsabilityStatusService.getUsabilityStatus();
 		} catch (NullPointerException npe) {
 			// creating resulatantUsabilityStatus Object
@@ -42,6 +48,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
@@ -62,6 +69,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
@@ -73,6 +81,9 @@ public class UsabilityStatusResource {
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
 			return resulatantUsabilityStatus;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -82,6 +93,8 @@ public class UsabilityStatusResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantUsabilityStatus createUsabilityStatus(UsabilityStatus usabilityStatus) {
 		try {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UsabilityStatusService.createUsabilityStatus(usabilityStatus);
 		} catch (NullPointerException npe) {
 
@@ -95,6 +108,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
@@ -118,6 +132,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
@@ -129,6 +144,9 @@ public class UsabilityStatusResource {
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
 			return resulatantUsabilityStatus;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -139,6 +157,8 @@ public class UsabilityStatusResource {
 	public ResultantUsabilityStatus updateUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId,
 			UsabilityStatus usabilityStatus) {
 		try {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UsabilityStatusService.updateUsabilityStatus(usabilityStatusId, usabilityStatus);
 		} catch (NullPointerException npe) {
 			usabilityStatuses = new ArrayList<UsabilityStatus>();
@@ -151,7 +171,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -174,7 +194,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -185,6 +205,9 @@ public class UsabilityStatusResource {
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
 			return resulatantUsabilityStatus;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -193,6 +216,8 @@ public class UsabilityStatusResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantUsabilityStatus deleteUsabilityStatus(@PathParam("usabilityStatusId") long usabilityStatusId) {
 		try {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return UsabilityStatusService.deleteUsabilityStatus(usabilityStatusId);
 		} catch (NullPointerException npe) {
 			// creating resulatantUsabilityStatus Object
@@ -202,7 +227,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -222,7 +247,7 @@ public class UsabilityStatusResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in UsabilityStatus Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -233,6 +258,9 @@ public class UsabilityStatusResource {
 			resulatantUsabilityStatus.setUsabilityStatus(usabilityStatuses);
 			errors = null;
 			return resulatantUsabilityStatus;
+		} finally {
+			log.info(
+					"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ UsabilityStatus Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 }

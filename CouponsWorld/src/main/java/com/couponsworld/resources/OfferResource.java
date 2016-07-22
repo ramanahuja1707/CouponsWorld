@@ -2,6 +2,7 @@ package com.couponsworld.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,6 +24,10 @@ import com.couponsworld.utilities.GenerateLinkService;
 
 @Path("/offers")
 public class OfferResource {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(OfferResource.class.getName());
+
 	private List<Offer> offers = null;
 	private List<com.couponsworld.apiresults.Error> errors = null;
 	private ResultantOffer resultantOffer;
@@ -34,6 +39,7 @@ public class OfferResource {
 			@QueryParam("userPlatform") String userPlatform, @QueryParam("usabilityStatus") String usabilityStatus,
 			@QueryParam("cashBackMode") String cashBackMode, @QueryParam("offerType") String offerType) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			if (category.replace("+", "").equals("") && company.replace("+", "").equals("")
 					&& subCategory.replace("+", "").equals("") && userType.replace("+", "").equals("")
 					&& userPlatform.replace("+", "").equals("") && usabilityStatus.replace("+", "").equals("")
@@ -52,7 +58,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -72,7 +78,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage());
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -83,6 +89,8 @@ public class OfferResource {
 			resultantOffer.setOffers(offers);
 			errors = null;
 			return resultantOffer;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}
@@ -92,6 +100,7 @@ public class OfferResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantOffer createOffer(Offer offer) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return OfferService.createOffer(offer);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
@@ -101,7 +110,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -126,7 +135,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -137,6 +146,8 @@ public class OfferResource {
 			resultantOffer.setOffers(offers);
 			errors = null;
 			return resultantOffer;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -146,6 +157,7 @@ public class OfferResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResultantOffer updateOffer(@PathParam("offerId") long offerId, Offer offer) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return OfferService.updateOffer(offerId, offer);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
@@ -155,7 +167,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -180,7 +192,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -192,6 +204,8 @@ public class OfferResource {
 			offers = null;
 			errors = null;
 			return resultantOffer;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 
@@ -200,6 +214,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResultantOffer deleteOffer(@PathParam("offerId") long offerId) {
 		try {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - Start @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return OfferService.deleteOffer(offerId);
 		} catch (NullPointerException npe) {
 			// creating resultantOffer Object
@@ -209,7 +224,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Provide correct credentials to access api");
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -230,7 +245,7 @@ public class OfferResource {
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(exception.getMessage().toString());
-
+			log.info("Error Occured in Offer Resource :" + error.getErrorCode() + ":" + error.getErrorName());
 			// wrapping the error to a list of errors
 			errors = new ArrayList<com.couponsworld.apiresults.Error>();
 			errors.add(error);
@@ -242,6 +257,8 @@ public class OfferResource {
 
 			errors = null;
 			return resultantOffer;
+		} finally {
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Offer Resource - End @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 
 	}

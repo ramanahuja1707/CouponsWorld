@@ -3,6 +3,7 @@ package com.couponsworld.resources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -19,6 +20,10 @@ import com.couponsworld.utilities.GenerateLinkService;
 
 @Provider
 public class ResourcesFilter implements ContainerRequestFilter {
+
+	// declaration of logger
+	private static final Logger log = Logger.getLogger(ResourcesFilter.class.getName());
+
 	private final String AUTHORIZATION_KEY = "Authorization";
 	private final String PASSWORD_KEY = "password";
 	private final String USERNAME_KEY = "username";
@@ -32,29 +37,36 @@ public class ResourcesFilter implements ContainerRequestFilter {
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		try {
+			log.info("Entered into Rest Api Filter Gateway...");
 			Error error = checkMandatoryRequestParametersForRestApi(requestContext);
 
 			if (error != null) {
+				// log.info("Error Occured in Resouce filter gateway....");
 				requestContext.abortWith(Response.ok(createResultForAuthError(error)).build());
 			}
 
 		} catch (NullPointerException n) {
-			System.out.println("Null Pointer");
+
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.NULL_POINTER_ERROR.getErrorCode());
 			error.setErrorName("Missing Mandatory parameters in request...");
-
+			log.info("Exception Occured in Resouce filter gateway :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			requestContext.abortWith(Response.ok(createResultForAuthError(error)).build());
 
 		} catch (Exception e) {
-			System.out.println("Exception Occured :" + e.getMessage());
+			// log.info("Exception Occured in Resouce filter gateway :" +
+			// e.getMessage());
 			// creating the error getting
 			com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 			error.setErrorCode(Errors.GENERAL_ERROR.getErrorCode());
 			error.setErrorName(e.getMessage());
-
+			log.info("Exception Occured in Resouce filter gateway :" + error.getErrorCode() + ":"
+					+ error.getErrorName());
 			requestContext.abortWith(Response.ok(createResultForAuthError(error)).build());
+		} finally {
+			log.info("Exited from Rest Api Filter Gateway...");
 		}
 
 	}
@@ -67,7 +79,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 		com.couponsworld.apiresults.Error error = new com.couponsworld.apiresults.Error();
 		error.setErrorCode(errorReceived.getErrorCode());
 		error.setErrorName(errorReceived.getErrorName());
-
+		log.info("Error Occured in Resouce filter gateway :" + error.getErrorCode() + ":" + error.getErrorName());
 		// wrapping the error to a list of errors
 		errors = new ArrayList<com.couponsworld.apiresults.Error>();
 		errors.add(error);
@@ -85,6 +97,7 @@ public class ResourcesFilter implements ContainerRequestFilter {
 		resultantFilter.setLinks(listOfLinksList);
 		resultantFilter.setStatus(Status.FAILURE);
 		errors = null;
+		log.info("Returning Corresponding Error Response....");
 		return resultantFilter;
 	}
 
