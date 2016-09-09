@@ -341,4 +341,20 @@ public class ValidationService {
 		return null;
 	}
 
+	public static List<Error> validateMandatoryParametersForGetMethodOfBestOfferResource(String company,
+			String category, String subCategory, String userType, String userPlatform, String usabilityStatus,
+			long amountToSpend) {
+		List<Error> errors = null;
+		if (category.equals("")) {
+			Error error = new Error();
+			error.setErrorCode(Errors.VALIDATION_ERROR.getErrorCode());
+			error.setErrorName("Input supplied are missing mandatory parameter : Category" + category);
+			// Initializing error list
+			errors = new ArrayList<>();
+			errors.add(error);
+			return errors;
+		}
+		return null;
+	}
+
 }

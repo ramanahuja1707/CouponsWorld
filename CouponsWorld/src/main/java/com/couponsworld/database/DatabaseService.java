@@ -2,7 +2,11 @@ package com.couponsworld.database;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import com.couponsworld.dto.Category;
@@ -13,6 +17,8 @@ import com.couponsworld.dto.SubCategory;
 import com.couponsworld.dto.UsabilityStatus;
 import com.couponsworld.dto.UserPlatform;
 import com.couponsworld.dto.UserType;
+import com.couponsworld.enums.CashBackMode;
+import com.couponsworld.exceptions.BestOfferException;
 import com.couponsworld.exceptions.CategoryException;
 import com.couponsworld.exceptions.CategorySubCategoryMappingException;
 import com.couponsworld.exceptions.CompanyException;
@@ -51,6 +57,8 @@ public class DatabaseService {
 	public static long userPlatformNo = Constants.USERPLATFORM_NO;
 	public static long userTypeNo = Constants.USERTYPE_NO;
 	public static long categorySubCategoryMappingId = Constants.CATEGORYSUBCATEGORYMAPPING_NO;
+
+	// private Map<Long, Offer> mapOfBestOffer = null;
 
 	public static CategorySubCategoryMapping createCategorySubCategoryMappingInDatabase(
 			CategorySubCategoryMapping categorySubCategoryMapping) throws Exception {
@@ -788,6 +796,323 @@ public class DatabaseService {
 			log.info("Getting exit from the Database Service");
 			throw exception;
 		}
+	}
+
+	// --------------------------------------------------------------------------------------------------
+	public static List<Offer> getBestOffersForCashbackFromDatabase(String company, String category, String subCategory,
+			String userType, String userPlatform, String usabilityStatus, long amountToSpend)
+			throws BestOfferException, Exception {
+		try {
+			log.info("Entered into Database Service...");
+			log.info("Getting the Offers.");
+			com.googlecode.objectify.cmd.Query<Offer> offersRetreivedFromDatabaseQuery = ofy().load().type(Offer.class);
+			if (!(category.equals(""))) {
+				log.info("Filtering the OFfers by category passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("category", category);
+			}
+			if (!(company.equals(""))) {
+				log.info("Filtering the OFfers by company passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("company", company);
+			}
+			if (!(subCategory.equals(""))) {
+				log.info("Filtering the OFfers by sub category passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("subCategory", subCategory);
+			}
+			if (!(userType.equals(""))) {
+				log.info("Filtering the OFfers by user type passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("userType", userType);
+			}
+			if (!(userPlatform.equals(""))) {
+				log.info("Filtering the OFfers by user platform passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("userPlatform",
+						userPlatform);
+			}
+			if (!(usabilityStatus.equals(""))) {
+				log.info("Filtering the OFfers by usability Status passed in the input data ..");
+				offersRetreivedFromDatabaseQuery = offersRetreivedFromDatabaseQuery.filter("usabilityStatus",
+						usabilityStatus);
+			}
+			List<Offer> offersRetreivedFromDatabaseList = offersRetreivedFromDatabaseQuery.list();
+
+			log.info("Got all the Offers Successfully..");
+			// if (offersRetreivedFromDatabase.size() != 0) {
+
+			return offersRetreivedFromDatabaseList;
+			// }
+		} catch (Exception exception) {
+			log.info("Error in getting offers ..:" + exception.getMessage());
+			log.info("Getting Exit from Database Service ..");
+			throw exception;
+		}
+	}
+
+	public static Map<Long, List<Offer>> filterBestOffersForCashbackByAmount(List<Offer> bestOffers, long amountToSpend)
+			throws OfferException, Exception {
+		Map<Long, List<Offer>> mapOfBestOffer = null;
+		if (bestOffers.size() > 0 && amountToSpend > 0L) {
+			log.info("Filtering the best offers by amount passed : " + amountToSpend);
+			mapOfBestOffer = new HashMap<>();
+			for (Offer offer : bestOffers) {
+				log.info("--------------------Processing the offer with Offer id :" + offer.getOfferId()
+						+ " ----------------------------");
+				if (amountToSpend >= offer.getMinimumAmount()) {
+					log.info("condition : amountToSpend >= offer.getMinimumAmount() : True" + " : For Offer Id : "
+							+ offer.getOfferId());
+					// Offer fulfilling the minimum amount criteria..
+
+					if (offer.getCashBackMode().equals(CashBackMode.AMOUNT.getCashBackModeName())) {
+						// CASHBACK MODE - AMOUNT
+						log.info("OFFER WITH OFFER ID : " + offer.getOfferId() + "WITH CASHBACK MODE - AMOUNT");
+						if (offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack()) {
+
+							log.info(
+									"Condition :offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack() : True : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+							if (mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack()))) {
+								log.info(
+										"Condition :mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) :True : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = mapOfBestOffer.get(new Long(offer.getMaximumCashBack()));
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+							} else {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) : False : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = new ArrayList<>();
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+							}
+						} else {
+							log.info(
+									"Condition :offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack() : False : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+
+							// mapOfBestOffer.put(offer.getCashBack(), offer);
+
+							if (mapOfBestOffer.containsKey(new Long(offer.getCashBack()))) {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(offer.getCashBack())) :True : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = mapOfBestOffer.get(new Long(offer.getCashBack()));
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getCashBack()), offers);
+							} else {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(offer.getCashBack())) :False : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = new ArrayList<>();
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getCashBack()), offers);
+							}
+						}
+
+					} else if (offer.getCashBackMode().equals(CashBackMode.PERCENTAGE.getCashBackModeName())) {
+						log.info("OFFER WITH OFFER ID : " + offer.getOfferId() + "WITH CASHBACK MODE - PERCENTAGE");
+						long cashbackCalculated = (long) (((offer.getCashBack()) * amountToSpend) / 100);
+						log.info("Calculated cashback for amount passed : " + cashbackCalculated);
+						if (cashbackCalculated > offer.getMaximumCashBack()) {
+							log.info(
+									"Condition : cashbackCalculated > offer.getMaximumCashBack() : True : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+
+							// mapOfBestOffer.put(offer.getMaximumCashBack(),
+							// offer);
+
+							if (mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack()))) {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) :True : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = mapOfBestOffer.get(new Long(offer.getMaximumCashBack()));
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+							} else {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) : False : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = new ArrayList<>();
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+							}
+
+						} else {
+							log.info(
+									"Condition : cashbackCalculated > offer.getMaximumCashBack() : False : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + cashbackCalculated + " : For Offer Id : "
+									+ offer.getOfferId());
+							// mapOfBestOffer.put(cashbackCalculated, offer);
+
+							if (mapOfBestOffer.containsKey(new Long(cashbackCalculated))) {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(cashbackCalculated)) : True : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = mapOfBestOffer.get(new Long(cashbackCalculated));
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(cashbackCalculated), offers);
+							} else {
+								log.info(
+										"Condition : mapOfBestOffer.containsKey(new Long(cashbackCalculated)) : False : For Offer Id : "
+												+ offer.getOfferId());
+								List<Offer> offers = new ArrayList<>();
+								offers.add(offer);
+								mapOfBestOffer.put(new Long(cashbackCalculated), offers);
+							}
+
+						}
+
+					}
+
+				} else {
+					log.info("condition : amountToSpend >= offer.getMinimumAmount() : False" + " : For Offer Id : "
+							+ offer.getOfferId());
+					// Offer fulfilling the minimum amount criteria..
+					// bestOffers.remove(offer);
+				}
+				log.info("--------------------Offer Processed with Offer id :" + offer.getOfferId()
+						+ " ----------------------------");
+			}
+			log.info("Filtering the Best offers with amount passed as :" + amountToSpend + " completed...");
+			return mapOfBestOffer;
+		} else {
+			log.info("Filtering the Best offers with amount passed as (0 or < 0):" + amountToSpend);
+			mapOfBestOffer = new HashMap<>();
+			for (Offer offer : bestOffers) {
+				log.info("--------------------Processing the offer with Offer id :" + offer.getOfferId()
+						+ " ----------------------------");
+				if (offer.getCashBackMode().equals(CashBackMode.AMOUNT)) {
+					// CASHBACK MODE - PERCENTAGE
+					log.info("Cashback Mode of Offer :" + offer.getCashBackMode() + " : For Offer Id : "
+							+ offer.getOfferId());
+					if (offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack()) {
+						// mapOfBestOffer.put(offer.getMaximumCashBack(),
+						// offer);
+						log.info(
+								"Condition : offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack() : True : For Offer Id : "
+										+ offer.getOfferId());
+
+						log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+								+ offer.getOfferId());
+						if (mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack()))) {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) :True : For Offer Id : "
+											+ offer.getOfferId());
+							List<Offer> offers = mapOfBestOffer.get(new Long(offer.getMaximumCashBack()));
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+						} else {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) : False : For Offer Id : "
+											+ offer.getOfferId());
+							List<Offer> offers = new ArrayList<>();
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+						}
+
+					} else {
+						log.info(
+								"Condition : offer.getMaximumCashBack() != 0L && offer.getMaximumCashBack() >= offer.getCashBack() : False : For Offer Id : "
+										+ offer.getOfferId());
+
+						log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+								+ offer.getOfferId());
+						// mapOfBestOffer.put(offer.getCashBack(), offer);
+
+						if (mapOfBestOffer.containsKey(new Long(offer.getCashBack()))) {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getCashBack())) : True : For Offer Id : "
+											+ offer.getOfferId());
+							List<Offer> offers = mapOfBestOffer.get(new Long(offer.getCashBack()));
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getCashBack()), offers);
+						} else {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getCashBack())) : False : For Offer Id : "
+											+ offer.getOfferId());
+							List<Offer> offers = new ArrayList<>();
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getCashBack()), offers);
+						}
+					}
+
+				} else if (offer.getCashBackMode().equals(CashBackMode.PERCENTAGE)) {
+					log.info("Cashback Mode of Offer :" + offer.getCashBackMode() + " : For Offer Id : "
+							+ offer.getOfferId());
+					long cashbackCalculated = ((offer.getCashBack() / 100) * offer.getMinimumAmount());
+					if (cashbackCalculated > offer.getMaximumCashBack()) {
+						log.info("Condition : cashbackCalculated > offer.getMaximumCashBack() : True : For Offer Id : "
+								+ offer.getOfferId());
+						// mapOfBestOffer.put(offer.getMaximumCashBack(),
+						// offer);
+						if (mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack()))) {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) >= offer.getCashBack() : True : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+							List<Offer> offers = mapOfBestOffer.get(new Long(offer.getMaximumCashBack()));
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+						} else {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(offer.getMaximumCashBack())) : False : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+							List<Offer> offers = new ArrayList<>();
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(offer.getMaximumCashBack()), offers);
+						}
+					} else {
+						log.info("Condition : cashbackCalculated > offer.getMaximumCashBack() : False : For Offer Id : "
+								+ offer.getOfferId());
+						// mapOfBestOffer.put(cashbackCalculated, offer);
+						if (mapOfBestOffer.containsKey(new Long(cashbackCalculated))) {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(cashbackCalculated)) : True : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+							List<Offer> offers = mapOfBestOffer.get(new Long(cashbackCalculated));
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(cashbackCalculated), offers);
+						} else {
+							log.info(
+									"Condition : mapOfBestOffer.containsKey(new Long(cashbackCalculated)) : False : For Offer Id : "
+											+ offer.getOfferId());
+
+							log.info("Offer mapped with cashback :" + offer.getMaximumCashBack() + " : For Offer Id : "
+									+ offer.getOfferId());
+							List<Offer> offers = new ArrayList<>();
+							offers.add(offer);
+							mapOfBestOffer.put(new Long(cashbackCalculated), offers);
+						}
+					}
+
+				}
+
+				log.info("--------------------Offer Processed with Offer id :" + offer.getOfferId()
+						+ " ----------------------------");
+
+				// mapOfBestOffer.put(offer.getCashBack(), offer);
+			}
+			log.info("Filtering the Best offers with amount passed as :" + amountToSpend + ": completed...");
+			return mapOfBestOffer;
+		}
+
 	}
 
 }

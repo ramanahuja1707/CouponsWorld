@@ -10,7 +10,6 @@ import com.couponsworld.dto.Category;
 import com.couponsworld.enums.Errors;
 import com.couponsworld.enums.Status;
 import com.couponsworld.exceptions.CategoryException;
-import com.couponsworld.resources.UserTypeResource;
 import com.couponsworld.utilities.GenerateLinkService;
 
 public class CategoryService {
