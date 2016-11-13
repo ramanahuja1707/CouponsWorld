@@ -8,7 +8,7 @@
 </head>
 <body>
 	<center>
-		Sorry Not In Session... <a href="index.jsp">Login Back</a>
+		Sorry Not In Session... <a href="/index.jsp">Login Back</a>
 	</center>
 </body>
 </html>

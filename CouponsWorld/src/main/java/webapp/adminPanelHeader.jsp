@@ -125,13 +125,6 @@
 										value="addCategorySubCategoryMapping.jsp" name="_page"
 										style="display: none;" /><input type="submit" value="Add" />
 								</form></li>
-
-							<li><form method="get" action="#">
-									<input type="text" value="GET" name="_method"
-										style="display: none;" /> <input type="text"
-										value="addOffer.jsp" name="_page" style="display: none;" /><input
-										type="submit" value="Add" />
-								</form></li>
 						</ul>
 					</div></li>
 			</ul>

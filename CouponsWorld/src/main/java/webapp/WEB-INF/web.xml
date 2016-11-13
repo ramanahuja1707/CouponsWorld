@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<welcome-file-list>
 		<welcome-file>
-        index.jsp
+       index.jsp
     </welcome-file>
 	</welcome-file-list>
 	<session-config>
@@ -151,7 +151,15 @@
 	</servlet-mapping>
 
 
-
+	<servlet>
+		<servlet-name>GenerateOfferPageServletWeb</servlet-name>
+		<servlet-class>com.couponsworld.servlets.GenerateOfferPageServletWeb</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerateOfferPageServletWeb</servlet-name>
+		<url-pattern>/offerPageWeb</url-pattern>
+	</servlet-mapping>
 
 
 	<!-- Mapping of the JSP Pages -->
@@ -242,5 +250,7 @@
 		<servlet-name>AdminLogoutAccessServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
+
+
 
 </web-app>
