@@ -29,12 +29,6 @@
 				request.removeAttribute("status");
 			}
 		%>
-
-
 	</center>
-
-
-
-
 </body>
 </html>

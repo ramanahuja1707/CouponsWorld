@@ -38,6 +38,7 @@ public class DatabaseService {
 	private static final Logger log = Logger.getLogger(DatabaseService.class.getName());
 
 	static {
+		
 		// Registeration of the entities (dto's)
 		ObjectifyService.register(Offer.class);
 		ObjectifyService.register(Category.class);
@@ -47,6 +48,7 @@ public class DatabaseService {
 		ObjectifyService.register(UserPlatform.class);
 		ObjectifyService.register(UserType.class);
 		ObjectifyService.register(CategorySubCategoryMapping.class);
+		ObjectifyService.begin();
 	}
 
 	public static long offerNo = Constants.OFFER_NO;

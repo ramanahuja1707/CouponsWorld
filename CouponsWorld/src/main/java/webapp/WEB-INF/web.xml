@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<welcome-file-list>
 		<welcome-file>
-       index.jsp
+       HomePageWeb.jsp
     </welcome-file>
 	</welcome-file-list>
 	<session-config>
@@ -152,14 +152,15 @@
 
 
 	<servlet>
-		<servlet-name>GenerateOfferPageServletWeb</servlet-name>
-		<servlet-class>com.couponsworld.servlets.GenerateOfferPageServletWeb</servlet-class>
+		<servlet-name>GenerateIndexPageWeb</servlet-name>
+		<servlet-class>com.couponsworld.servlets.webclient.GenerateIndexPageWeb</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GenerateOfferPageServletWeb</servlet-name>
-		<url-pattern>/offerPageWeb</url-pattern>
+		<servlet-name>GenerateIndexPageWeb</servlet-name>
+		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
+
 
 
 	<!-- Mapping of the JSP Pages -->
