@@ -161,6 +161,15 @@
 		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>SearchBestOffers</servlet-name>
+		<servlet-class>com.couponsworld.servlets.webclient.SearchBestOffers</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchBestOffers</servlet-name>
+		<url-pattern>/searchBestOffers</url-pattern>
+	</servlet-mapping>
 
 
 	<!-- Mapping of the JSP Pages -->

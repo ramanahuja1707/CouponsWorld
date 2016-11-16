@@ -66,15 +66,9 @@
 		%>
 		<br /> <br />
 
-		<form action="#" method="post">
-			Select the Offer Type : <select name="offerType">
-
-				<option value="<%=OfferTypeEnum.CASHBACK.getOfferTypeName()%>"><%=OfferTypeEnum.CASHBACK.getOfferTypeName()%></option>
-				<option value="<%=OfferTypeEnum.DEAL.getOfferTypeName()%>"><%=OfferTypeEnum.DEAL.getOfferTypeName()%></option>
-				<option value="<%=OfferTypeEnum.DISCOUNT.getOfferTypeName()%>"><%=OfferTypeEnum.DISCOUNT.getOfferTypeName()%></option>
-				<option value="" selected="selected"></option>
-			</select><br /> <br /> <br /> <br /> Select A Sub Category<select
-				name="category" style="width: 150px">
+		<form action="searchBestOffers" method="get">
+			<br /> <br /> Select A Sub Category<select name="category"
+				style="width: 150px">
 				<%
 					if (resultantCategorySubCategoryMapping.getCategorySubCategoryMappings() != null) {
 									for (CategorySubCategoryMapping categorySubCategoryMapping : allCategorySubCategoryMappings) {
@@ -134,8 +128,8 @@
 								}
 				%>
 				<option value="" selected="selected"></option>
-			</select> <br /> <br /> <br /> <br />Enter the minimum Amount to spend :<input
-				type="text" name="minimumAmountToSpend"><br /> <br /> <input
+			</select> <br /> <br /> <br /> <br />Enter the Amount to spend :<input
+				type="text" name="amountToSpend"><br /> <br /> <input
 				type="submit" value="Search Offer">
 		</form>
 	</center>

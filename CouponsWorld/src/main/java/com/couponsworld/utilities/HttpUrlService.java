@@ -7,12 +7,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.logging.Logger;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.couponsworld.exceptions.MissingMandatoryParametersException;
@@ -135,6 +137,7 @@ public class HttpUrlService {
 	public static String readHttpUrlResponseWeb(String url) throws MalformedURLException, Exception {
 		log.info("----------------------READING URL - START------------------------------------");
 		HttpClient client = new DefaultHttpClient();
+
 		HttpGet request = new HttpGet(url);
 		log.info("----------------------Adding parameters to Request------------------------------------");
 		request.addHeader("username", "innovate.garr");
@@ -157,4 +160,5 @@ public class HttpUrlService {
 		return text;
 
 	}
+
 }

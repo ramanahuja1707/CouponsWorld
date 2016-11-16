@@ -308,6 +308,9 @@ public class Constants {
 	// URL OF REST-API
 	public static final String CATEGORY_SUBCATEGORY_MAPPING_URL = "http://1.couponsworld-1707.appspot.com/webapi/categorySubCategoryMapping";
 
+	// URL OF REST-API
+	public static final String BEST_OFFERS_URL = "http://1.couponsworld-1707.appspot.com/webapi/bestoffers";
+
 	// Access Id OF REST-API
 	public static final String ADMIN_ACCESS_ID = "ADMIN";
 
