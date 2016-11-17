@@ -69,7 +69,7 @@ public class GenerateIndexPageWeb extends HttpServlet {
 					req.setAttribute("errors", getErrorsList("Error in Fetching all User Platforms...",
 							Errors.GENERAL_ERROR.getErrorCode()));
 
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorPageWeb.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/errorPageWeb.jsp");
 					requestDispatcher.forward(req, resp);
 
 				} else if (allUserTypes.equals("")) {
@@ -79,7 +79,7 @@ public class GenerateIndexPageWeb extends HttpServlet {
 					req.setAttribute("errors",
 							getErrorsList("Error in Fetching all User Types...", Errors.GENERAL_ERROR.getErrorCode()));
 
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorPageWeb.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/errorPageWeb.jsp");
 					requestDispatcher.forward(req, resp);
 
 				} else if (allCategorySubCategoryMappings.equals("")) {
@@ -89,7 +89,7 @@ public class GenerateIndexPageWeb extends HttpServlet {
 					req.setAttribute("errors", getErrorsList("Error in Fetching all category sub category mappings...",
 							Errors.GENERAL_ERROR.getErrorCode()));
 
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorPageWeb.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/errorPageWeb.jsp");
 					requestDispatcher.forward(req, resp);
 
 				} else {
@@ -111,7 +111,7 @@ public class GenerateIndexPageWeb extends HttpServlet {
 					req.setAttribute("allUserTypes", allUserTypes);
 					req.setAttribute("allCategorySubCategoryMappings", allCategorySubCategoryMappings);
 					log.info("Redirecting the control to load the index.jsp Page...");
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/index.jsp");
 					requestDispatcher.forward(req, resp);
 
 				}
@@ -122,7 +122,7 @@ public class GenerateIndexPageWeb extends HttpServlet {
 			// setting the Status of Get method execution - Failure
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", getErrorsList(e.getMessage(), Errors.GENERAL_ERROR.getErrorCode()));
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errorPageWeb.jsp");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/errorPageWeb.jsp");
 			requestDispatcher.forward(req, resp);
 
 		}

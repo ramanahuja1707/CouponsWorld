@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%
-		RequestDispatcher rd = request.getRequestDispatcher("/Home");
+		RequestDispatcher rd = request.getRequestDispatcher("/homeWebClient");
 		rd.forward(request, response);
 	%>
 </body>

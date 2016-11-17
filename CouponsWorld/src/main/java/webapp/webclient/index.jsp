@@ -66,7 +66,7 @@
 		%>
 		<br /> <br />
 
-		<form action="searchBestOffers" method="get">
+		<form action="/searchBestOffers" method="get">
 			<br /> <br /> Select A Sub Category<select name="category"
 				style="width: 150px">
 				<%

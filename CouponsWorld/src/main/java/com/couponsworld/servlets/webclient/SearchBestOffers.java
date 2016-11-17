@@ -63,7 +63,7 @@ public class SearchBestOffers extends HttpServlet {
 				req.setAttribute("status", Status.FAILURE);
 				req.setAttribute("errors",
 						getErrorsList("Error in Fetching All Best Offers...", Errors.GENERAL_ERROR.getErrorCode()));
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/index.jsp");
 				requestDispatcher.forward(req, resp);
 			} else {
 				log.info("Required Data Fetched Successfully...");
@@ -72,7 +72,7 @@ public class SearchBestOffers extends HttpServlet {
 				log.info("All Best Offers in Response Object : " + allBestOffers);
 				req.setAttribute("allBestOffers", allBestOffers);
 				log.info("Redirecting the control to load the showBestOffers.jsp Page...");
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/showBestOffers.jsp");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/webclient/showBestOffersWeb.jsp");
 				requestDispatcher.forward(req, resp);
 			}
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class SearchBestOffers extends HttpServlet {
 			e.printStackTrace();
 			req.setAttribute("status", Status.FAILURE);
 			req.setAttribute("errors", getErrorsList(e.getMessage(), Errors.GENERAL_ERROR.getErrorCode()));
-			RequestDispatcher requestdDispatcher = req.getRequestDispatcher("/index.jsp");
+			RequestDispatcher requestdDispatcher = req.getRequestDispatcher("/webclient/index.jsp");
 			requestdDispatcher.forward(req, resp);
 		}
 

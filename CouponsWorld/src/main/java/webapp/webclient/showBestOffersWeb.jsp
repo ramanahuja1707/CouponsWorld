@@ -18,20 +18,22 @@
 	<%
 		if (request.getAttribute("status") != null) {
 			if (request.getAttribute("status").equals(Status.SUCCESS)) {
-				out.println("Response successfully got from input provided by user ");
+				out.println("<b>Response successfully got from input provided by user : </b>");
 				Gson allBestOffersGson = new Gson();
 				ResultantBestOffer allBestOffers = allBestOffersGson
 						.fromJson(request.getAttribute("allBestOffers").toString(), ResultantBestOffer.class);
 				Map<Long, List<Offer>> mapOfBestOffers = allBestOffers.getMapOfBestOffer();
 				if (mapOfBestOffers != null) {
 					for (Map.Entry<Long, List<Offer>> allBestOfferEntries : mapOfBestOffers.entrySet()) {
-						out.println("Cashback : " + allBestOfferEntries.getKey());
+						out.println("<br><b>Cashback :</b> " + allBestOfferEntries.getKey());
+						out.println("<br>");
+						out.println("<b>Offers :</b>");
 						if (allBestOfferEntries.getValue().size() > 0
 								&& allBestOfferEntries.getValue().size() == 1) {
-							out.println(allBestOfferEntries.getValue().get(0).getDescription());
+							out.println("<br>" + allBestOfferEntries.getValue().get(0).getDescription());
 						} else {
 							for (Offer offer : allBestOfferEntries.getValue()) {
-								out.println(offer.getDescription());
+								out.println("<br>" + offer.getDescription());
 							}
 						}
 					}
